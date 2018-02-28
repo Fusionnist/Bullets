@@ -112,6 +112,7 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\placeholder\dot.png" />
     <Content Include="Content\placeholder\greenBeamChunk.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

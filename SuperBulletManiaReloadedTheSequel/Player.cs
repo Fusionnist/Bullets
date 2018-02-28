@@ -11,7 +11,7 @@ namespace SuperBulletManiaReloadedTheSequel
 
         public override void Input(Vector2 input_)
         {
-            mov += input_ * 20;
+            mov += input_ * 500;
         }
     }
 }
