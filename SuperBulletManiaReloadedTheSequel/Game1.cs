@@ -20,19 +20,22 @@ namespace SuperBulletManiaReloadedTheSequel
         InputProfile inputProfile;
         CollisionManager colman;
         Bullet[] testBullets;
+        int boundWidth, boundHeight;
         
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.PreferredBackBufferHeight = 810;
-            graphics.PreferredBackBufferWidth = 1440;
+            boundHeight = 810;
+            boundWidth = 1440;
+            graphics.PreferredBackBufferHeight = boundHeight;
+            graphics.PreferredBackBufferWidth = boundWidth;
         }
 
         protected override void Initialize()
         {
             inputProfile = new InputProfile(new KeyManager[] { new KeyManager(Keys.Left, "playerLeft"), new KeyManager(Keys.Right, "playerRight"), new KeyManager(Keys.Up, "playerUp"), new KeyManager(Keys.Down, "playerDown") });
-            colman = new CollisionManager();
+            colman = new CollisionManager(boundWidth, boundHeight);
 
             base.Initialize();
         }
@@ -41,18 +44,21 @@ namespace SuperBulletManiaReloadedTheSequel
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            TextureDrawer playerDrawer = new TextureDrawer(Content.Load<Texture2D>("greenBeamChunk"), new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 16, 16) } }, "collision") }, "default");
+            HitboxCollection tempColHb = new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 16, 16) } }, "collision");
+            HitboxCollection tempHurtHb = new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 16, 16) } }, "hurt");
+
+            TextureDrawer playerDrawer = new TextureDrawer(Content.Load<Texture2D>("greenBeamChunk"), new HitboxCollection[] { tempColHb , tempHurtHb }, "default");
             DrawerCollection drawer = new DrawerCollection(new TextureDrawer[] { playerDrawer }, "playerDrawThingy");
             player = new Player(drawer, new Vector2(0, 0), new List<Property>());
 
-            TextureDrawer testBulletDrawer = new TextureDrawer(Content.Load<Texture2D>("dot"), new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 16, 16) } }, "collision") }, "default");
+            TextureDrawer testBulletDrawer = new TextureDrawer(Content.Load<Texture2D>("dot"), new HitboxCollection[] { tempColHb, tempHurtHb }, "default");
             DrawerCollection testBulletDrawerCol = new DrawerCollection(new TextureDrawer[] { testBulletDrawer }, "bulletDrawThingy");
             testBullets = new Bullet[10];
 
             Random rng = new Random();
             for (int i = 0; i < 10; i++)
             {
-                testBullets[i] = new Bullet(testBulletDrawerCol, new Vector2((float)rng.NextDouble() * 810, (float)rng.NextDouble() * 1440), new List<Property>(), (float)((rng.NextDouble() - 0.5) * 2 * Math.PI));
+                testBullets[i] = new Bullet(testBulletDrawerCol, new Vector2((float)rng.NextDouble() * 1440, (float)rng.NextDouble() * 810), new List<Property>(), (float)((rng.NextDouble() - 0.5) * 2 * Math.PI));
             }
         }
         

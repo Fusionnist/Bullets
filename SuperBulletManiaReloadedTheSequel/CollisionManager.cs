@@ -4,7 +4,13 @@ namespace SuperBulletManiaReloadedTheSequel
 {
     class CollisionManager
     {
-        public CollisionManager() { }
+        int boundWidth, boundHeight;
+
+        public CollisionManager(int boundWidth_, int boundHeight_)
+        {
+            boundWidth = boundWidth_;
+            boundHeight = boundHeight_;
+        }
 
         public void PlayerAndWall(Player player_, bool isVertical_, float pos_)
         {
@@ -47,16 +53,16 @@ namespace SuperBulletManiaReloadedTheSequel
         public void DoBounds(Player player_, Bullet[] bullets_)
         {
             PlayerAndWall(player_, true, 0);
-            PlayerAndWall(player_, true, 1440);
+            PlayerAndWall(player_, true, boundWidth);
             PlayerAndWall(player_, false, 0);
-            PlayerAndWall(player_, false, 810);
+            PlayerAndWall(player_, false, boundHeight);
 
             foreach (var bullet in bullets_)
             {
                 BulletAndWall(bullet, true, 0);
-                BulletAndWall(bullet, true, 1440);
+                BulletAndWall(bullet, true, boundWidth);
                 BulletAndWall(bullet, false, 0);
-                BulletAndWall(bullet, false, 810);
+                BulletAndWall(bullet, false, boundHeight);
             }
         }
     }
