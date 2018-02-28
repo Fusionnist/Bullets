@@ -53,7 +53,7 @@ namespace SuperBulletManiaReloadedTheSequel
 
             TextureDrawer testBulletDrawer = new TextureDrawer(Content.Load<Texture2D>("dot"), new HitboxCollection[] { tempColHb, tempHurtHb }, "default");
             DrawerCollection testBulletDrawerCol = new DrawerCollection(new TextureDrawer[] { testBulletDrawer }, "bulletDrawThingy");
-            Bullet baseBullet = new Bullet(testBulletDrawerCol, Vector2.Zero, new List<Property>(), 0);
+            Bullet baseBullet = new Bullet(testBulletDrawerCol, new Vector2(boundWidth / 2, boundHeight / 2), new List<Property>(), 0);
             testShooter = new BulletShooter(drawer, new Vector2(boundWidth / 2, boundHeight / 2), new List<Property>(), 0, baseBullet, 0.1f, 0.5f);
         }
         
@@ -71,12 +71,13 @@ namespace SuperBulletManiaReloadedTheSequel
 
             player.Input(ConvertInput());
             player.MultMov((float)gameTime.ElapsedGameTime.TotalSeconds);
+            colman.TileAndPlayer(testShooter, player);
+            colman.DoBounds(player, testShooter.bullets.ToArray());
 
             foreach (var testBullet in testShooter.bullets)
             {
                 testBullet.MultMov((float)gameTime.ElapsedGameTime.TotalSeconds);
-
-                colman.DoBounds(player, new Bullet[] { testBullet });
+                colman.TileAndBullet(testBullet, testShooter);
 
                 testBullet.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             }

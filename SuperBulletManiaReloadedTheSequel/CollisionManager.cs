@@ -65,5 +65,25 @@ namespace SuperBulletManiaReloadedTheSequel
                 BulletAndWall(bullet, false, boundHeight);
             }
         }
+
+        public void TileAndPlayer(Tile tile_, Player player_)
+        {
+            FRectangle hb = player_.MovHB()[0];
+            FRectangle tilehb = tile_.MovHB()[0];
+            if (hb.X + player_.mov.X < tilehb.X + tilehb.Width && hb.X + player_.mov.X + hb.Width > tilehb.X)
+            { PlayerAndWall(player_, false, tilehb.Y); PlayerAndWall(player_, false, tilehb.Y + tilehb.Height); }
+            if (hb.Y + player_.mov.Y < tilehb.Y + tilehb.Height && hb.Y + player_.mov.Y + hb.Height > tilehb.Y)
+            { PlayerAndWall(player_, true, tilehb.X); PlayerAndWall(player_, true, tilehb.X + tilehb.Width); }
+        }
+
+        public void TileAndBullet(Bullet bullet_, Tile tile_)
+        {
+            FRectangle bullethb = bullet_.MovHB()[0];
+            FRectangle tilehb = tile_.MovHB()[0];
+            if (bullethb.X + bullet_.mov.X < tilehb.X + tilehb.Width && bullethb.X + bullet_.mov.X + bullethb.Width > tilehb.X)
+            { BulletAndWall(bullet_, false, tilehb.Y); BulletAndWall(bullet_, false, tilehb.Y + tilehb.Height); }
+            if (bullethb.Y + bullet_.mov.Y < tilehb.Y + tilehb.Height && bullethb.Y + bullet_.mov.Y + bullethb.Height > tilehb.Y)
+            { BulletAndWall(bullet_, true, tilehb.X); BulletAndWall(bullet_, true, tilehb.X + tilehb.Width); }
+        }
     }
 }
