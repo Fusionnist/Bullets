@@ -31,7 +31,7 @@ namespace SuperBulletManiaReloadedTheSequel
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            TextureDrawer playerDrawer = new TextureDrawer(Content.Load<Texture2D>("greenBeamChunk"), new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 16, 16) } }, "iDunno") });
+            TextureDrawer playerDrawer = new TextureDrawer(Content.Load<Texture2D>("greenBeamChunk"), new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 16, 16) } }, "iDunno") }, "default");
             DrawerCollection drawer = new DrawerCollection(new TextureDrawer[] { playerDrawer }, "playerDrawThingy");
             player = new Player(drawer, new Vector2(800, 800), new List<Property>());
         }
@@ -54,7 +54,9 @@ namespace SuperBulletManiaReloadedTheSequel
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-           
+            spriteBatch.Begin();
+            player.Draw(spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
