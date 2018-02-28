@@ -45,9 +45,9 @@ namespace SuperBulletManiaReloadedTheSequel
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             HitboxCollection tempColHb = new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 16, 16) } }, "collision");
-            HitboxCollection tempHurtHb = new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 16, 16) } }, "hurt");
+            HitboxCollection tempHurtHb = new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 16, 16, properties_: new List<Property>() { new Property("damage", "1", "damage") }) } }, "hurt");
 
-            TextureDrawer playerDrawer = new TextureDrawer(Content.Load<Texture2D>("greenBeamChunk"), new HitboxCollection[] { tempColHb , tempHurtHb }, "default");
+            TextureDrawer playerDrawer = new TextureDrawer(Content.Load<Texture2D>("greenBeamChunk"), new HitboxCollection[] { tempColHb }, "default");
             DrawerCollection drawer = new DrawerCollection(new TextureDrawer[] { playerDrawer }, "playerDrawThingy");
             player = new Player(drawer, new Vector2(0, 0), new List<Property>());
 
