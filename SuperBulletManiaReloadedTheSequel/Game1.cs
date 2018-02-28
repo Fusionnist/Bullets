@@ -17,18 +17,20 @@ namespace SuperBulletManiaReloadedTheSequel
         SpriteBatch spriteBatch;
         Player player;
         InputProfile inputProfile;
+        CollisionManager colman;
         
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.PreferredBackBufferHeight = 1080;
-            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 810;
+            graphics.PreferredBackBufferWidth = 1440;
         }
 
         protected override void Initialize()
         {
             inputProfile = new InputProfile(new KeyManager[] { new KeyManager(Keys.Left, "playerLeft"), new KeyManager(Keys.Right, "playerRight"), new KeyManager(Keys.Up, "playerUp"), new KeyManager(Keys.Down, "playerDown") });
+            colman = new CollisionManager();
 
             base.Initialize();
         }
@@ -37,7 +39,7 @@ namespace SuperBulletManiaReloadedTheSequel
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            TextureDrawer playerDrawer = new TextureDrawer(Content.Load<Texture2D>("greenBeamChunk"), new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 16, 16) } }, "iDunno") }, "default");
+            TextureDrawer playerDrawer = new TextureDrawer(Content.Load<Texture2D>("greenBeamChunk"), new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 16, 16) } }, "collision") }, "default");
             DrawerCollection drawer = new DrawerCollection(new TextureDrawer[] { playerDrawer }, "playerDrawThingy");
             player = new Player(drawer, new Vector2(0, 0), new List<Property>());
         }
@@ -55,6 +57,9 @@ namespace SuperBulletManiaReloadedTheSequel
             inputProfile.Update(Keyboard.GetState(), GamePad.GetState(1));
 
             player.Input(ConvertInput());
+
+            colman.DoBounds(player);
+
             player.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
             base.Update(gameTime);
