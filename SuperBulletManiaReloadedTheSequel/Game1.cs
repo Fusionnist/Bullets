@@ -19,7 +19,7 @@ namespace SuperBulletManiaReloadedTheSequel
         Player player;
         InputProfile inputProfile;
         CollisionManager colman;
-        Bullet[] testBullets;
+        BulletShooter testShooter;
         int boundWidth, boundHeight;
         
         public Game1()
@@ -53,13 +53,8 @@ namespace SuperBulletManiaReloadedTheSequel
 
             TextureDrawer testBulletDrawer = new TextureDrawer(Content.Load<Texture2D>("dot"), new HitboxCollection[] { tempColHb, tempHurtHb }, "default");
             DrawerCollection testBulletDrawerCol = new DrawerCollection(new TextureDrawer[] { testBulletDrawer }, "bulletDrawThingy");
-            testBullets = new Bullet[10];
-
-            Random rng = new Random();
-            for (int i = 0; i < 10; i++)
-            {
-                testBullets[i] = new Bullet(testBulletDrawerCol, new Vector2((float)rng.NextDouble() * 1440, (float)rng.NextDouble() * 810), new List<Property>(), (float)((rng.NextDouble() - 0.5) * 2 * Math.PI));
-            }
+            Bullet baseBullet = new Bullet(testBulletDrawerCol, Vector2.Zero, new List<Property>(), 0);
+            testShooter = new BulletShooter(drawer, new Vector2(boundWidth / 2, boundHeight / 2), new List<Property>(), 0, baseBullet, 0.1f, 0.5f);
         }
         
         protected override void UnloadContent()
@@ -77,7 +72,7 @@ namespace SuperBulletManiaReloadedTheSequel
             player.Input(ConvertInput());
             player.MultMov((float)gameTime.ElapsedGameTime.TotalSeconds);
 
-            foreach (var testBullet in testBullets)
+            foreach (var testBullet in testShooter.bullets)
             {
                 testBullet.MultMov((float)gameTime.ElapsedGameTime.TotalSeconds);
 
@@ -85,6 +80,7 @@ namespace SuperBulletManiaReloadedTheSequel
 
                 testBullet.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             }
+            testShooter.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             player.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
             base.Update(gameTime);
@@ -95,7 +91,8 @@ namespace SuperBulletManiaReloadedTheSequel
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
             player.Draw(spriteBatch);
-            foreach (var testBullet in testBullets)
+            testShooter.Draw(spriteBatch);
+            foreach (var testBullet in testShooter.bullets)
                 testBullet.Draw(spriteBatch);
             spriteBatch.End();
 

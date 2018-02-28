@@ -24,5 +24,10 @@ namespace SuperBulletManiaReloadedTheSequel
                 angle = -angle;
             vel = new Vector2((float)Math.Cos(angle) * 500, (float)Math.Sin(angle) * 500);
         }
+
+        public Bullet CloneForShoot(float angle_, Vector2 pos_)
+        {
+            return new Bullet(textures, pos_, properties, angle_);
+        }
     }
 }
