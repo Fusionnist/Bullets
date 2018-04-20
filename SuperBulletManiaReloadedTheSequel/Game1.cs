@@ -72,15 +72,16 @@ namespace SuperBulletManiaReloadedTheSequel
             player.Input(ConvertInput());
             player.MultMov((float)gameTime.ElapsedGameTime.TotalSeconds);
             colman.TileAndPlayer(testShooter, player);
-            colman.DoBounds(player, testShooter.bullets.ToArray());
 
             foreach (var testBullet in testShooter.bullets)
             {
                 testBullet.MultMov((float)gameTime.ElapsedGameTime.TotalSeconds);
                 colman.TileAndBullet(testBullet, testShooter);
-
-                testBullet.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             }
+            colman.DoBounds(player, testShooter.bullets.ToArray());
+
+            foreach (var testBullet in testShooter.bullets)
+                testBullet.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             testShooter.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             player.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
