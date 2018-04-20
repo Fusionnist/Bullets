@@ -42,9 +42,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Bullet.cs" />
-    <Compile Include="BulletShooter.cs" />
-    <Compile Include="CollisionManager.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
