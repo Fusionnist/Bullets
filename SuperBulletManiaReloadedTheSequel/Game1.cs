@@ -56,6 +56,8 @@ namespace SuperBulletManiaReloadedTheSequel
         
         protected override void Update(GameTime gameTime)
         {
+            mouseMan.Update();
+
             currentUI.HandleMouseInput(mouseMan);
             for (int i = 0; i < UIs.Length; i++)
             {
