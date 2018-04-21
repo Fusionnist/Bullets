@@ -240,8 +240,8 @@ namespace SuperBulletManiaReloadedTheSequel
             TextureDrawer temp = new TextureDrawer(Content.Load<Texture2D>("button"));
             List<Button> gameButtons = new List<Button>()
             {
-                new Button("sayYes", new Rectangle(0, 0, 200, 50), temp),
-                new Button("sayNo", new Rectangle(virtualDims.X * 1/5, virtualDims.Y * 1/2, virtualDims.X / 6, virtualDims.X / 8), temp)
+                new Button("sayYes", new Rectangle(0, 212, 100 ,60), new TextureDrawer(Content.Load<Texture2D>("yes"))),
+                new Button("sayNo", new Rectangle(60, 212, 100, 60), new TextureDrawer(Content.Load<Texture2D>("no")))
             };
             return gameButtons;
         }
