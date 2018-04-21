@@ -20,6 +20,7 @@ namespace SuperBulletManiaReloadedTheSequel
         List<float> poses;
         float scrollSpeed;
         Point virtualDims;
+        public bool wasIgnored;
 
         public TextHandler(FontDrawer drawer_, Point virtualDims_)
         {
@@ -28,6 +29,7 @@ namespace SuperBulletManiaReloadedTheSequel
             poses = new List<float>();
             scrollSpeed = -50;
             virtualDims = virtualDims_;
+            wasIgnored = false;
         }
 
         public void Update(float es_)
@@ -39,6 +41,8 @@ namespace SuperBulletManiaReloadedTheSequel
                 {
                     poses.RemoveAt(i);
                     texts.RemoveAt(i);
+                    wasIgnored = true;
+
                 }
             }
             drawer.Update(es_);
@@ -58,8 +62,11 @@ namespace SuperBulletManiaReloadedTheSequel
 
         public void RemoveText()
         {
-            poses.RemoveAt(0);
-            texts.RemoveAt(0);
+            if (texts.Count != 0)
+            {
+                poses.RemoveAt(0);
+                texts.RemoveAt(0);
+            }
         }
     }
 }

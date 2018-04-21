@@ -87,11 +87,10 @@ namespace SuperBulletManiaReloadedTheSequel
             TextureDrawer[] letters = GetLettersFromSource();
             drawer.fonts.Add(new DrawerCollection(letters, "aaa"));
             handler = new TextHandler(drawer, virtualDims);
-            handler.AddTextToScroll("zfsf sdfdftrhtsd dqdqsd");
 
 
-            allEvents = new Event[2] { new Event("this is the first dialogue text wow", "getEvent1", "getEvent1", "getEvent0"), new Event("and this is the second dialogue text!", "getEvent0", "getEvent1", "getEvent1") };
-            currentEvent = allEvents[0];
+            allEvents = new Event[2] { new Event("this is the first dialogue text wow", "getEvent1", "getEvent1", "getEvent1"), new Event("and this is the second dialogue text!", "getEvent0", "getEvent1", "getEvent0") };
+            ChangeToEvent(0);
 
             //LOAD MAP AND ENTS 
             Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), new Vector2(30, 30), Content, ebuilder);
@@ -124,9 +123,11 @@ namespace SuperBulletManiaReloadedTheSequel
                 UpdateTA(es);
 
                 if (currentUI.IssuedCommand("sayYes"))
-                    HandleEventConsequences(0);
+                    HandleEventConsequences(currentEvent.outcomeIfYes);
                 else if (currentUI.IssuedCommand("sayNo"))
-                    HandleEventConsequences(1);
+                    HandleEventConsequences(currentEvent.outcomeIfNo);
+                else if (handler.wasIgnored)
+                { HandleEventConsequences(currentEvent.outcomeIfIgnored); handler.wasIgnored = false; }
             }
 
             base.Update(gameTime);
@@ -240,9 +241,16 @@ namespace SuperBulletManiaReloadedTheSequel
             return letterTexes;
         }
 
-        protected void HandleEventConsequences(int playerCHoice)
+        protected void HandleEventConsequences(string relevantVariable)
         {
-
+            ChangeToEvent((int)char.GetNumericValue(relevantVariable[8]));
+        }
+        
+        protected void ChangeToEvent(int eventNo)
+        {
+            currentEvent = allEvents[eventNo];
+            handler.RemoveText();
+            handler.AddTextToScroll(currentEvent.text);
         }
     }
 }
