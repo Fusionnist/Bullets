@@ -296,9 +296,10 @@ namespace SuperBulletManiaReloadedTheSequel
             availableTurrets[turretIndex].Draw(spriteBatch);
             string moneystring = money.ToString();
             while(moneystring.Length > 3) { moneystring =  moneystring.Remove(moneystring.Length - 2); moneystring += "k"; }
-            handler.drawer.DrawText("aaa", moneystring, new Rectangle(128, 0, 500, 200), spriteBatch);
-            handler.drawer.DrawText("aaa", Math.Round(waveTimer.timer,1) + "", new Rectangle(128, 16, 500, 200), spriteBatch);
-            handler.drawer.DrawText("aaa", waveNumber + "", new Rectangle(208, 8, 500, 200), spriteBatch);
+            handler.drawer.DrawText("aaa", moneystring, new Rectangle(128, 2, 500, 200), spriteBatch);
+            handler.drawer.DrawText("aaa", Math.Round(waveTimer.timer,1) + "", new Rectangle(128, 18, 500, 200), spriteBatch);
+            handler.drawer.DrawText("aaa", waveNumber + "", new Rectangle(208, 10, 500, 200), spriteBatch);
+            handler.drawer.DrawText("aaa", availableTurrets[turretIndex].IntProperty("price").ToString(), new Rectangle(48, 18, 500, 200), spriteBatch);
             spriteBatch.End();
         }
         void DrawGameScenes()
