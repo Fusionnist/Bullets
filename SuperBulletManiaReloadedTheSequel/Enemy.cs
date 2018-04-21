@@ -17,13 +17,24 @@ namespace SuperBulletManiaReloadedTheSequel
         Vector2 point;
         Timer deathTimer;
         Random r;
+        bool looted;
 
         public Enemy(DrawerCollection t_, Vector2 p_, List<Property> prop_) : base(t_,p_,prop_,"enemi","enemy")
         {
             point = pos;
-            deathTimer = new Timer(10);
+            deathTimer = new Timer(1);
             hp = 100;
             r = new Random();
+        }
+
+        public override int GetValue(string context_)
+        {
+            if (context_ == "loot" && isDestroyed)
+            {
+                if (looted) { return 0; }
+                else { looted = true; return 1; }
+            }
+            return base.GetValue(context_);
         }
 
         public override void FeedVector(Vector2 vec_, string context_)
