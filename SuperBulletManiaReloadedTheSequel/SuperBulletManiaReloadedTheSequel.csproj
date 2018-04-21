@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Enemy.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Event.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Player.cs" />
@@ -123,6 +124,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Image4.png" />
+    <Content Include="Content\font.png" />
+    <Content Include="Content\placeholder\aaaaaaaaaaaaaaa.png" />
     <Content Include="Content\placeholder\button.png" />
     <Content Include="Content\placeholder\dot.png" />
     <Content Include="Content\placeholder\greenBeamChunk.png" />
