@@ -27,11 +27,14 @@ namespace SuperBulletManiaReloadedTheSequel
         UISystem[] UIs;
         Vector2 virtualDims;
         TDEntityBuilder ebuilder;
+        Point virtualDims;
         
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = 1200;
 
             ebuilder = new TDEntityBuilder();
         }
@@ -46,14 +49,16 @@ namespace SuperBulletManiaReloadedTheSequel
             EntityCollection.CreateGroup("enemy", "enemies");
             EntityCollection.CreateGroup("bgElement", "bgElements");
             virtualDims = new Vector2(800, 480);
+            EntityCollection.CreateGroup(new Property("isEnt", "isEnt", "isEnt"), "entities");
+            virtualDims = new Point(1200, 720);
             base.Initialize();
         }
         
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Button button = new Button("goToGame", new Rectangle(300, 200, 200, 100), new TextureDrawer(Content.Load<Texture2D>("button")));
-            UIs = new UISystem[] { new UISystem(new List<Button>(1) {button}, "Menu"), new UISystem(new List<Button>(), "Game") };
+            Button button = new Button("goToGame", new Rectangle(virtualDims.X / 2 - 100, virtualDims.Y / 2 - 50, 200, 100), new TextureDrawer(Content.Load<Texture2D>("button")));
+            UIs = new UISystem[] { new UISystem(new List<Button>(1) {button}, "Menu"), new UISystem(SetupGameButtons(), "Game") };
             currentUI = UIs[0];
             //LOAD ALL XML
             ElementCollection.ReadDocument(XDocument.Load("Content/Entities.xml"));
@@ -107,6 +112,19 @@ namespace SuperBulletManiaReloadedTheSequel
         void DrawTD()
         {
             EntityCollection.DrawAll(spriteBatch);
+        }
+
+        protected List<Button> SetupGameButtons()
+        {
+            TextureDrawer temp = new TextureDrawer(Content.Load<Texture2D>("button"));
+            List<Button> gameButtons = new List<Button>()
+            {
+                new Button("sayYes", new Rectangle(virtualDims.X * 3/5, virtualDims.Y * 7/8, virtualDims.X / 6, virtualDims.X / 8), temp),
+                new Button("sayNo", new Rectangle(virtualDims.X * 4/5, virtualDims.Y * 7/8, virtualDims.X / 6, virtualDims.X / 8), temp),
+                new Button("selectTurret1", new Rectangle(0, 0, virtualDims.X / 6, virtualDims.X / 6), temp),
+                new Button("selectTurret2", new Rectangle(virtualDims.X / 6, 0, virtualDims.X / 6, virtualDims.X / 6), temp),
+            };
+            return gameButtons;
         }
     }
 }

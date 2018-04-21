@@ -17,7 +17,6 @@ namespace SuperBulletManiaReloadedTheSequel
     {
         int baseDmg;
 
-
         public Turret(DrawerCollection texes_, Vector2 pos_, List<Property> properties_): base(texes_, pos_, properties_, "turret", "turret")
         {
             baseDmg = 10;
