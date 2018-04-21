@@ -25,7 +25,6 @@ namespace SuperBulletManiaReloadedTheSequel
         GamePhase phase;
         UISystem currentUI;
         UISystem[] UIs;
-        Vector2 virtualDims;
         TDEntityBuilder ebuilder;
         Point virtualDims;
         
@@ -48,7 +47,6 @@ namespace SuperBulletManiaReloadedTheSequel
             EntityCollection.CreateGroup("turret", "turrets");
             EntityCollection.CreateGroup("enemy", "enemies");
             EntityCollection.CreateGroup("bgElement", "bgElements");
-            virtualDims = new Vector2(800, 480);
             EntityCollection.CreateGroup(new Property("isEnt", "isEnt", "isEnt"), "entities");
             virtualDims = new Point(1200, 720);
             base.Initialize();
