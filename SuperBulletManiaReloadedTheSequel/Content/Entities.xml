@@ -3,7 +3,14 @@
   <Entity type="turret" name="turret1">
     <Textures name="ass">
       <Texture name="t1idle" id="0" sheetName="turrets"/>
+      <Texture name="t1shoot" id="1" sheetName="turrets"/>
     </Textures>    
+    <Properties/>
+  </Entity>
+  <Entity type="enemy" name="enemy1">
+    <Textures name="ass">
+      <Texture name="enemywalk" id="2" sheetName="turrets"/>
+    </Textures>
     <Properties/>
   </Entity>
 </Entities>

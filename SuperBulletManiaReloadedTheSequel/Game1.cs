@@ -69,7 +69,7 @@ namespace SuperBulletManiaReloadedTheSequel
             ElementCollection.ReadDocument(XDocument.Load("Content/TurretSheet.xml"));
             XElement e = ElementCollection.GetSpritesheetRef("turrets");
             SpriteSheetCollection.LoadSheet(ElementCollection.GetSpritesheetRef("turrets"), Content);
-            Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), new Vector2(100, 100), Content, ebuilder);
+            Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), new Vector2(30, 30), Content, ebuilder);
 
             //LOAD MAP AND ENTS
 
@@ -139,7 +139,7 @@ namespace SuperBulletManiaReloadedTheSequel
         {
             scenes.SelectScene("td");
             scenes.CurrentScene.CreateInput(new Rectangle(0, 0, 100, virtualDims.Y),1f);
-            scenes.CurrentScene.CreateOutput(new Rectangle(200, 0, 200, 200), true, true);
+            scenes.CurrentScene.CreateOutput(new Rectangle(0, 0, 1000, 1000), true, true);
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             EntityCollection.DrawAll(spriteBatch);

@@ -6,5 +6,15 @@
       <Center x="8" y="8"/>
     </Frame>
   </Texture>
+    <Texture name="t1shoot" anim="true" id="1">
+      <Frame>
+        <SourceRect x="16" y="0" w="16" h="16"/>
+        <Center x="8" y="8"/>
+      </Frame>
+      <Frame>
+        <SourceRect x="0" y="16" w="16" h="16"/>
+        <Center x="8" y="8"/>
+      </Frame>
+    </Texture>
 </Spritesheet>
 </Spritesheets>
