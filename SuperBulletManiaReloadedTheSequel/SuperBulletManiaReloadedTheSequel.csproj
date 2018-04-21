@@ -130,6 +130,7 @@
     <Content Include="Content\placeholder\button.png" />
     <Content Include="Content\placeholder\dot.png" />
     <Content Include="Content\placeholder\greenBeamChunk.png" />
+    <Content Include="Content\statusbar.png" />
     <Content Include="Content\Tower.png" />
     <Content Include="Content\TurretSheet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
