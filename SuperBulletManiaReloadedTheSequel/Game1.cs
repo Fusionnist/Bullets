@@ -18,7 +18,6 @@ namespace SuperBulletManiaReloadedTheSequel
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Player player;
         InputProfile inputProfile;
         CursorManager mouseMan;
         GamePhase phase;
@@ -37,15 +36,17 @@ namespace SuperBulletManiaReloadedTheSequel
             phase = GamePhase.Menu;
             mouseMan = new CursorManager();
             IsMouseVisible = true;
+            EntityCollection.CreateGroup("turret", "turrets");
+            EntityCollection.CreateGroup("enemy", "enemies");
+            EntityCollection.CreateGroup("bgElement", "bgElements");
             base.Initialize();
         }
         
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Button button = new Button("goToGame", new Rectangle(100, 100, 16, 16), new TextureDrawer(Content.Load<Texture2D>("dot")));
-            Button button2 = new Button("goToMenu", new Rectangle(50, 50, 16, 16), new TextureDrawer(Content.Load<Texture2D>("dot")));
-            UIs = new UISystem[] { new UISystem(new List<Button>(1) {button}, "Menu"), new UISystem(new List<Button>(1) { button2 }, "Game") };
+            Button button = new Button("goToGame", new Rectangle(300, 200, 200, 100), new TextureDrawer(Content.Load<Texture2D>("button")));
+            UIs = new UISystem[] { new UISystem(new List<Button>(1) {button}, "Menu"), new UISystem(new List<Button>(), "Game") };
             currentUI = UIs[0];
         }
         
@@ -59,11 +60,14 @@ namespace SuperBulletManiaReloadedTheSequel
             mouseMan.Update();
 
             currentUI.HandleMouseInput(mouseMan);
-            for (int i = 0; i < UIs.Length; i++)
+            if (currentUI.IssuedCommand("goToGame"))
+            { currentUI = UIs[1]; phase = GamePhase.Gameplay; }
+
+            if (phase == GamePhase.Gameplay)
             {
-                if (currentUI.IssuedCommand("goTo" + UIs[i].Name))
-                    currentUI = UIs[i];
+                EntityCollection.UpdateAll((float)gameTime.ElapsedGameTime.TotalSeconds);
             }
+
             base.Update(gameTime);
         }
         
