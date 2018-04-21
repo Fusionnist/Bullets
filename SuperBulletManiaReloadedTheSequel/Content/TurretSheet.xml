@@ -1,0 +1,10 @@
+﻿<SpriteSheets>
+  <SpriteSheet name="turrets" src="Tower">
+  <Texture name="t1idle" anim="false" id="0">
+    <Frame>
+      <SourceRect x="0" y="0" w="16" h="16"/>
+      <Center x="8" y="8"/>
+    </Frame>
+  </Texture>
+</SpriteSheet>
+</SpriteSheets>

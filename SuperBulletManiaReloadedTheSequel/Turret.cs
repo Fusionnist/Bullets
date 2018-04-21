@@ -26,7 +26,7 @@ namespace SuperBulletManiaReloadedTheSequel
         public override void Update(float elapsedTime_)
         {
             //damage first enemy
-            EntityCollection.GetGroup("enemy")[0].TakeDamage(10);
+            EntityCollection.GetGroup("enemies")[0].TakeDamage(10);
 
             base.Update(elapsedTime_);
         }

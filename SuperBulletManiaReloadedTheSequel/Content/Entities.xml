@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Entities>
+  <Entity type="turret" name="turret1">
+    <Textures name="ass">
+      <Texture name="t1idle" id="0" sheetName="turrets"/>
+    </Textures>    
+    <Properties/>
+  </Entity>
+</Entities>
+

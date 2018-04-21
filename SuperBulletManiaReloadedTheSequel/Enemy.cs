@@ -54,7 +54,7 @@ namespace SuperBulletManiaReloadedTheSequel
         void Wiggle()
         {
             //WIGGLE
-            foreach (Entity e in EntityCollection.GetGroup("enemy"))
+            foreach (Entity e in EntityCollection.GetGroup("enemies"))
             {
                 if ((e.pos - pos).Length() < 10)
                 {

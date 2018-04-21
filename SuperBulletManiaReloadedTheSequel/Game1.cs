@@ -7,6 +7,8 @@ using MonoGame.FZT.Data;
 using MonoGame.FZT.Drawing;
 using MonoGame.FZT.Input;
 using MonoGame.FZT.UI;
+using MonoGame.FZT.XML;
+using System.Xml.Linq;
 using System;
 using System.Collections.Generic;
 using static SuperBulletManiaReloadedTheSequel.Enums;
@@ -24,11 +26,14 @@ namespace SuperBulletManiaReloadedTheSequel
         UISystem currentUI;
         UISystem[] UIs;
         Vector2 virtualDims;
+        TDEntityBuilder ebuilder;
         
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            ebuilder = new TDEntityBuilder();
         }
 
         protected override void Initialize()
@@ -40,7 +45,6 @@ namespace SuperBulletManiaReloadedTheSequel
             EntityCollection.CreateGroup("turret", "turrets");
             EntityCollection.CreateGroup("enemy", "enemies");
             EntityCollection.CreateGroup("bgElement", "bgElements");
-            EntityCollection.CreateGroup(new Property("isEnt", "isEnt", "isEnt"), "entities");
             virtualDims = new Vector2(800, 480);
             base.Initialize();
         }
@@ -51,6 +55,15 @@ namespace SuperBulletManiaReloadedTheSequel
             Button button = new Button("goToGame", new Rectangle(300, 200, 200, 100), new TextureDrawer(Content.Load<Texture2D>("button")));
             UIs = new UISystem[] { new UISystem(new List<Button>(1) {button}, "Menu"), new UISystem(new List<Button>(), "Game") };
             currentUI = UIs[0];
+            //LOAD ALL XML
+            ElementCollection.ReadDocument(XDocument.Load("Content/Entities.xml"));
+            ElementCollection.ReadDocument(XDocument.Load("Content/TurretSheet.xml"));
+            XElement e = ElementCollection.GetSpritesheetRef("turrets");
+            SpriteSheetCollection.LoadSheet(ElementCollection.GetSpritesheetRef("turrets"), Content);
+            Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), new Vector2(100, 100), Content, ebuilder);
+
+            //LOAD MAP AND ENTS
+
         }
         
         protected override void UnloadContent()
@@ -60,6 +73,7 @@ namespace SuperBulletManiaReloadedTheSequel
         
         protected override void Update(GameTime gameTime)
         {
+            float es = (float)gameTime.ElapsedGameTime.TotalSeconds; 
             mouseMan.Update();
 
             currentUI.HandleMouseInput(mouseMan);
@@ -68,10 +82,15 @@ namespace SuperBulletManiaReloadedTheSequel
 
             if (phase == GamePhase.Gameplay)
             {
-                EntityCollection.UpdateAll((float)gameTime.ElapsedGameTime.TotalSeconds);
+                UpdateTD(es);
             }
 
             base.Update(gameTime);
+        }
+
+        void UpdateTD(float es)
+        {
+            EntityCollection.UpdateAll(es);
         }
         
         protected override void Draw(GameTime gameTime)
@@ -80,10 +99,14 @@ namespace SuperBulletManiaReloadedTheSequel
             spriteBatch.Begin();
             currentUI.Draw(spriteBatch);
             if (phase == GamePhase.Gameplay)
-                EntityCollection.DrawGroup("entities", spriteBatch);
+                DrawTD();
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+        void DrawTD()
+        {
+            EntityCollection.DrawAll(spriteBatch);
         }
     }
 }
