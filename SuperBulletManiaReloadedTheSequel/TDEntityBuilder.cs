@@ -23,6 +23,10 @@ namespace SuperBulletManiaReloadedTheSequel
             {
                 return new Turret(dc_, pos_, props_);
             }
+            if (type_ == "enemy")
+            {
+                return new Enemy(dc_, pos_, props_);
+            }
             return base.CreateEntity(type_, dc_, pos_, props_, name_);
         }
     }

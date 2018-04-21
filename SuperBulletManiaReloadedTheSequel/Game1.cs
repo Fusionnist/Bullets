@@ -70,7 +70,7 @@ namespace SuperBulletManiaReloadedTheSequel
             XElement e = ElementCollection.GetSpritesheetRef("turrets");
             SpriteSheetCollection.LoadSheet(ElementCollection.GetSpritesheetRef("turrets"), Content);
             Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), new Vector2(30, 30), Content, ebuilder);
-
+            Assembler.GetEnt(ElementCollection.GetEntRef("enemy1"), new Vector2(300, 300), Content, ebuilder);
             //LOAD MAP AND ENTS
 
         }

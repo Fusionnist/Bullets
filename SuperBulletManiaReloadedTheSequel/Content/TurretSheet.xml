@@ -1,11 +1,11 @@
 ﻿<Spritesheets>
   <Spritesheet name="turrets" source="Tower">
-  <Texture name="t1idle" anim="false" id="0">
-    <Frame>
-      <SourceRect x="0" y="0" w="16" h="16"/>
-      <Center x="8" y="8"/>
-    </Frame>
-  </Texture>
+    <Texture name="t1idle" anim="false" id="0">
+      <Frame>
+        <SourceRect x="0" y="0" w="16" h="16"/>
+        <Center x="8" y="8"/>
+      </Frame>
+    </Texture>
     <Texture name="t1shoot" anim="true" id="1">
       <Frame>
         <SourceRect x="16" y="0" w="16" h="16"/>
@@ -16,5 +16,23 @@
         <Center x="8" y="8"/>
       </Frame>
     </Texture>
-</Spritesheet>
+    <Texture name="enemywalk" anim="true" id="2">
+      <Frame displayTime="0.1">
+        <SourceRect x="48" y="32" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="80" y="32" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="64" y="32" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="80" y="32" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+    </Texture>
+  </Spritesheet>
 </Spritesheets>

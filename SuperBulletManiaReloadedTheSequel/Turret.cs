@@ -30,8 +30,9 @@ namespace SuperBulletManiaReloadedTheSequel
             {
                 EntityCollection.GetGroup("enemies")[0].TakeDamage(10);
                 target = EntityCollection.GetGroup("enemies")[0].pos;
+
+                angle = (float)Math.Atan2(target.X - pos.X, target.Y - pos.Y) + (float)Math.PI/2;
             }
-            angle += 0.01f;
             base.Update(elapsedTime_);
         }
 
