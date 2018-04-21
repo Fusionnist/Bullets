@@ -45,7 +45,9 @@
     <Compile Include="Bullet.cs" />
     <Compile Include="BulletShooter.cs" />
     <Compile Include="CollisionManager.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,8 +57,9 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="MonoGame.FZT">
-      <HintPath>..\..\..\..\..\..\dll\MonoGame.FZT.dll</HintPath>
+    <Reference Include="MonoGame.FZT, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\dll\MonoGame.FZT.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
