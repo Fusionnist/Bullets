@@ -109,14 +109,15 @@ namespace SuperBulletManiaReloadedTheSequel
             float es = (float)gameTime.ElapsedGameTime.TotalSeconds; 
             mouseMan.Update();
 
-            currentUI.HandleMouseInput(mouseMan);
             if (phase == GamePhase.Menu)
             {
                 if (currentUI.IssuedCommand("goToGame"))
                 { currentUI = UIs[1]; phase = GamePhase.Gameplay; }
+                currentUI.HandleMouseInput(mouseMan);
             }
             if (phase == GamePhase.Gameplay)
             {
+                currentUI.HandleMouseInput(mouseMan, scenes.GetScene("text").ToVirtualPos(mouseMan.ClickPos()));
                 handler.Update(es);
                 EntityCollection.RecycleAll();
                 UpdateTD(es);
@@ -145,19 +146,20 @@ namespace SuperBulletManiaReloadedTheSequel
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
-            spriteBatch.Begin();
-            currentUI.Draw(spriteBatch);
-            spriteBatch.End();
 
             if (phase == GamePhase.Gameplay)
             {
-                
                 DrawTD();
                 DrawTA();
                 DrawGameScenes();
             }
-            else if (phase == GamePhase.Menu)
-               
+            else
+            {
+                spriteBatch.Begin();
+                currentUI.Draw(spriteBatch);
+                spriteBatch.End();
+            }
+
 
             base.Draw(gameTime);
         }
@@ -167,10 +169,8 @@ namespace SuperBulletManiaReloadedTheSequel
             TextureDrawer temp = new TextureDrawer(Content.Load<Texture2D>("button"));
             List<Button> gameButtons = new List<Button>()
             {
-                new Button("sayYes", new Rectangle(virtualDims.X * 3/5, virtualDims.Y * 7/8, virtualDims.X / 6, virtualDims.X / 8), temp),
-                new Button("sayNo", new Rectangle(virtualDims.X * 4/5, virtualDims.Y * 7/8, virtualDims.X / 6, virtualDims.X / 8), temp),
-                new Button("selectTurret1", new Rectangle(0, 0, virtualDims.X / 6, virtualDims.X / 6), temp),
-                new Button("selectTurret2", new Rectangle(virtualDims.X / 6, 0, virtualDims.X / 6, virtualDims.X / 6), temp),
+                new Button("sayYes", new Rectangle(0, 0, 400, 200), temp),
+                new Button("sayNo", new Rectangle(virtualDims.X * 1/5, virtualDims.Y * 1/2, virtualDims.X / 6, virtualDims.X / 8), temp)
             };
             return gameButtons;
         }
@@ -194,6 +194,7 @@ namespace SuperBulletManiaReloadedTheSequel
 
             //draw
             GraphicsDevice.Clear(Color.Beige);
+            currentUI.Draw(spriteBatch);
             handler.Draw(spriteBatch);
 
             spriteBatch.End();
