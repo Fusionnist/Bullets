@@ -29,6 +29,8 @@ namespace SuperBulletManiaReloadedTheSequel
         Point virtualDims;
         SceneCollection scenes;
         TextHandler handler;
+        Event[] allEvents;
+        Event currentEvent;
         
         public Game1()
         {
@@ -77,6 +79,10 @@ namespace SuperBulletManiaReloadedTheSequel
             handler = new TextHandler(drawer, virtualDims);
             handler.AddTextToScroll("zfsf sdfdftrhtsd dqdqsd");
 
+
+            allEvents = new Event[2] { new Event("this is the first dialogue text wow", "getEvent1", "getEvent1", "getEvent0"), new Event("and this is the second dialogue text!", "getEvent0", "getEvent1", "getEvent1") };
+            currentEvent = allEvents[0];
+
             //LOAD MAP AND ENTS 
             Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), new Vector2(30, 30), Content, ebuilder);
             for (int x = 0; x < 10; x++) { Assembler.GetEnt(ElementCollection.GetEntRef("enemy1"), new Vector2(300, 300), Content, ebuilder); }
@@ -95,17 +101,23 @@ namespace SuperBulletManiaReloadedTheSequel
             mouseMan.Update();
 
             currentUI.HandleMouseInput(mouseMan);
-            if (currentUI.IssuedCommand("goToGame"))
-            { currentUI = UIs[1]; phase = GamePhase.Gameplay; }
-
+            if (phase == GamePhase.Menu)
+            {
+                if (currentUI.IssuedCommand("goToGame"))
+                { currentUI = UIs[1]; phase = GamePhase.Gameplay; }
+            }
             if (phase == GamePhase.Gameplay)
             {
+                handler.Update(es);
                 EntityCollection.RecycleAll();
                 UpdateTD(es);
                 UpdateTA(es);
-            }
 
-            handler.Update(es);
+                if (currentUI.IssuedCommand("sayYes"))
+                    HandleEventConsequences(0);
+                else if (currentUI.IssuedCommand("sayNo"))
+                    HandleEventConsequences(1);
+            }
 
             base.Update(gameTime);
         }
@@ -206,6 +218,11 @@ namespace SuperBulletManiaReloadedTheSequel
                 letterTexes[i + 44] = new TextureDrawer(letter,null, alphabet[i+44].ToString());
             }
             return letterTexes;
+        }
+
+        protected void HandleEventConsequences(int playerCHoice)
+        {
+
         }
     }
 }
