@@ -26,9 +26,11 @@ namespace SuperBulletManiaReloadedTheSequel
         UISystem currentUI;
         UISystem[] UIs;
         TDEntityBuilder ebuilder;
-        Point virtualDims;
+        Point virtualDims, windowDims;
         SceneCollection scenes;
         TextHandler handler;
+        Rectangle TDFrame, TAFrame;
+        Point TDdims, TAdims;
         Event[] allEvents;
         Event currentEvent;
         
@@ -38,8 +40,9 @@ namespace SuperBulletManiaReloadedTheSequel
             Content.RootDirectory = "Content";
 
             ebuilder = new TDEntityBuilder();
-            graphics.PreferredBackBufferHeight = 720;
-            graphics.PreferredBackBufferWidth = 1200;
+            windowDims = new Point(800, 544);
+            graphics.PreferredBackBufferHeight = windowDims.Y;
+            graphics.PreferredBackBufferWidth = windowDims.X;
         }
 
         protected override void Initialize()
@@ -52,12 +55,19 @@ namespace SuperBulletManiaReloadedTheSequel
             EntityCollection.CreateGroup("enemy", "enemies");
             EntityCollection.CreateGroup("bgElement", "bgElements");
             EntityCollection.CreateGroup(new Property("isEnt", "isEnt", "isEnt"), "entities");
-            virtualDims = new Point(1200, 720);
+            virtualDims = new Point(400, 272);
+
+            TDdims = new Point(240, 272);
+            TAdims = new Point(160, 272);
+
+            TDFrame = new Rectangle(0, 0, TDdims.X, TDdims.Y);
+            TAFrame = new Rectangle(240, 0, TAdims.X, TAdims.Y);            
 
             scenes = new SceneCollection();
-            scenes.scenes.Add(new Scene(new RenderTarget2D(GraphicsDevice, virtualDims.X, virtualDims.Y),"text"));
+            scenes.scenes.Add(new Scene(new RenderTarget2D(GraphicsDevice, TAdims.X, TAdims.Y),"text"));
             scenes.scenes.Add(new Scene(new RenderTarget2D(GraphicsDevice, virtualDims.X, virtualDims.Y), "menu"));
-            scenes.scenes.Add(new Scene(new RenderTarget2D(GraphicsDevice, virtualDims.X, virtualDims.Y), "td"));
+            scenes.scenes.Add(new Scene(new RenderTarget2D(GraphicsDevice, TDdims.X, TDdims.Y), "td"));
+            scenes.scenes.Add(new Scene(new RenderTarget2D(GraphicsDevice, virtualDims.X, virtualDims.Y), "game"));
             base.Initialize();
         }
         
@@ -136,17 +146,17 @@ namespace SuperBulletManiaReloadedTheSequel
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
             currentUI.Draw(spriteBatch);
+            spriteBatch.End();
 
             if (phase == GamePhase.Gameplay)
             {
-                handler.Draw(spriteBatch);
-                spriteBatch.End();
+                
                 DrawTD();
                 DrawTA();
                 DrawGameScenes();
             }
             else if (phase == GamePhase.Menu)
-                spriteBatch.End();
+               
 
             base.Draw(gameTime);
         }
@@ -166,8 +176,8 @@ namespace SuperBulletManiaReloadedTheSequel
         void DrawTD()
         {
             scenes.SelectScene("td");
-            scenes.CurrentScene.CreateInput(new Rectangle(0, 0, 100, virtualDims.Y),1f);
-            scenes.CurrentScene.CreateOutput(new Rectangle(0, 0, 1000, 1000), true, true);
+            scenes.CurrentScene.CreateInput(new Rectangle(0, 0, TDdims.X, TDdims.Y),1f);
+            scenes.CurrentScene.CreateOutput(TDFrame, true, true);
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             EntityCollection.DrawAll(spriteBatch);
@@ -177,20 +187,30 @@ namespace SuperBulletManiaReloadedTheSequel
         void DrawTA()
         {
             scenes.SelectScene("text");
-            scenes.CurrentScene.CreateInput(new Rectangle(0, 0, 100, virtualDims.Y), 1f);
-            scenes.CurrentScene.CreateOutput(new Rectangle(0, 0, 200, 200), true, true);
+            scenes.CurrentScene.CreateInput(new Rectangle(0, 0, TAdims.X, TAdims.Y), 1f);
+            scenes.CurrentScene.CreateOutput(TAFrame, true, true);
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             //draw
+            GraphicsDevice.Clear(Color.Beige);
+            handler.Draw(spriteBatch);
 
             spriteBatch.End();
         }
         void DrawGameScenes()
         {
-            spriteBatch.Begin();
-            GraphicsDevice.SetRenderTarget(null);
+            scenes.SelectScene("game");
+            scenes.CurrentScene.CreateInput(new Rectangle(0, 0, virtualDims.X, virtualDims.Y), 1);
+            scenes.CurrentScene.CreateOutput(new Rectangle(0, 0, windowDims.X, windowDims.Y),true,false);
+            scenes.SetupScene(spriteBatch, GraphicsDevice);
+            GraphicsDevice.Clear(Color.Blue);
             scenes.DrawScene(spriteBatch, "text");
             scenes.DrawScene(spriteBatch, "td");
+            spriteBatch.End();
+
+            spriteBatch.Begin(samplerState: SamplerState.PointWrap);
+            GraphicsDevice.SetRenderTarget(null);
+            scenes.DrawScene(spriteBatch);
             spriteBatch.End();
         }
 
