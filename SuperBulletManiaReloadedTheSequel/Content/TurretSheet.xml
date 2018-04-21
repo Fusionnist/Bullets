@@ -20,6 +20,20 @@
         <Center x="8" y="24"/>
       </Frame>
     </Texture>
+    <Texture name="t2idle" anim="false" id="2">
+      <Frame displayTime="0.1">
+        <SourceRect x="96" y="8" w="16" h="24"/>
+        <Center x="8" y="24" />
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="112" y="8" w="16" h="24"/>
+        <Center x="8" y="24" />
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="128" y="8" w="16" h="24"/>
+        <Center x="8" y="24" />
+      </Frame>
+    </Texture>
     <Texture name="enemywalk" anim="true" id="2">
       <Frame displayTime="0.5">
         <SourceRect x="48" y="32" w="16" h="16"/>

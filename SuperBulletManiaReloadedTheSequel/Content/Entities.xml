@@ -7,6 +7,11 @@
     </Textures>    
     <Properties/>
   </Entity>
+  <Entity type="turret" name="turret2">
+    <Textures name="ass">
+      <Texture name="t2shoot" id="3" sheetName ="turrets"/>
+    </Textures>
+  </Entity>
   <Entity type="enemy" name="enemy1">
     <Textures name="ass">
       <Texture name="enemywalk" id="2" sheetName="turrets"/>
