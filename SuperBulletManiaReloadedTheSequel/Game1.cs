@@ -31,6 +31,8 @@ namespace SuperBulletManiaReloadedTheSequel
         TextHandler handler;
         Rectangle TDFrame, TAFrame;
         Point TDdims, TAdims;
+        Event[] allEvents;
+        Event currentEvent;
         Map gameMap;
         
         public Game1()
@@ -86,7 +88,10 @@ namespace SuperBulletManiaReloadedTheSequel
             TextureDrawer[] letters = GetLettersFromSource();
             drawer.fonts.Add(new DrawerCollection(letters, "aaa"));
             handler = new TextHandler(drawer, virtualDims);
-            handler.AddTextToScroll("zfsf sdfdftrhtsd dqdqsd");
+
+
+            allEvents = new Event[2] { new Event("this is the first dialogue text wow", "getEvent1", "getEvent1", "getEvent1"), new Event("and this is the second dialogue text!", "getEvent0", "getEvent1", "getEvent0") };
+            ChangeToEvent(0);
 
             //LOAD MAP AND ENTS 
             Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), new Vector2(30, 30), Content, ebuilder);
@@ -116,20 +121,28 @@ namespace SuperBulletManiaReloadedTheSequel
             mouseMan.Update();
 
             currentUI.HandleMouseInput(mouseMan);
-            if (currentUI.IssuedCommand("goToGame"))
-            { currentUI = UIs[1]; phase = GamePhase.Gameplay; }
-
+            if (phase == GamePhase.Menu)
+            {
+                if (currentUI.IssuedCommand("goToGame"))
+                { currentUI = UIs[1]; phase = GamePhase.Gameplay; }
+            }
             if (phase == GamePhase.Gameplay)
             {
                 EntityCollection.OrderGroup(EntityCollection.entities, DrawOrder.SmallToBigY);
+                handler.Update(es);
                 EntityCollection.RecycleAll();
 
                 gameMap.Update(es);
                 UpdateTD(es);
                 UpdateTA(es);
-            }
 
-            handler.Update(es);
+                if (currentUI.IssuedCommand("sayYes"))
+                    HandleEventConsequences(currentEvent.outcomeIfYes);
+                else if (currentUI.IssuedCommand("sayNo"))
+                    HandleEventConsequences(currentEvent.outcomeIfNo);
+                else if (handler.wasIgnored)
+                { HandleEventConsequences(currentEvent.outcomeIfIgnored); handler.wasIgnored = false; }
+            }
 
             base.Update(gameTime);
         }
@@ -241,6 +254,18 @@ namespace SuperBulletManiaReloadedTheSequel
                 letterTexes[i + 44] = new TextureDrawer(letter,null, alphabet[i+44].ToString());
             }
             return letterTexes;
+        }
+
+        protected void HandleEventConsequences(string relevantVariable)
+        {
+            ChangeToEvent((int)char.GetNumericValue(relevantVariable[8]));
+        }
+        
+        protected void ChangeToEvent(int eventNo)
+        {
+            currentEvent = allEvents[eventNo];
+            handler.RemoveText();
+            handler.AddTextToScroll(currentEvent.text);
         }
     }
 }
