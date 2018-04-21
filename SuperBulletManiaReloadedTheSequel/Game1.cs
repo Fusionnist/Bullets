@@ -23,6 +23,7 @@ namespace SuperBulletManiaReloadedTheSequel
         GamePhase phase;
         UISystem currentUI;
         UISystem[] UIs;
+        Vector2 virtualDims;
         
         public Game1()
         {
@@ -39,6 +40,8 @@ namespace SuperBulletManiaReloadedTheSequel
             EntityCollection.CreateGroup("turret", "turrets");
             EntityCollection.CreateGroup("enemy", "enemies");
             EntityCollection.CreateGroup("bgElement", "bgElements");
+            EntityCollection.CreateGroup(new Property("isEnt", "isEnt", "isEnt"), "entities");
+            virtualDims = new Vector2(800, 480);
             base.Initialize();
         }
         
@@ -76,6 +79,8 @@ namespace SuperBulletManiaReloadedTheSequel
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
             currentUI.Draw(spriteBatch);
+            if (phase == GamePhase.Gameplay)
+                EntityCollection.DrawGroup("entities", spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
