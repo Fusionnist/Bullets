@@ -47,7 +47,7 @@ namespace SuperBulletManiaReloadedTheSequel
         public void Draw(SpriteBatch sb_)
         {
             for (int i = 0; i < texts.Count; i++)
-                drawer.DrawText("aaa", texts[i], new Rectangle(virtualDims.X * 3 / 5, (int)poses[i], virtualDims.X * 2 / 5, 666), sb_);
+                drawer.DrawText("aaa", texts[i], new Rectangle(0, (int)poses[i], virtualDims.X * 2 / 5, 666), sb_);
         }
 
         public void AddTextToScroll(string textToAdd_)
