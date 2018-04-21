@@ -13,7 +13,7 @@ using static SuperBulletManiaReloadedTheSequel.Enums;
 
 namespace SuperBulletManiaReloadedTheSequel
 {
-    class Event
+    public class Event
     {
         public string text;
         public string[] outcomeIfYes, outcomeIfNo, outcomeIfIgnored;
