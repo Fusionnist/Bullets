@@ -371,11 +371,14 @@ namespace SuperBulletManiaReloadedTheSequel
             for (int i = 0; i < turretNo; i++)
             {
                 bool done = false;
-                while (!done)
+                int n = 0;
+                while (!done && n < EntityCollection.GetGroup("turrets").Count)
                 {
                     int k = r.Next(0, EntityCollection.GetGroup("turrets").Count);
                     if (EntityCollection.GetGroup("turrets")[k].exists)
-                    { EntityCollection.GetGroup("turrets")[k].exists = false; done = true; }
+                    {
+                        EntityCollection.GetGroup("turrets")[k].exists = false; done = true; }
+                    n++;
                 }
                 
             }
