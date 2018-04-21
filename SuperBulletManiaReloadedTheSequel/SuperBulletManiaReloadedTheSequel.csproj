@@ -52,6 +52,7 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextHandler.cs" />
     <Compile Include="Turret.cs" />
   </ItemGroup>
   <ItemGroup>
