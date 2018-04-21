@@ -33,6 +33,7 @@ namespace SuperBulletManiaReloadedTheSequel
         Point TDdims, TAdims;
         Event[] allEvents;
         Event currentEvent;
+        Map gameMap;
         
         public Game1()
         {
@@ -82,7 +83,7 @@ namespace SuperBulletManiaReloadedTheSequel
             ElementCollection.ReadDocument(XDocument.Load("Content/TurretSheet.xml"));
             XElement e = ElementCollection.GetSpritesheetRef("turrets");
             SpriteSheetCollection.LoadSheet(ElementCollection.GetSpritesheetRef("turrets"), Content);
-            Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), new Vector2(100, 100), Content, ebuilder);
+            Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), new Vector2(150, 0), Content, ebuilder);
             FontDrawer drawer = new FontDrawer();
             TextureDrawer[] letters = GetLettersFromSource();
             drawer.fonts.Add(new DrawerCollection(letters, "aaa"));
@@ -94,9 +95,19 @@ namespace SuperBulletManiaReloadedTheSequel
 
             //LOAD MAP AND ENTS 
             Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), new Vector2(30, 30), Content, ebuilder);
-            for (int x = 0; x < 10; x++) { Assembler.GetEnt(ElementCollection.GetEntRef("enemy1"), new Vector2(300, 300), Content, ebuilder); }
+            for (int x = 0; x < 10; x++) { Assembler.GetEnt(ElementCollection.GetEntRef("enemy1"), new Vector2(150, 0), Content, ebuilder); }
             //LOAD MAP AND ENTS
-
+            gameMap = new Map(
+                new Vector2[] {
+                    new Vector2(150, 0),
+                    new Vector2(153, 138),
+                    new Vector2(222, 139),
+                    new Vector2(222, 184),
+                    new Vector2(113, 185),
+                    new Vector2(100, 100),
+                    new Vector2(0, 100)},
+                new TextureDrawer(Content.Load<Texture2D>("envtest3")),
+                new FRectangle[] { });
         }
         
         protected override void UnloadContent()
@@ -117,9 +128,12 @@ namespace SuperBulletManiaReloadedTheSequel
             }
             if (phase == GamePhase.Gameplay)
             {
+                EntityCollection.OrderGroup(EntityCollection.entities, DrawOrder.SmallToBigY);
                 currentUI.HandleMouseInput(mouseMan, scenes.GetScene("text").ToVirtualPos(mouseMan.ClickPos()));
                 handler.Update(es);
                 EntityCollection.RecycleAll();
+
+                gameMap.Update(es);
                 UpdateTD(es);
                 UpdateTA(es);
 
@@ -181,6 +195,7 @@ namespace SuperBulletManiaReloadedTheSequel
             scenes.CurrentScene.CreateOutput(TDFrame, true, true);
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
+            gameMap.Draw(spriteBatch);
             EntityCollection.DrawAll(spriteBatch);
 
             spriteBatch.End();

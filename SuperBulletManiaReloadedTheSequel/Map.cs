@@ -46,7 +46,7 @@ namespace SuperBulletManiaReloadedTheSequel
             //update ground texture
             ground.Update(es_);
             //direct enemies
-            foreach (Entity e in EntityCollection.GetGroup("enemy"))
+            foreach (Entity e in EntityCollection.GetGroup("enemies"))
             {
                 e.FeedVector(NextPoint(e.pos), "path");
             }

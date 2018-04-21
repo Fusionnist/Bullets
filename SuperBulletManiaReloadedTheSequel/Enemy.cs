@@ -20,7 +20,7 @@ namespace SuperBulletManiaReloadedTheSequel
 
         public Enemy(DrawerCollection t_, Vector2 p_, List<Property> prop_) : base(t_,p_,prop_,"enemi","enemy")
         {
-            point = new Vector2(0, 100);
+            point = pos;
             deathTimer = new Timer(10);
             hp = 1000;
             r = new Random();
@@ -29,8 +29,9 @@ namespace SuperBulletManiaReloadedTheSequel
         public override void FeedVector(Vector2 vec_, string context_)
         {
             //REGISTER PATH POINT
-            if(context_ == "follow")
+            if(context_ == "path")
             {
+                if((point-pos).Length() < 10)
                 point = vec_;
             }
             base.FeedVector(vec_, context_);
@@ -59,7 +60,7 @@ namespace SuperBulletManiaReloadedTheSequel
             //WIGGLE
             foreach (Entity e in EntityCollection.GetGroup("enemies"))
             {
-                if ((e.pos - pos).Length() < 2)
+                if ((e.pos - pos).Length() < 4)
                 {
                     float a = (float)r.NextDouble() * (float)Math.PI*2;
                     Vector2 apart = new Vector2((float)Math.Sin(a), (float)Math.Cos(a));

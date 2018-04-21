@@ -123,6 +123,7 @@
     <Content Include="Content\Entities.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\envtest3.png" />
     <Content Include="Content\Image4.png" />
     <Content Include="Content\font.png" />
     <Content Include="Content\placeholder\aaaaaaaaaaaaaaa.png" />
