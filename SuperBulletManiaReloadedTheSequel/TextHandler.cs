@@ -26,7 +26,7 @@ namespace SuperBulletManiaReloadedTheSequel
             drawer = drawer_;
             texts = new List<string>();
             poses = new List<float>();
-            scrollSpeed = 1;
+            scrollSpeed = -50;
             virtualDims = virtualDims_;
         }
 
@@ -47,13 +47,13 @@ namespace SuperBulletManiaReloadedTheSequel
         public void Draw(SpriteBatch sb_)
         {
             for (int i = 0; i < texts.Count; i++)
-                drawer.DrawText("nofuckingclue", texts[i], new Rectangle(virtualDims.X * 3 / 5, (int)poses[i], virtualDims.X * 2 / 5, 666), sb_);
+                drawer.DrawText("aaa", texts[i], new Rectangle(virtualDims.X * 3 / 5, (int)poses[i], virtualDims.X * 2 / 5, 666), sb_);
         }
 
         public void AddTextToScroll(string textToAdd_)
         {
             texts.Add(textToAdd_);
-            poses.Add(virtualDims.Y / 5);
+            poses.Add(virtualDims.Y * 4 / 5);
         }
     }
 }

@@ -27,6 +27,7 @@ namespace SuperBulletManiaReloadedTheSequel
         UISystem[] UIs;
         TDEntityBuilder ebuilder;
         Point virtualDims;
+        TextHandler handler;
         
         public Game1()
         {
@@ -64,8 +65,13 @@ namespace SuperBulletManiaReloadedTheSequel
             XElement e = ElementCollection.GetSpritesheetRef("turrets");
             SpriteSheetCollection.LoadSheet(ElementCollection.GetSpritesheetRef("turrets"), Content);
             Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), new Vector2(100, 100), Content, ebuilder);
+            FontDrawer drawer = new FontDrawer();
+            TextureDrawer[] letters = GetLettersFromSource();
+            drawer.fonts.Add(new DrawerCollection(letters, "aaa"));
+            handler = new TextHandler(drawer, virtualDims);
+            handler.AddTextToScroll("zfsf sdfdftrhtsd dqdqsd");
 
-            //LOAD MAP AND ENTS
+            //LOAD MAP AND ENTS 
 
         }
         
@@ -86,7 +92,9 @@ namespace SuperBulletManiaReloadedTheSequel
             if (phase == GamePhase.Gameplay)
             {
                 UpdateTD(es);
-            }
+            } 
+
+            handler.Update(es);
 
             base.Update(gameTime);
         }
@@ -102,7 +110,8 @@ namespace SuperBulletManiaReloadedTheSequel
             spriteBatch.Begin();
             currentUI.Draw(spriteBatch);
             if (phase == GamePhase.Gameplay)
-                DrawTD();
+            { DrawTD();
+                handler.Draw(spriteBatch); }
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -123,6 +132,32 @@ namespace SuperBulletManiaReloadedTheSequel
         void DrawTD()
         {
             EntityCollection.DrawAll(spriteBatch);
+        }
+
+        protected TextureDrawer[] GetLettersFromSource()
+        {
+            string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?!:;,.-_abcdefghijklmnopqrstuvwxyz";
+            Texture2D ogTex = Content.Load<Texture2D>("font");
+            TextureDrawer[] letterTexes = new TextureDrawer[70];
+            for (int i = 0; i < 44; i++)
+            {
+                Rectangle rect = new Rectangle(16 * i, 0, 16, 16);
+                Texture2D letter = new Texture2D(GraphicsDevice, rect.Width, rect.Height);
+                Color[] data = new Color[rect.Width * rect.Height];
+                ogTex.GetData(0, rect, data, 0, data.Length);
+                letter.SetData(data);
+                letterTexes[i] = new TextureDrawer(letter, null, alphabet[i].ToString());
+            }
+            for (int i = 0; i < 26; i++)
+            {
+                Rectangle rect = new Rectangle(16 * i, 16, 16, 16);
+                Texture2D letter = new Texture2D(GraphicsDevice, rect.Width, rect.Height);
+                Color[] data = new Color[rect.Width * rect.Height];
+                ogTex.GetData(0, rect, data, 0, data.Length);
+                letter.SetData(data);
+                letterTexes[i + 44] = new TextureDrawer(letter,null, alphabet[i+44].ToString());
+            }
+            return letterTexes;
         }
     }
 }
