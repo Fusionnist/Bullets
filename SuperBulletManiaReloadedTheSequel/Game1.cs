@@ -101,19 +101,7 @@ namespace SuperBulletManiaReloadedTheSequel
             handler = new TextHandler(drawer, virtualDims);
 
 
-            allEvents = new Event[2] 
-            {
-                new Event(
-                    "this is the first dialogue text wow",
-                    new string[] { "getEvent1" },
-                    new string[] { "getEvent1" }, 
-                    new string[] { "getEvent1", "sendWave8" }),
-                new Event(
-                    "and this is the second dialogue text!",
-                    new string[] { "getEvent0" },
-                    new string[] { "getEvent0" },
-                    new string[] { "getEvent0", "sendWave8" })
-            };
+            allEvents = LoadUpEvents();
 
             ChangeToEvent(0);
 
@@ -308,7 +296,7 @@ namespace SuperBulletManiaReloadedTheSequel
             TextureDrawer[] letterTexes = new TextureDrawer[70];
             for (int i = 0; i < 44; i++)
             {
-                Rectangle rect = new Rectangle(16 * i, 0, 16, 16);
+                Rectangle rect = new Rectangle(6 * i, 0, 6, 12);
                 Texture2D letter = new Texture2D(GraphicsDevice, rect.Width, rect.Height);
                 Color[] data = new Color[rect.Width * rect.Height];
                 ogTex.GetData(0, rect, data, 0, data.Length);
@@ -317,7 +305,7 @@ namespace SuperBulletManiaReloadedTheSequel
             }
             for (int i = 0; i < 26; i++)
             {
-                Rectangle rect = new Rectangle(16 * i, 16, 16, 16);
+                Rectangle rect = new Rectangle(6 * i, 12, 6, 12);
                 Texture2D letter = new Texture2D(GraphicsDevice, rect.Width, rect.Height);
                 Color[] data = new Color[rect.Width * rect.Height];
                 ogTex.GetData(0, rect, data, 0, data.Length);
