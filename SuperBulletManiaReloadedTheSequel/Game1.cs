@@ -39,7 +39,7 @@ namespace SuperBulletManiaReloadedTheSequel
         int turretIndex;
         TextureDrawer status;
         Timer waveTimer;
-        int waveNumber, money;
+        int waveNumber, money, health;
         
         public Game1()
         {
@@ -85,6 +85,8 @@ namespace SuperBulletManiaReloadedTheSequel
             base.Initialize();
 
             waveTimer = new Timer(10);
+
+            money = 100;
         }
         
         protected override void LoadContent()
@@ -120,7 +122,14 @@ namespace SuperBulletManiaReloadedTheSequel
                     new Vector2(100, 100),
                     new Vector2(-30, 100)},
                 new TextureDrawer(Content.Load<Texture2D>("envtest3")),
-                new FRectangle[] { });
+                new FRectangle[] {
+                new FRectangle(0,0,141,81),
+                new FRectangle(119,82,26,58),
+                new FRectangle(135,144,78,23),
+                new FRectangle(162,0,79,123),
+                new FRectangle(230,123,9,67),
+                new FRectangle(102,191,138,49),
+                new FRectangle(0,104,100,138)});
 
             availableTurrets = new List<Entity>();
             availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), new Vector2(24,16), Content, ebuilder, false));
@@ -129,7 +138,31 @@ namespace SuperBulletManiaReloadedTheSequel
 
         void PlaceTurret(Vector2 pos_)
         {
-            Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), pos_, Content, ebuilder);
+            if(money > availableTurrets[turretIndex].IntProperty("price"))
+            {
+                bool canPlace = false;
+                foreach(FRectangle r in gameMap.buildableAreas)
+                {
+                    if (r.Contains(scenes.GetScene("game").ToVirtualPos(scenes.GetScene("td").ToVirtualPos(mouseMan.ClickPos()))))
+                    {
+                        canPlace = true;
+                    }
+                }
+                foreach(Entity t in EntityCollection.GetGroup("turrets"))
+                {
+                    if((t.pos - scenes.GetScene("game").ToVirtualPos(scenes.GetScene("td").ToVirtualPos(mouseMan.ClickPos()))).Length()< 20)
+                    {
+                        canPlace = false;
+                    }
+                }
+                if (canPlace)
+                {
+                    money -= availableTurrets[turretIndex].IntProperty("price");
+                    Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), pos_, Content, ebuilder);
+                }
+                
+            }
+            
         }
         
         protected override void UnloadContent()
@@ -283,11 +316,12 @@ namespace SuperBulletManiaReloadedTheSequel
             status.Draw(spriteBatch, new Vector2(0, 0));
             availableTurrets[turretIndex].Draw(spriteBatch);
             string moneystring = money.ToString();
-            while(moneystring.Length > 3) { moneystring =  moneystring.Remove(moneystring.Length - 2); moneystring += "k"; }
-            handler.drawer.DrawText("aaa", moneystring, new Rectangle(128, 2, 500, 200), spriteBatch);
-            handler.drawer.DrawText("aaa", Math.Round(waveTimer.timer,1) + "", new Rectangle(128, 18, 500, 200), spriteBatch);
-            handler.drawer.DrawText("aaa", waveNumber + "", new Rectangle(208, 10, 500, 200), spriteBatch);
-            handler.drawer.DrawText("aaa", availableTurrets[turretIndex].IntProperty("price").ToString(), new Rectangle(48, 18, 500, 200), spriteBatch);
+            while(moneystring.Length > 8) { moneystring =  moneystring.Remove(moneystring.Length - 2); moneystring += "k"; }
+            handler.drawer.DrawText("aaa", "money:"+moneystring, new Rectangle(114, 3, 500, 200), spriteBatch);
+            handler.drawer.DrawText("aaa", "next:"+ Math.Round(waveTimer.timer,1) + "", new Rectangle(114, 19, 500, 200), spriteBatch);
+            handler.drawer.DrawText("aaa", "wave:"+ waveNumber + "", new Rectangle(194, 11, 500, 200), spriteBatch);
+            handler.drawer.DrawText("aaa", "price:"+availableTurrets[turretIndex].IntProperty("price").ToString(), new Rectangle(50, 19, 500, 200), spriteBatch);
+            handler.drawer.DrawText("aaa", availableTurrets[turretIndex].Name, new Rectangle(50, 3, 500, 200), spriteBatch);
             spriteBatch.End();
         }
         void DrawGameScenes()
