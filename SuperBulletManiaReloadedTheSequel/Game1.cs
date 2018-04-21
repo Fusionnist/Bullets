@@ -27,16 +27,15 @@ namespace SuperBulletManiaReloadedTheSequel
         UISystem[] UIs;
         Vector2 virtualDims;
         TDEntityBuilder ebuilder;
-        Point virtualDims;
         
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.PreferredBackBufferHeight = 720;
-            graphics.PreferredBackBufferWidth = 1200;
 
             ebuilder = new TDEntityBuilder();
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = 1200;
         }
 
         protected override void Initialize()
@@ -48,9 +47,9 @@ namespace SuperBulletManiaReloadedTheSequel
             EntityCollection.CreateGroup("turret", "turrets");
             EntityCollection.CreateGroup("enemy", "enemies");
             EntityCollection.CreateGroup("bgElement", "bgElements");
-            virtualDims = new Vector2(800, 480);
             EntityCollection.CreateGroup(new Property("isEnt", "isEnt", "isEnt"), "entities");
             virtualDims = new Point(1200, 720);
+            virtualDims = new Vector2(800, 480);
             base.Initialize();
         }
         
@@ -109,10 +108,6 @@ namespace SuperBulletManiaReloadedTheSequel
 
             base.Draw(gameTime);
         }
-        void DrawTD()
-        {
-            EntityCollection.DrawAll(spriteBatch);
-        }
 
         protected List<Button> SetupGameButtons()
         {
@@ -125,6 +120,10 @@ namespace SuperBulletManiaReloadedTheSequel
                 new Button("selectTurret2", new Rectangle(virtualDims.X / 6, 0, virtualDims.X / 6, virtualDims.X / 6), temp),
             };
             return gameButtons;
+        }
+        void DrawTD()
+        {
+            EntityCollection.DrawAll(spriteBatch);
         }
     }
 }
