@@ -46,12 +46,14 @@
     <Compile Include="BulletShooter.cs" />
     <Compile Include="CollisionManager.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tile.cs" />
+    <Compile Include="Turret.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -117,6 +119,7 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\placeholder\button.png" />
     <Content Include="Content\placeholder\dot.png" />
     <Content Include="Content\placeholder\greenBeamChunk.png" />
   </ItemGroup>
