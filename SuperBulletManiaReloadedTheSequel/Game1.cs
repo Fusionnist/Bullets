@@ -129,7 +129,7 @@ namespace SuperBulletManiaReloadedTheSequel
             if (phase == GamePhase.Gameplay)
             {
                 EntityCollection.OrderGroup(EntityCollection.entities, DrawOrder.SmallToBigY);
-                currentUI.HandleMouseInput(mouseMan, scenes.GetScene("text").ToVirtualPos(mouseMan.ClickPos()));
+                currentUI.HandleMouseInput(mouseMan, scenes.GetScene("text").ToVirtualPos(scenes.GetScene("game").ToVirtualPos(mouseMan.ClickPos())));
                 handler.Update(es);
                 EntityCollection.RecycleAll();
 
@@ -183,7 +183,7 @@ namespace SuperBulletManiaReloadedTheSequel
             TextureDrawer temp = new TextureDrawer(Content.Load<Texture2D>("button"));
             List<Button> gameButtons = new List<Button>()
             {
-                new Button("sayYes", new Rectangle(0, 0, 400, 200), temp),
+                new Button("sayYes", new Rectangle(0, 0, 200, 50), temp),
                 new Button("sayNo", new Rectangle(virtualDims.X * 1/5, virtualDims.Y * 1/2, virtualDims.X / 6, virtualDims.X / 8), temp)
             };
             return gameButtons;
