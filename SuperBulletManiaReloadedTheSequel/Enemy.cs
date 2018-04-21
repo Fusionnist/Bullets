@@ -16,11 +16,14 @@ namespace SuperBulletManiaReloadedTheSequel
         //next pt in map
         Vector2 point;
         Timer deathTimer;
+        Random r;
 
         public Enemy(DrawerCollection t_, Vector2 p_, List<Property> prop_) : base(t_,p_,prop_,"enemi","enemy")
         {
-            point = Vector2.Zero;
+            point = new Vector2(0, 100);
             deathTimer = new Timer(10);
+            hp = 1000;
+            r = new Random();
         }
 
         public override void FeedVector(Vector2 vec_, string context_)
@@ -56,9 +59,12 @@ namespace SuperBulletManiaReloadedTheSequel
             //WIGGLE
             foreach (Entity e in EntityCollection.GetGroup("enemies"))
             {
-                if ((e.pos - pos).Length() < 10)
+                if ((e.pos - pos).Length() < 2)
                 {
-                    mov += (e.pos - pos) / 10;
+                    float a = (float)r.NextDouble() * (float)Math.PI*2;
+                    Vector2 apart = new Vector2((float)Math.Sin(a), (float)Math.Cos(a));
+                    e.mov += apart;
+                    mov -= apart;
                 }
             }
         }

@@ -70,7 +70,7 @@ namespace SuperBulletManiaReloadedTheSequel
             XElement e = ElementCollection.GetSpritesheetRef("turrets");
             SpriteSheetCollection.LoadSheet(ElementCollection.GetSpritesheetRef("turrets"), Content);
             Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), new Vector2(30, 30), Content, ebuilder);
-            Assembler.GetEnt(ElementCollection.GetEntRef("enemy1"), new Vector2(300, 300), Content, ebuilder);
+            for (int x = 0; x < 10; x++) { Assembler.GetEnt(ElementCollection.GetEntRef("enemy1"), new Vector2(300, 300), Content, ebuilder); }
             //LOAD MAP AND ENTS
 
         }
@@ -91,6 +91,7 @@ namespace SuperBulletManiaReloadedTheSequel
 
             if (phase == GamePhase.Gameplay)
             {
+                EntityCollection.RecycleAll();
                 UpdateTD(es);
                 UpdateTA(es);
             }
@@ -100,6 +101,7 @@ namespace SuperBulletManiaReloadedTheSequel
 
         void UpdateTD(float es)
         {
+            EntityCollection.MoveAll();
             EntityCollection.UpdateAll(es);
         }
         void UpdateTA(float es)

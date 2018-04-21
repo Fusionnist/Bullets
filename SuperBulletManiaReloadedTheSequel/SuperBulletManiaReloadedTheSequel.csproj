@@ -122,6 +122,7 @@
     <Content Include="Content\Entities.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Image4.png" />
     <Content Include="Content\placeholder\button.png" />
     <Content Include="Content\placeholder\dot.png" />
     <Content Include="Content\placeholder\greenBeamChunk.png" />

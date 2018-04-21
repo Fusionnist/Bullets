@@ -18,26 +18,43 @@ namespace SuperBulletManiaReloadedTheSequel
         int baseDmg;
         Vector2 target;
         float angle;
+        bool isShooting;
         public Turret(DrawerCollection texes_, Vector2 pos_, List<Property> properties_): base(texes_, pos_, properties_, "turret", "turret")
         {
-            baseDmg = 10;
+            baseDmg = 1;
         }
 
         public override void Update(float elapsedTime_)
         {
             //damage first enemy
+            isShooting = false;
             if (EntityCollection.GetGroup("enemies").Count > 0)
             {
-                EntityCollection.GetGroup("enemies")[0].TakeDamage(10);
-                target = EntityCollection.GetGroup("enemies")[0].pos;
+                Entity tar = null;
+                foreach (Entity e in EntityCollection.GetGroup("enemies"))
+                {
+                    if (!e.isDestroyed)
+                    {
+                        tar = e;
+                        break;
+                    }
+                }
+                if(tar != null)
+                {
+                    isShooting = true;
+                    tar.TakeDamage(10);
+                    target = tar.pos;
 
-                angle = (float)Math.Atan2(target.X - pos.X, target.Y - pos.Y) + (float)Math.PI/2;
+                    angle = -(float)Math.Atan2(target.X - pos.X, target.Y - pos.Y) + (float)Math.PI;
+                }                
             }
             base.Update(elapsedTime_);
         }
 
         public override void Draw(SpriteBatch sb_, bool flipH_ = false, float angle_ = 0f)
         {
+            if (isShooting) { currentTex = textures.GetTex("t1shoot"); }
+            else { currentTex = textures.GetTex("t1idle"); }
             base.Draw(sb_, flipH_, angle);
         }
     }
