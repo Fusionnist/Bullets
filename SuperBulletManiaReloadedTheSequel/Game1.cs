@@ -102,7 +102,6 @@ namespace SuperBulletManiaReloadedTheSequel
             {
                 EntityCollection.RecycleAll();
                 UpdateTD(es);
-            } 
                 UpdateTA(es);
             }
 
@@ -125,16 +124,17 @@ namespace SuperBulletManiaReloadedTheSequel
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
             currentUI.Draw(spriteBatch);
-            spriteBatch.End();
 
             if (phase == GamePhase.Gameplay)
             {
+                handler.Draw(spriteBatch);
+                spriteBatch.End();
                 DrawTD();
-            { DrawTD();
-                handler.Draw(spriteBatch); }
                 DrawTA();
                 DrawGameScenes();
             }
+            else if (phase == GamePhase.Menu)
+                spriteBatch.End();
 
             base.Draw(gameTime);
         }
