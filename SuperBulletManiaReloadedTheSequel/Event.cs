@@ -15,10 +15,11 @@ namespace SuperBulletManiaReloadedTheSequel
 {
     class Event
     {
-        public string text, outcomeIfYes, outcomeIfNo, outcomeIfIgnored;
+        public string text;
+        public string[] outcomeIfYes, outcomeIfNo, outcomeIfIgnored;
         bool wasIgnored;
 
-        public Event(string text_, string outcomeIfYes_, string outcomeIfNo_, string outcomeIfIgnored_)
+        public Event(string text_, string[] outcomeIfYes_, string[] outcomeIfNo_, string[] outcomeIfIgnored_)
         {
             text = text_;
             outcomeIfYes = outcomeIfYes_;

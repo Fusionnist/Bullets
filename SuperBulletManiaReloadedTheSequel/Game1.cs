@@ -90,7 +90,20 @@ namespace SuperBulletManiaReloadedTheSequel
             handler = new TextHandler(drawer, virtualDims);
 
 
-            allEvents = new Event[2] { new Event("this is the first dialogue text wow", "getEvent1", "getEvent1", "getEvent1"), new Event("and this is the second dialogue text!", "getEvent0", "getEvent1", "getEvent0") };
+            allEvents = new Event[2] 
+            {
+                new Event(
+                    "this is the first dialogue text wow",
+                    new string[] { "getEvent1" },
+                    new string[] { "getEvent1" }, 
+                    new string[] { "getEvent1", "sendWave8" }),
+                new Event(
+                    "and this is the second dialogue text!",
+                    new string[] { "getEvent0" },
+                    new string[] { "getEvent0" },
+                    new string[] { "getEvent0", "sendWave8" })
+            };
+
             ChangeToEvent(0);
 
             //LOAD MAP AND ENTS 
@@ -257,9 +270,14 @@ namespace SuperBulletManiaReloadedTheSequel
             return letterTexes;
         }
 
-        protected void HandleEventConsequences(string relevantVariable)
+        protected void HandleEventConsequences(string[] relevantVariable)
         {
-            ChangeToEvent((int)char.GetNumericValue(relevantVariable[8]));
+            ChangeToEvent((int)char.GetNumericValue(relevantVariable[0][8]));
+            for (int i = 1; i < relevantVariable.Length; i++)
+            {
+                if (relevantVariable[i].StartsWith("sendWave"))
+                    SendWave((int)char.GetNumericValue(relevantVariable[i][8]));
+            }
         }
         
         protected void ChangeToEvent(int eventNo)
@@ -267,6 +285,14 @@ namespace SuperBulletManiaReloadedTheSequel
             currentEvent = allEvents[eventNo];
             handler.RemoveText();
             handler.AddTextToScroll(currentEvent.text);
+        }
+
+        protected void SendWave(int enemyNo_)
+        {
+            for (int i = 0; i < enemyNo_; i++)
+            {
+                Assembler.GetEnt(ElementCollection.GetEntRef("enemy1"), new Vector2(150, 0), Content, ebuilder);
+            }
         }
     }
 }

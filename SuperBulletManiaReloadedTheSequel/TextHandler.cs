@@ -21,6 +21,7 @@ namespace SuperBulletManiaReloadedTheSequel
         float scrollSpeed;
         Point virtualDims;
         public bool wasIgnored;
+        public int currentHeight;
 
         public TextHandler(FontDrawer drawer_, Point virtualDims_)
         {
@@ -30,6 +31,7 @@ namespace SuperBulletManiaReloadedTheSequel
             scrollSpeed = -50;
             virtualDims = virtualDims_;
             wasIgnored = false;
+            currentHeight = 0;
         }
 
         public void Update(float es_)
@@ -37,7 +39,7 @@ namespace SuperBulletManiaReloadedTheSequel
             for (int i = 0; i < texts.Count; i++)
             {
                 poses[i] += es_ * scrollSpeed;
-                if (poses[i] < 0)
+                if (poses[i] < -currentHeight)
                 {
                     poses.RemoveAt(i);
                     texts.RemoveAt(i);
@@ -51,7 +53,7 @@ namespace SuperBulletManiaReloadedTheSequel
         public void Draw(SpriteBatch sb_)
         {
             for (int i = 0; i < texts.Count; i++)
-                drawer.DrawText("aaa", texts[i], new Rectangle(0, (int)poses[i], virtualDims.X * 2 / 5, 666), sb_);
+                currentHeight = drawer.DrawText("aaa", texts[i], new Rectangle(0, (int)poses[i], virtualDims.X * 2 / 5, 666), sb_).Height;
         }
 
         public void AddTextToScroll(string textToAdd_)
