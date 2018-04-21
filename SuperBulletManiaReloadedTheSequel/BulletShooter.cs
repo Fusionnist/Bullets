@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace SuperBulletManiaReloadedTheSequel
 {
-    class BulletShooter : Tile
+    class BulletShooter : Entity
     {
         float angle, bulletTimer, bulletTime, rotationSpeed;
         Bullet baseBullet;

@@ -25,7 +25,6 @@ namespace SuperBulletManiaReloadedTheSequel
         GamePhase phase;
         UISystem currentUI;
         UISystem[] UIs;
-        Vector2 virtualDims;
         TDEntityBuilder ebuilder;
         
         public Game1()
