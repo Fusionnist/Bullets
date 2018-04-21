@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperBulletManiaReloadedTheSequel", "SuperBulletManiaReloadedTheSequel\SuperBulletManiaReloadedTheSequel.csproj", "{239C1C32-A250-4827-B08A-8D701D3F9478}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.FZT", "..\MGFZTLIB\Monogame.FZT\Monogame.FZT\MonoGame.FZT.csproj", "{E5372227-1702-468D-B8A0-B9A304D9D1F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{239C1C32-A250-4827-B08A-8D701D3F9478}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{239C1C32-A250-4827-B08A-8D701D3F9478}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{239C1C32-A250-4827-B08A-8D701D3F9478}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5372227-1702-468D-B8A0-B9A304D9D1F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5372227-1702-468D-B8A0-B9A304D9D1F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5372227-1702-468D-B8A0-B9A304D9D1F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5372227-1702-468D-B8A0-B9A304D9D1F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {46DFD81B-CED8-409C-BECA-91ACB2710EDE}
 	EndGlobalSection
 EndGlobal
