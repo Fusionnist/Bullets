@@ -22,7 +22,7 @@ namespace SuperBulletManiaReloadedTheSequel
         {
             point = pos;
             deathTimer = new Timer(10);
-            hp = 1000;
+            hp = 100;
             r = new Random();
         }
 

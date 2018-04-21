@@ -105,7 +105,6 @@ namespace SuperBulletManiaReloadedTheSequel
             ChangeToEvent(0);
 
             //LOAD MAP AND ENTS 
-            Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), new Vector2(30, 30), Content, ebuilder);
             for (int x = 0; x < 10; x++) { Assembler.GetEnt(ElementCollection.GetEntRef("enemy1"), new Vector2(150, 0), Content, ebuilder); }
             //LOAD MAP AND ENTS
             gameMap = new Map(
