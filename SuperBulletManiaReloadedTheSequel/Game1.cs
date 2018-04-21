@@ -254,8 +254,8 @@ namespace SuperBulletManiaReloadedTheSequel
             TextureDrawer temp = new TextureDrawer(Content.Load<Texture2D>("button"));
             List<Button> gameButtons = new List<Button>()
             {
-                new Button("sayYes", new Rectangle(0, 0, 200, 50), temp),
-                new Button("sayNo", new Rectangle(virtualDims.X * 1/5, virtualDims.Y * 1/2, virtualDims.X / 6, virtualDims.X / 8), temp)
+                new Button("sayYes", new Rectangle(0, 212, 100 ,60), new TextureDrawer(Content.Load<Texture2D>("yes"))),
+                new Button("sayNo", new Rectangle(60, 212, 100, 60), new TextureDrawer(Content.Load<Texture2D>("no")))
             };
             return gameButtons;
         }
@@ -353,6 +353,11 @@ namespace SuperBulletManiaReloadedTheSequel
                 if (relevantVariable[i].StartsWith("sendWave"))
                     SendWave((int)char.GetNumericValue(relevantVariable[i][8]));
             }
+            for (int i = 1; i < relevantVariable.Length; i++)
+            {
+                if (relevantVariable[i].StartsWith("breakTurret"))
+                    BreakTurret((int)char.GetNumericValue(relevantVariable[i][11]));
+            }
         }
         
         protected void ChangeToEvent(int eventNo)
@@ -369,6 +374,40 @@ namespace SuperBulletManiaReloadedTheSequel
             {
                 Assembler.GetEnt(ElementCollection.GetEntRef("enemy1"), new Vector2(150, -20), Content, ebuilder);
             }
+        }
+
+        protected void BreakTurret(int turretNo)
+        {
+            Random r = new Random();
+            for (int i = 0; i < turretNo; i++)
+            {
+                bool done = false;
+                while (!done)
+                {
+                    int k = r.Next(0, EntityCollection.GetGroup("turrets").Count);
+                    if (EntityCollection.GetGroup("turrets")[k].exists)
+                    { EntityCollection.GetGroup("turrets")[k].exists = false; done = true; }
+                }
+                
+            }
+        }
+
+        protected Event[] LoadUpEvents()
+        {
+            Event[] events = new Event[2]
+            {
+                new Event(
+                    "this is the first dialogue text wow",
+                    new string[] { "getEvent1" },
+                    new string[] { "getEvent1", "breakTurret1" },
+                    new string[] { "getEvent1", "sendWave8" }),
+                new Event(
+                    "and this is the second dialogue text!",
+                    new string[] { "getEvent0" },
+                    new string[] { "getEvent0", "breakTurret3" },
+                    new string[] { "getEvent0", "sendWave8" })
+            };
+            return events;
         }
     }
 }
