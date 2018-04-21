@@ -35,7 +35,7 @@ namespace SuperBulletManiaReloadedTheSequel
             for (int i = 0; i < texts.Count; i++)
             {
                 poses[i] += es_ * scrollSpeed;
-                if (poses[i] >= virtualDims.Y * 7/8)
+                if (poses[i] < 0)
                 {
                     poses.RemoveAt(i);
                     texts.RemoveAt(i);
@@ -54,6 +54,12 @@ namespace SuperBulletManiaReloadedTheSequel
         {
             texts.Add(textToAdd_);
             poses.Add(virtualDims.Y * 4 / 5);
+        }
+
+        public void RemoveText()
+        {
+            poses.RemoveAt(0);
+            texts.RemoveAt(0);
         }
     }
 }

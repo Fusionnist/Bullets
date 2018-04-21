@@ -15,7 +15,7 @@ namespace SuperBulletManiaReloadedTheSequel
 {
     class Event
     {
-        string text, outcomeIfYes, outcomeIfNo, outcomeIfIgnored;
+        public string text, outcomeIfYes, outcomeIfNo, outcomeIfIgnored;
         bool wasIgnored;
 
         public Event(string text_, string outcomeIfYes_, string outcomeIfNo_, string outcomeIfIgnored_)
