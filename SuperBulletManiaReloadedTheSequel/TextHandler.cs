@@ -15,7 +15,7 @@ namespace SuperBulletManiaReloadedTheSequel
 {
     class TextHandler
     {
-        FontDrawer drawer;
+        public FontDrawer drawer;
         List<string> texts;
         List<float> poses;
         float scrollSpeed;
