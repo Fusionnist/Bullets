@@ -41,6 +41,9 @@ namespace SuperBulletManiaReloadedTheSequel
         TextureDrawer status, cursor;
         Timer waveTimer;
         int waveNumber, money, health, waveAmt;
+        bool lost;
+        bool transition;
+        Timer transitionTimer;
         
         public Game1()
         {
@@ -59,6 +62,7 @@ namespace SuperBulletManiaReloadedTheSequel
             {
                 new KeyManager(Keys.Right, "right"),
                 new KeyManager(Keys.Left, "left"),
+                new KeyManager(Keys.R, "restart"),
             });
 
             inputProfile = new InputProfile(new KeyManager[] { new KeyManager(Keys.Left, "playerLeft"), new KeyManager(Keys.Right, "playerRight"), new KeyManager(Keys.Up, "playerUp"), new KeyManager(Keys.Down, "playerDown") });
@@ -66,6 +70,7 @@ namespace SuperBulletManiaReloadedTheSequel
             mouseMan = new CursorManager();
             IsMouseVisible = false;
             EntityCollection.CreateGroup("turret", "turrets");
+            EntityCollection.CreateGroup("rock", "rocks");
             EntityCollection.CreateGroup("enemy", "enemies");
             EntityCollection.CreateGroup("bgElement", "bgElements");
             EntityCollection.CreateGroup(new Property("isEnt", "isEnt", "isEnt"), "entities");
@@ -133,11 +138,45 @@ namespace SuperBulletManiaReloadedTheSequel
                 new FRectangle(0,104,100,138)});
 
             availableTurrets = new List<Entity>();
-            availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("turret1"), new Vector2(24,16), Content, ebuilder, false));
-            availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("turret2"), new Vector2(24, 16), Content, ebuilder, false));
+            availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("artillery"), new Vector2(24,16), Content, ebuilder, false));
+            availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("flak"), new Vector2(24, 16), Content, ebuilder, false));
             status = new TextureDrawer(Content.Load<Texture2D>("statusbar"));
 
             cursor = new TextureDrawer(Content.Load<Texture2D>("cursor"), new TextureFrame(new Rectangle(0, 0, 8, 8), new Point(4, 4)));
+        }
+
+        void SetupGame()
+        {
+            lost = false;
+            health = 100;
+            money = 100;
+            waveNumber = 0;
+            waveAmt = 0;
+            EntityCollection.RemoveAll();
+            PlaceRocks();
+        }
+
+        void PlaceRocks()
+        {
+            Assembler.GetEnt(ElementCollection.GetEntRef("rock1"),new Vector2(14,122), Content, ebuilder);
+            Assembler.GetEnt(ElementCollection.GetEntRef("rock1"), new Vector2(5, 160), Content, ebuilder);
+            Assembler.GetEnt(ElementCollection.GetEntRef("rock1"), new Vector2(5, 167), Content, ebuilder);
+            Assembler.GetEnt(ElementCollection.GetEntRef("rock1"), new Vector2(76, 214), Content, ebuilder);
+
+            Assembler.GetEnt(ElementCollection.GetEntRef("rock2"), new Vector2(100, 64), Content, ebuilder);
+            Assembler.GetEnt(ElementCollection.GetEntRef("rock2"), new Vector2(93, 57), Content, ebuilder);
+            Assembler.GetEnt(ElementCollection.GetEntRef("rock2"), new Vector2(130, 48), Content, ebuilder);
+            Assembler.GetEnt(ElementCollection.GetEntRef("rock2"), new Vector2(185, 24), Content, ebuilder);
+            Assembler.GetEnt(ElementCollection.GetEntRef("rock2"), new Vector2(230, 78), Content, ebuilder);
+            Assembler.GetEnt(ElementCollection.GetEntRef("rock2"), new Vector2(240, 16), Content, ebuilder);
+
+            Assembler.GetEnt(ElementCollection.GetEntRef("tree1"), new Vector2(44, 44), Content, ebuilder);
+            Assembler.GetEnt(ElementCollection.GetEntRef("tree1"), new Vector2(54, 44), Content, ebuilder);
+            Assembler.GetEnt(ElementCollection.GetEntRef("tree1"), new Vector2(64, 44), Content, ebuilder);
+            Assembler.GetEnt(ElementCollection.GetEntRef("tree1"), new Vector2(48, 52), Content, ebuilder);
+            Assembler.GetEnt(ElementCollection.GetEntRef("tree1"), new Vector2(58, 52), Content, ebuilder);
+            Assembler.GetEnt(ElementCollection.GetEntRef("tree1"), new Vector2(100, 32), Content, ebuilder);
+
         }
 
         void PlaceTurret(Vector2 pos_)
@@ -159,17 +198,22 @@ namespace SuperBulletManiaReloadedTheSequel
                         canPlace = false;
                     }
                 }
+                foreach (Entity t in EntityCollection.GetGroup("rocks"))
+                {
+                    if ((t.pos - scenes.GetScene("game").ToVirtualPos(scenes.GetScene("td").ToVirtualPos(mouseMan.ClickPos()))).Length() < 5)
+                    {
+                        canPlace = false;
+                    }
+                }
                 if (canPlace)
                 {
                     money -= availableTurrets[turretIndex].IntProperty("price");
-                    Assembler.GetEnt(ElementCollection.GetEntRef("turret"+(turretIndex+1)), pos_, Content, ebuilder);
+                    Assembler.GetEnt(ElementCollection.GetEntRef(availableTurrets[turretIndex].Name), pos_, Content, ebuilder);
                 }
                 
             }
             
         }
-
-
 
         protected override void UnloadContent()
         {
@@ -187,12 +231,21 @@ namespace SuperBulletManiaReloadedTheSequel
             if (phase == GamePhase.Menu)
             {
                 if (currentUI.IssuedCommand("goToGame"))
-                { currentUI = UIs[1]; phase = GamePhase.Gameplay; }
+                {
+                    currentUI = UIs[1]; phase = GamePhase.Gameplay;
+                    SetupGame();
+                }
                 currentUI.HandleMouseInput(mouseMan, scenes.GetScene("game").ToVirtualPos(mouseMan.RawPos()));
             }
             if (phase == GamePhase.Gameplay)
             {
-                EntityCollection.OrderGroup(EntityCollection.entities, DrawOrder.SmallToBigY);
+                if(lost && ipp.JustPressed("restart"))
+                {
+                    SetupGame();
+                }
+
+                UpdateHealth();
+                for (int x = 0; x < 10; x++) { EntityCollection.OrderGroup(EntityCollection.entities, DrawOrder.SmallToBigY); }
                 currentUI.HandleMouseInput(mouseMan, scenes.GetScene("text").ToVirtualPos(scenes.GetScene("game").ToVirtualPos(mouseMan.ClickPos())));
                 handler.Update(es);
                 EntityCollection.RecycleAll();
@@ -210,7 +263,7 @@ namespace SuperBulletManiaReloadedTheSequel
                 waveTimer.Update(es);
                 if (waveTimer.Complete())
                 {
-                    SendWave( waveNumber * 40);
+                    SendWave(waveNumber*1);
                     waveTimer.Reset();
                 }
                 if(waveAmt > 0)
@@ -264,6 +317,23 @@ namespace SuperBulletManiaReloadedTheSequel
                 }
             }
         }
+        void UpdateHealth()
+        {
+            foreach(Entity e in EntityCollection.GetGroup("enemies"))
+            {
+                if(e.exists)
+                if (gameMap.ReachedFinish(e.pos))
+                {
+                    health--;
+                    e.exists = false;
+                }
+            }
+            if (health <= 0)
+            {
+                lost = true;
+            }
+        }
+
 
         void SendWave(int amt_)
         {
@@ -352,7 +422,8 @@ namespace SuperBulletManiaReloadedTheSequel
             while(moneystring.Length > 5) { moneystring =  moneystring.Remove(moneystring.Length - 3); moneystring += "k"; }
             handler.drawer.DrawText("aaa", "money:"+moneystring, new Rectangle(114, 3, 500, 200), spriteBatch);
             handler.drawer.DrawText("aaa", "next:"+ Math.Round(waveTimer.timer,1) + "", new Rectangle(114, 19, 500, 200), spriteBatch);
-            handler.drawer.DrawText("aaa", "wave:"+ waveNumber + "", new Rectangle(194, 11, 500, 200), spriteBatch);
+            handler.drawer.DrawText("aaa", "wave:"+ waveNumber + "", new Rectangle(194, 3, 500, 200), spriteBatch);
+            handler.drawer.DrawText("aaa", "health:" + health + "", new Rectangle(180, 19, 500, 200), spriteBatch);
             handler.drawer.DrawText("aaa", "price:"+availableTurrets[turretIndex].IntProperty("price").ToString(), new Rectangle(50, 19, 500, 200), spriteBatch);
             handler.drawer.DrawText("aaa", availableTurrets[turretIndex].Name, new Rectangle(50, 3, 500, 200), spriteBatch);
             spriteBatch.End();

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Entities>
-  <Entity type="turret" name="turret1">
+  <Entity type="artillery" name="artillery">
     <Textures name="ass">
       <Texture name="t1idle" id="0" sheetName="turrets"/>
       <Texture name="t1shoot" id="1" sheetName="turrets"/>
@@ -9,7 +9,7 @@
       <Property name="price" type="int" value="100"></Property>
     </Properties>
   </Entity>
-  <Entity type="turret" name="turret2">
+  <Entity type="flak" name="flak">
     <Textures name="ass">
       <Texture name="t2shoot" id="3" sheetName ="turrets"/>
       <Texture name="t2idle" id="4" sheetName ="turrets"/>
@@ -21,6 +21,24 @@
   <Entity type="enemy" name="enemy1">
     <Textures name="ass">
       <Texture name="enemywalk" id="2" sheetName="turrets"/>
+    </Textures>
+    <Properties/>
+  </Entity>
+  <Entity type="rock" name="rock1">
+    <Textures name="ass">
+      <Texture name="rock1" id="5" sheetName="turrets"/>
+    </Textures>
+    <Properties/>
+  </Entity>
+  <Entity type="rock" name="rock2">
+    <Textures name="ass">
+      <Texture name="rock2" id="6" sheetName="turrets"/>
+    </Textures>
+    <Properties/>
+  </Entity>
+  <Entity type="rock" name="tree1">
+    <Textures name="ass">
+      <Texture name="tree1" id="7" sheetName="turrets"/>
     </Textures>
     <Properties/>
   </Entity>

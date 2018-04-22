@@ -68,5 +68,23 @@
         <Center x="8" y="16"/>
       </Frame>
     </Texture>
+    <Texture name="rock1" anim="false" id="5">
+      <Frame>
+        <SourceRect x="16" y="112" w="16" h="16"/>
+        <Center x="8" y="8"/>
+      </Frame>
+    </Texture>
+    <Texture name="rock2" anim="false" id="6">
+      <Frame>
+        <SourceRect x="32" y="112" w="16" h="16"/>
+        <Center x="8" y="8"/>
+      </Frame>
+    </Texture>
+    <Texture name="tree1" anim="false" id="7">
+      <Frame>
+        <SourceRect x="0" y="112" w="16" h="16"/>
+        <Center x="8" y="8"/>
+      </Frame>
+    </Texture>
   </Spritesheet>
 </Spritesheets>
