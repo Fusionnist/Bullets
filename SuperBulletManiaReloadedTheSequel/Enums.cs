@@ -8,6 +8,6 @@ namespace SuperBulletManiaReloadedTheSequel
 {
     public class Enums
     {
-        public enum GamePhase { Menu, Gameplay, Cutscene, Pause };
+        public enum GamePhase { Menu, Gameplay, Cutscene, Pause, urded };
     }
 }

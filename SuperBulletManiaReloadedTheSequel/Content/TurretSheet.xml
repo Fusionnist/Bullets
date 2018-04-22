@@ -43,19 +43,19 @@
      
     </Texture>
     <Texture name="enemywalk" anim="true" id="2">
-      <Frame displayTime="0.5">
+      <Frame displayTime="0.1">
         <SourceRect x="48" y="32" w="16" h="16"/>
         <Center x="8" y="16"/>
       </Frame>
-      <Frame displayTime="0.5">
+      <Frame displayTime="0.1">
         <SourceRect x="80" y="32" w="16" h="16"/>
         <Center x="8" y="16"/>
       </Frame>
-      <Frame displayTime="0.5">
+      <Frame displayTime="0.1">
         <SourceRect x="64" y="32" w="16" h="16"/>
         <Center x="8" y="16"/>
       </Frame>
-      <Frame displayTime="0.5">
+      <Frame displayTime="0.1">
         <SourceRect x="80" y="32" w="16" h="16"/>
         <Center x="8" y="16"/>
       </Frame>
