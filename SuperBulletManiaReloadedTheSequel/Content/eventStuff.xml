@@ -1,15 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<EventQueue0 cap="2">
-  <Event nb ="0">
-    <Text>hi my name is ndsvndsofnndfnsdnf</Text>
-    <yes>getQueueEvent1</yes>
-    <no>getQueueEvent1 breakTurret1</no>
-    <ignore>getQueueEvent0</ignore>
-  </Event>
-  <Event nb="1">
-    <Text>oh hi my name is guhsdihfhigshusdogg</Text>
-    <yes>getQueueEvent0</yes>
-    <no>getQueueEvent0 sendWave10</no>
-    <ignore>getQueueEvent1</ignore>
-  </Event>
-</EventQueue0>
+<Events>
+  <EventQueue0 cap="2">
+    <Event nb ="0">
+      <Text>hi my name is ndsvndsofnndfnsdnf</Text>
+      <yes>getQueueEvent1</yes>
+      <no>getQueueEvent1 breakTurret1</no>
+      <ignore>getQueueEvent0</ignore>
+    </Event>
+    <Event nb="1">
+      <Text>oh hi my name is guhsdihfhigshusdogg</Text>
+      <yes>getQueue1</yes>
+      <no>getQueueEvent0 sendWave10</no>
+      <ignore>getQueueEvent1</ignore>
+    </Event>
+  </EventQueue0>
+  <EventQueue1 cap="3">
+    <Event nb ="0">
+      <Text>and so here is the second queue</Text>
+      <yes>getQueueEvent1</yes>
+      <no>getQueueEvent1 breakTurret1</no>
+      <ignore>getQueueEvent0</ignore>
+    </Event>
+    <Event nb="1">
+      <Text>the tension is unbearable</Text>
+      <yes>getQueueEvent2</yes>
+      <no>getQueueEvent0</no>
+      <ignore>getQueueEvent1</ignore>
+    </Event>
+    <Event nb="1">
+      <Text>hmmmmmmmmmmmmm</Text>
+      <yes>getQueue0</yes>
+      <no>getQueueEvent1 sendWave10</no>
+      <ignore>getQueueEvent2</ignore>
+    </Event>
+  </EventQueue1>
+</Events>
