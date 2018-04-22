@@ -425,7 +425,7 @@ namespace SuperBulletManiaReloadedTheSequel
             handler.drawer.DrawText("aaa", "money:"+moneystring, new Rectangle(114, 3, 500, 200), spriteBatch);
             handler.drawer.DrawText("aaa", "next:"+ Math.Round(waveTimer.timer,1) + "", new Rectangle(114, 19, 500, 200), spriteBatch);
             handler.drawer.DrawText("aaa", "wave:"+ waveNumber + "", new Rectangle(194, 3, 500, 200), spriteBatch);
-            handler.drawer.DrawText("aaa", "health:" + health + "", new Rectangle(180, 19, 500, 200), spriteBatch);
+            handler.drawer.DrawText("aaa", "health:" + health + "", new Rectangle(164, 19, 500, 200), spriteBatch);
             handler.drawer.DrawText("aaa", "price:"+availableTurrets[turretIndex].IntProperty("price").ToString(), new Rectangle(50, 19, 500, 200), spriteBatch);
             handler.drawer.DrawText("aaa", availableTurrets[turretIndex].Name, new Rectangle(50, 3, 500, 200), spriteBatch);
             spriteBatch.End();
