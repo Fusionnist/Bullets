@@ -351,7 +351,7 @@ namespace SuperBulletManiaReloadedTheSequel
             waveTimer.Update(es);
             if (waveTimer.Complete())
             {
-                SendWave(waveNumber * 10);
+                SendWave(waveNumber * 1);
                 waveTimer.Reset();
                 money += income;
                 if (money < 0)
