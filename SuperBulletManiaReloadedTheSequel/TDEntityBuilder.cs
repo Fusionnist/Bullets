@@ -31,6 +31,33 @@ namespace SuperBulletManiaReloadedTheSequel
             {
                 return new Machinegun3(dc_, pos_, props_, name_);
             }
+
+            if (type_ == "sniper 1")
+            {
+                return new Sniper1(dc_, pos_, props_, name_);
+            }
+            if (type_ == "sniper 2")
+            {
+                return new Sniper2(dc_, pos_, props_, name_);
+            }
+            if (type_ == "sniper 3")
+            {
+                return new Sniper3(dc_, pos_, props_, name_);
+            }
+
+            if (type_ == "artillery 1")
+            {
+                return new Artillery1(dc_, pos_, props_, name_);
+            }
+            if (type_ == "artillery 2")
+            {
+                return new Artillery2(dc_, pos_, props_, name_);
+            }
+            if (type_ == "artillery 3")
+            {
+                return new Artillery3(dc_, pos_, props_, name_);
+            }
+
             if (type_ == "enemy")
             {
                 return new Enemy(dc_, pos_, props_, name_);
