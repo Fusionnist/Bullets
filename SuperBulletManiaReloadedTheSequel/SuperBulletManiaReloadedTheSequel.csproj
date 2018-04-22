@@ -42,6 +42,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ClassInheriters\Artillery.cs" />
+    <Compile Include="ClassInheriters\Flak.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Event.cs" />
@@ -134,8 +136,11 @@
     <Content Include="Content\placeholder\greenBeamChunk.png" />
     <Content Include="Content\placeholder\no.png" />
     <Content Include="Content\placeholder\yes.png" />
+    <Content Include="Content\rock1.png" />
+    <Content Include="Content\rock2.png" />
     <Content Include="Content\statusbar.png" />
     <Content Include="Content\Tower.png" />
+    <Content Include="Content\tree1.png" />
     <Content Include="Content\TurretSheet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

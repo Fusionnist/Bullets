@@ -15,11 +15,11 @@ namespace SuperBulletManiaReloadedTheSequel
 {
     class Turret : Entity
     {
-        int baseDmg;
+        protected int baseDmg;
         Vector2 target;
         float angle;
         bool isShooting;
-        public Turret(DrawerCollection texes_, Vector2 pos_, List<Property> properties_, string name_, string type_ = "turret"): base(texes_, pos_, properties_, name_, type_)
+        public Turret(DrawerCollection texes_, Vector2 pos_, List<Property> properties_, string name_, string type_ = "turret"): base(texes_, pos_, properties_, name_, "turret")
         {
             baseDmg = 1;
         }
@@ -42,7 +42,7 @@ namespace SuperBulletManiaReloadedTheSequel
                 if(tar != null)
                 {
                     isShooting = true;
-                    tar.TakeDamage(10);
+                    tar.TakeDamage(baseDmg);
                     target = tar.pos;
 
                     angle = -(float)Math.Atan2(target.X - pos.X, target.Y - pos.Y) + (float)Math.PI;

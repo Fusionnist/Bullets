@@ -63,7 +63,7 @@ namespace SuperBulletManiaReloadedTheSequel
             //FOLLOW PATH
             Vector2 v = (point - pos);
             v.Normalize();
-            mov += v;
+            mov += v/1;
         }
 
         void Wiggle()
@@ -71,10 +71,11 @@ namespace SuperBulletManiaReloadedTheSequel
             //WIGGLE
             foreach (Entity e in EntityCollection.GetGroup("enemies"))
             {
-                if ((e.pos - pos).Length() < 4)
+                if ((e.pos - pos).Length() < 5)
                 {
-                    float a = (float)r.NextDouble() * (float)Math.PI*2;
-                    Vector2 apart = new Vector2((float)Math.Sin(a), (float)Math.Cos(a));
+                    Vector2 diff = e.pos - pos;
+                    float a = (float)Math.Atan2(diff.Y, diff.X);
+                    Vector2 apart = new Vector2((float)Math.Cos(a), (float)Math.Sin(a))/5;
                     e.mov += apart;
                     mov -= apart;
                 }
