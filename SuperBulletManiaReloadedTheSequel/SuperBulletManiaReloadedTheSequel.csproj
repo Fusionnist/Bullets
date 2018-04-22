@@ -134,6 +134,7 @@
     <Content Include="Content\Image4.png" />
     <Content Include="Content\font.png" />
     <Content Include="Content\ld41tracktest2.wav" />
+    <Content Include="Content\LOADINGOWO.png" />
     <Content Include="Content\nonpressed.png" />
     <Content Include="Content\nopressed.png" />
     <Content Include="Content\mapoverlay.png" />
@@ -141,6 +142,7 @@
     <Content Include="Content\placeholder\button.png" />
     <Content Include="Content\placeholder\dot.png" />
     <Content Include="Content\placeholder\greenBeamChunk.png" />
+    <Content Include="Content\ld41tracktest2.mp3" />
     <Content Include="Content\placeholder\no.png" />
     <Content Include="Content\placeholder\yes.png" />
     <Content Include="Content\rock1.png" />

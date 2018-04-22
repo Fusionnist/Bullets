@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 using MonoGame.FZT;
 using MonoGame.FZT.Assets;
 using MonoGame.FZT.Data;
@@ -26,7 +27,7 @@ namespace SuperBulletManiaReloadedTheSequel
         SpriteBatch spriteBatch;
         InputProfile inputProfile;
         CursorManager mouseMan;
-        GamePhase phase;
+        GamePhase phase, nextPhase;
         UISystem currentUI;
         UISystem[] UIs;
         TDEntityBuilder ebuilder;
@@ -38,7 +39,7 @@ namespace SuperBulletManiaReloadedTheSequel
         Map gameMap;
         InputProfile ipp;
         List<Entity> availableTurrets;
-        TextureDrawer status, cursor;
+        TextureDrawer status, cursor, transitiontex;
         Timer waveTimer, transitionTimer;
         int waveNumber, money, health, waveAmt, currentEventNo, turretIndex, income;
         bool lost, transition;
@@ -56,6 +57,7 @@ namespace SuperBulletManiaReloadedTheSequel
 
         protected override void Initialize()
         {
+            transitionTimer = new Timer(2f);
             ipp = new InputProfile(new KeyManager[]
             {
                 new KeyManager(Keys.Right, "right"),
@@ -112,6 +114,7 @@ namespace SuperBulletManiaReloadedTheSequel
             handler = new TextHandler(drawer, virtualDims);
 
             SoundManager.AddEffect(Content.Load<SoundEffect>("classic_hurt"), "shoot");
+            SoundManager.AddSong(Content.Load<Song>("ld41tracktest2"), "song");
 
             ChangeToQueue(0);
 
@@ -141,6 +144,7 @@ namespace SuperBulletManiaReloadedTheSequel
             status = new TextureDrawer(Content.Load<Texture2D>("statusbar"));
 
             cursor = new TextureDrawer(Content.Load<Texture2D>("cursor"), new TextureFrame(new Rectangle(0, 0, 8, 8), new Point(4, 4)));
+            transitiontex = new TextureDrawer(Content.Load<Texture2D>("LOADINGOWO"));
         }
 
         void SetupGame()
@@ -148,10 +152,12 @@ namespace SuperBulletManiaReloadedTheSequel
             lost = false;
             health = 100;
             money = 100;
-            waveNumber = 0;
+            waveNumber = 1;
             waveAmt = 0;
             EntityCollection.RemoveAll();
             PlaceRocks();
+
+            SoundManager.PlaySong("song");
         }
 
         void PlaceRocks()
@@ -213,6 +219,13 @@ namespace SuperBulletManiaReloadedTheSequel
             
         }
 
+        void TransitionTo(GamePhase dest_)
+        {
+            nextPhase = dest_;
+            transition = true;
+            transitionTimer.Reset();
+        }
+
         protected override void UnloadContent()
         {
             Content.Unload();
@@ -226,62 +239,24 @@ namespace SuperBulletManiaReloadedTheSequel
             float es = (float)gameTime.ElapsedGameTime.TotalSeconds; 
             mouseMan.Update();
 
-            if (phase == GamePhase.Menu)
+            if (!transition)
             {
-                if (currentUI.IssuedCommand("goToGame"))
+                if (phase == GamePhase.Menu)
                 {
-                    currentUI = UIs[1]; phase = GamePhase.Gameplay;
-                    SetupGame();
+                    UpdateMenu(es);
                 }
-                currentUI.HandleMouseInput(mouseMan, scenes.GetScene("game").ToVirtualPos(mouseMan.RawPos()));
+                if (phase == GamePhase.Gameplay)
+                {
+                    UpdateGame(es);
+                }
+                if (phase == GamePhase.urded)
+                {
+                    Updateurded(es);
+                }
             }
-            if (phase == GamePhase.Gameplay)
+            else
             {
-                if(lost && ipp.JustPressed("restart"))
-                {
-                    SetupGame();
-                }
-
-                UpdateHealth();
-                for (int x = 0; x < 10; x++) { EntityCollection.OrderGroup(EntityCollection.entities, DrawOrder.SmallToBigY); }
-                currentUI.HandleMouseInput(mouseMan, scenes.GetScene("text").ToVirtualPos(scenes.GetScene("game").ToVirtualPos(mouseMan.ClickPos())));
-                handler.Update(es);
-                EntityCollection.RecycleAll();
-
-                gameMap.Update(es);
-                UpdateTD(es);
-                UpdateTA(es);
-                UpdateTS(es);
-
-                foreach(Entity e in EntityCollection.GetGroup("enemies"))
-                {
-                    money += e.GetValue("loot")*10;
-                }
-
-                waveTimer.Update(es);
-                if (waveTimer.Complete())
-                {
-                    SendWave(waveNumber*1);
-                    waveTimer.Reset();
-                    money += income;
-                    if (money < 0)
-                        money = 0;
-                }
-                if(waveAmt > 0)
-                {
-                    waveAmt--;
-                    SpawnEnemy(1);
-                }
-
-                if (!mouseMan.Pressed())
-                {
-                    if (currentUI.IssuedCommand("sayYes"))
-                        HandleEventConsequences(currentQueue[currentEventNo].outcomeIfYes);
-                    else if (currentUI.IssuedCommand("sayNo"))
-                        HandleEventConsequences(currentQueue[currentEventNo].outcomeIfNo);
-                }
-                if (handler.wasIgnored)
-                { HandleEventConsequences(currentQueue[currentEventNo].outcomeIfIgnored); handler.wasIgnored = false; }
+                UpdateTransition(es);
             }
 
             base.Update(gameTime);
@@ -318,6 +293,14 @@ namespace SuperBulletManiaReloadedTheSequel
                 }
             }
         }
+        void Updateurded(float es)
+        {
+            if (ipp.JustPressed("restart"))
+            {
+                TransitionTo(GamePhase.Gameplay);
+                SetupGame();
+            }
+        }
         void UpdateHealth()
         {
             foreach(Entity e in EntityCollection.GetGroup("enemies"))
@@ -332,14 +315,89 @@ namespace SuperBulletManiaReloadedTheSequel
             if (health <= 0)
             {
                 lost = true;
+                TransitionTo(GamePhase.urded);
             }
         }
+        void UpdateMenu(float es)
+        {
+            if (currentUI.IssuedCommand("goToGame"))
+            {
+                currentUI = UIs[1];
+                TransitionTo(GamePhase.Gameplay);
+                SetupGame();
+            }
+            currentUI.HandleMouseInput(mouseMan, scenes.GetScene("game").ToVirtualPos(mouseMan.RawPos()));
+        }
+        void UpdateGame(float es)
+        {
 
+            UpdateHealth();
+            for (int x = 0; x < 10; x++) { EntityCollection.OrderGroup(EntityCollection.entities, DrawOrder.SmallToBigY); }
+            currentUI.HandleMouseInput(mouseMan, scenes.GetScene("text").ToVirtualPos(scenes.GetScene("game").ToVirtualPos(mouseMan.ClickPos())));
+            handler.Update(es);
+            EntityCollection.RecycleAll();
+
+            gameMap.Update(es);
+            UpdateTD(es);
+            UpdateTA(es);
+            UpdateTS(es);
+
+            foreach (Entity e in EntityCollection.GetGroup("enemies"))
+            {
+                money += e.GetValue("loot") * 10;
+            }
+
+            waveTimer.Update(es);
+            if (waveTimer.Complete())
+            {
+                SendWave(waveNumber * 10);
+                waveTimer.Reset();
+                money += income;
+                if (money < 0)
+                    money = 0;
+            }
+            if (waveAmt > 0)
+            {
+                waveAmt--;
+                SpawnEnemy(1);
+            }
+
+            if (!mouseMan.Pressed())
+            {
+                if (currentUI.IssuedCommand("sayYes"))
+                    HandleEventConsequences(currentQueue[currentEventNo].outcomeIfYes);
+                else if (currentUI.IssuedCommand("sayNo"))
+                    HandleEventConsequences(currentQueue[currentEventNo].outcomeIfNo);
+            }
+            if (handler.wasIgnored)
+            { HandleEventConsequences(currentQueue[currentEventNo].outcomeIfIgnored); handler.wasIgnored = false; }
+        }
+        void UpdateTransition(float es)
+        {
+            transitionTimer.Update(es);
+            if (transitionTimer.Complete())
+            {
+                transition = false;
+                phase = nextPhase;
+            }
+        }
 
         void SendWave(int amt_)
         {
             waveAmt += amt_;
             waveNumber++;
+        }
+       
+
+        protected List<Button> SetupGameButtons()
+        {
+            TextureDrawer temp = new TextureDrawer(Content.Load<Texture2D>("button"));
+            List<Button> gameButtons = new List<Button>()
+            {
+                new Button("sayYes", new Rectangle(20, 230, 49 ,21), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")), new TextureDrawer(Content.Load<Texture2D>("yespressed"))),
+                new Button("sayNo", new Rectangle(91, 230, 49, 21), new TextureDrawer(Content.Load<Texture2D>("nonpressed")), new TextureDrawer(Content.Load<Texture2D>("nopressed")))
+            };
+            return gameButtons;
         }
         protected override void Draw(GameTime gameTime)
         {
@@ -351,6 +409,9 @@ namespace SuperBulletManiaReloadedTheSequel
                 DrawTA();
                 DrawTS();
                 DrawGameScenes();
+                
+
+                
             }
             else
             {
@@ -361,28 +422,18 @@ namespace SuperBulletManiaReloadedTheSequel
 
                 currentUI.Draw(spriteBatch);
                 cursor.Draw(spriteBatch, scenes.CurrentScene.ToVirtualPos(mouseMan.RawPos()));
-
-                spriteBatch.End();
-
-                spriteBatch.Begin(samplerState: SamplerState.PointWrap);
-                GraphicsDevice.SetRenderTarget(null);
-                scenes.DrawScene(spriteBatch);
+                if (transition)
+                {
+                    transitiontex.Draw(spriteBatch, Vector2.Zero);
+                }
                 spriteBatch.End();
             }
-
+            spriteBatch.Begin(samplerState: SamplerState.PointWrap);
+            GraphicsDevice.SetRenderTarget(null);
+            scenes.DrawScene(spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
-        }
-
-        protected List<Button> SetupGameButtons()
-        {
-            TextureDrawer temp = new TextureDrawer(Content.Load<Texture2D>("button"));
-            List<Button> gameButtons = new List<Button>()
-            {
-                new Button("sayYes", new Rectangle(20, 230, 49 ,21), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")), new TextureDrawer(Content.Load<Texture2D>("yespressed"))),
-                new Button("sayNo", new Rectangle(91, 230, 49, 21), new TextureDrawer(Content.Load<Texture2D>("nonpressed")), new TextureDrawer(Content.Load<Texture2D>("nopressed")))
-            };
-            return gameButtons;
         }
         void DrawTD()
         {
@@ -424,7 +475,7 @@ namespace SuperBulletManiaReloadedTheSequel
             handler.drawer.DrawText("aaa", "money:"+moneystring, new Rectangle(114, 3, 500, 200), spriteBatch);
             handler.drawer.DrawText("aaa", "next:"+ Math.Round(waveTimer.timer,1) + "", new Rectangle(114, 19, 500, 200), spriteBatch);
             handler.drawer.DrawText("aaa", "wave:"+ waveNumber + "", new Rectangle(194, 3, 500, 200), spriteBatch);
-            handler.drawer.DrawText("aaa", "health:" + health + "", new Rectangle(180, 19, 500, 200), spriteBatch);
+            handler.drawer.DrawText("aaa", "health:" + health + "", new Rectangle(164, 19, 500, 200), spriteBatch);
             handler.drawer.DrawText("aaa", "price:"+availableTurrets[turretIndex].IntProperty("price").ToString(), new Rectangle(50, 19, 500, 200), spriteBatch);
             handler.drawer.DrawText("aaa", availableTurrets[turretIndex].Name, new Rectangle(50, 3, 500, 200), spriteBatch);
             spriteBatch.End();
@@ -441,12 +492,10 @@ namespace SuperBulletManiaReloadedTheSequel
             scenes.DrawScene(spriteBatch, "td");
             scenes.DrawScene(spriteBatch, "status");
             cursor.Draw(spriteBatch, scenes.CurrentScene.ToVirtualPos(mouseMan.RawPos()));
-
-            spriteBatch.End();
-
-            spriteBatch.Begin(samplerState: SamplerState.PointWrap);
-            GraphicsDevice.SetRenderTarget(null);
-            scenes.DrawScene(spriteBatch);
+            if (transition)
+            {
+                transitiontex.Draw(spriteBatch, Vector2.Zero);
+            }
             spriteBatch.End();
         }
 

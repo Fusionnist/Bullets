@@ -5,7 +5,7 @@ using MonoGame.FZT;
 using MonoGame.FZT.Assets;
 using MonoGame.FZT.Data;
 using MonoGame.FZT.Drawing;
-using MonoGame.FZT.Input;
+using MonoGame.FZT.Sound;
 using MonoGame.FZT.UI;
 using System;
 using System.Collections.Generic;
@@ -24,7 +24,7 @@ namespace SuperBulletManiaReloadedTheSequel
         public Turret(DrawerCollection texes_, Vector2 pos_, List<Property> properties_, string name_, string type_ = "turret"): base(texes_, pos_, properties_, name_, "turret")
         {
             baseDmg = 1;
-            shotTimer = new Timer(0.2f);
+            shotTimer = new Timer(1f);
             shotDrawTimer = new Timer(0.2f);
         }
 
@@ -66,6 +66,8 @@ namespace SuperBulletManiaReloadedTheSequel
                     //angle -= angle%((float)Math.PI / 16);
 
                     shotDrawTimer.Reset();
+
+                    SoundManager.PlayEffect("shoot");
                 }
             }
         }
