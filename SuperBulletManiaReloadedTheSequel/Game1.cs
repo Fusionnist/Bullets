@@ -42,7 +42,7 @@ namespace SuperBulletManiaReloadedTheSequel
         TextureDrawer status, cursor, transitiontex;
         Timer waveTimer, transitionTimer;
         int waveNumber, money, health, waveAmt, currentEventNo, turretIndex, income;
-        bool lost, transition;
+        bool lost, transition, countdown;
         
         public Game1()
         {
@@ -346,6 +346,7 @@ namespace SuperBulletManiaReloadedTheSequel
                 money += e.GetValue("loot") * 10;
             }
 
+            if(countdown)
             waveTimer.Update(es);
             if (waveTimer.Complete())
             {
