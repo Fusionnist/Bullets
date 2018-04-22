@@ -479,13 +479,13 @@ namespace SuperBulletManiaReloadedTheSequel
             for (int i = 0; i < relevantVariable.Length; i++)
             {
                 if (relevantVariable[i].StartsWith("getQueueEvent"))
-                    ChangeToEventInQueue((int)char.GetNumericValue(relevantVariable[i][13]));
+                    ChangeToEventInQueue(int.Parse(relevantVariable[i].Substring(13)));
                 else if (relevantVariable[i].StartsWith("sendWave"))
-                    SendWave((int)char.GetNumericValue(relevantVariable[i][8]));
+                    SendWave(int.Parse(relevantVariable[i].Substring(8)));
                 else if (relevantVariable[i].StartsWith("breakTurret"))
-                    BreakTurret((int)char.GetNumericValue(relevantVariable[i][11]));
+                    BreakTurret(int.Parse(relevantVariable[i].Substring(11)));
                 else if (relevantVariable[i].StartsWith("getQueue"))
-                    ChangeToQueue((int)char.GetNumericValue(relevantVariable[i][8]));
+                    ChangeToQueue(int.Parse(relevantVariable[i].Substring(8)));
             }
         }
         
@@ -534,7 +534,7 @@ namespace SuperBulletManiaReloadedTheSequel
         protected Event[] GetEventQueue(int nb)
         {
             XDocument xdoc = XDocument.Load("Content\\eventStuff.xml");
-            XElement el = xdoc.Element("EventQueue" + nb.ToString());
+            XElement el = xdoc.Root.Element("EventQueue" + nb.ToString());
             int cap = (int)el.Attribute("cap");
             Event[] eQueue = new Event[cap];
             IEnumerable<XElement> els = el.Elements("Event");
