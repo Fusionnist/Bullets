@@ -18,6 +18,69 @@
       <Property name="price" type="int" value="1000"></Property>
     </Properties>
   </Entity>
+  <Entity type="machinegun 3" name="machinegun 3">
+    <Textures name="ass">
+      <Texture name="t1shoot" id="8" sheetName ="turrets"/>
+      <Texture name="t1idle" id="9" sheetName ="turrets"/>
+    </Textures>
+    <Properties>
+      <Property name="price" type="int" value="1000"></Property>
+    </Properties>
+  </Entity>
+  <Entity type="sniper 1" name="sniper 1">
+    <Textures name="ass">
+      <Texture name="t1idle" id="s1i" sheetName="turrets"/>
+      <Texture name="t1shoot" id="s1s" sheetName="turrets"/>
+    </Textures>
+    <Properties>
+      <Property name="price" type="int" value="100"></Property>
+    </Properties>
+  </Entity>
+  <Entity type="sniper 2" name="sniper 2">
+    <Textures name="ass">
+      <Texture name="t1shoot" id="12" sheetName ="turrets"/>
+      <Texture name="t1idle" id="13" sheetName ="turrets"/>
+    </Textures>
+    <Properties>
+      <Property name="price" type="int" value="1000"></Property>
+    </Properties>
+  </Entity>
+  <Entity type="sniper 3" name="sniper 3">
+    <Textures name="ass">
+      <Texture name="t1shoot" id="14" sheetName ="turrets"/>
+      <Texture name="t1idle" id="15" sheetName ="turrets"/>
+    </Textures>
+    <Properties>
+      <Property name="price" type="int" value="1000"></Property>
+    </Properties>
+  </Entity>
+  <Entity type="artillery 1" name="artillery 1">
+    <Textures name="ass">
+      <Texture name="t1idle" id="a1i" sheetName="turrets"/>
+      <Texture name="t1shoot" id="a1s" sheetName="turrets"/>
+    </Textures>
+    <Properties>
+      <Property name="price" type="int" value="100"></Property>
+    </Properties>
+  </Entity>
+  <Entity type="artillery 2" name="artillery 2">
+    <Textures name="ass">
+      <Texture name="t1shoot" id="18" sheetName ="turrets"/>
+      <Texture name="t1idle" id="19" sheetName ="turrets"/>
+    </Textures>
+    <Properties>
+      <Property name="price" type="int" value="1000"></Property>
+    </Properties>
+  </Entity>
+  <Entity type="artillery 3" name="artillery 3">
+    <Textures name="ass">
+      <Texture name="t1shoot" id="20" sheetName ="turrets"/>
+      <Texture name="t1idle" id="21" sheetName ="turrets"/>
+    </Textures>
+    <Properties>
+      <Property name="price" type="int" value="1000"></Property>
+    </Properties>
+  </Entity>
   <Entity type="enemy" name="enemy1">
     <Textures name="ass">
       <Texture name="enemywalk" id="2" sheetName="turrets"/>
