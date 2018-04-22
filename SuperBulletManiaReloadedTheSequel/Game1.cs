@@ -31,8 +31,9 @@ namespace SuperBulletManiaReloadedTheSequel
         TextHandler handler;
         Rectangle TDFrame, TAFrame;
         Point TDdims, TAdims;
-        Event[] allEvents;
-        Event currentEvent;
+        Event[][] allEvents;
+        Event[] currentQueue;
+        int currentEventNo;
         Map gameMap;
         InputProfile ipp;
         List<Entity> availableTurrets;
@@ -109,7 +110,7 @@ namespace SuperBulletManiaReloadedTheSequel
 
             allEvents = LoadUpEvents();
 
-            ChangeToEvent(0);
+            ChangeToQueue(0);
 
             //LOAD MAP AND ENTS
             gameMap = new Map(
@@ -206,11 +207,11 @@ namespace SuperBulletManiaReloadedTheSequel
                 }
 
                 if (currentUI.IssuedCommand("sayYes"))
-                    HandleEventConsequences(currentEvent.outcomeIfYes);
+                    HandleEventConsequences(currentQueue[currentEventNo].outcomeIfYes);
                 else if (currentUI.IssuedCommand("sayNo"))
-                    HandleEventConsequences(currentEvent.outcomeIfNo);
+                    HandleEventConsequences(currentQueue[currentEventNo].outcomeIfNo);
                 else if (handler.wasIgnored)
-                { HandleEventConsequences(currentEvent.outcomeIfIgnored); handler.wasIgnored = false; }
+                { HandleEventConsequences(currentQueue[currentEventNo].outcomeIfIgnored); handler.wasIgnored = false; }
             }
 
             base.Update(gameTime);
@@ -370,24 +371,32 @@ namespace SuperBulletManiaReloadedTheSequel
 
         protected void HandleEventConsequences(string[] relevantVariable)
         {
-            ChangeToEvent((int)char.GetNumericValue(relevantVariable[0][8]));
-            for (int i = 1; i < relevantVariable.Length; i++)
+            for (int i = 0; i < relevantVariable.Length; i++)
             {
-                if (relevantVariable[i].StartsWith("sendWave"))
+                if (relevantVariable[i].StartsWith("getQueueEvent"))
+                    ChangeToEventInQueue((int)char.GetNumericValue(relevantVariable[i][13]));
+                else if (relevantVariable[i].StartsWith("sendWave"))
                     SendWave((int)char.GetNumericValue(relevantVariable[i][8]));
-            }
-            for (int i = 1; i < relevantVariable.Length; i++)
-            {
-                if (relevantVariable[i].StartsWith("breakTurret"))
+                else if (relevantVariable[i].StartsWith("breakTurret"))
                     BreakTurret((int)char.GetNumericValue(relevantVariable[i][11]));
+                else if (relevantVariable[i].StartsWith("getQueue"))
+                    ChangeToQueue((int)char.GetNumericValue(relevantVariable[i][8]));
             }
         }
         
-        protected void ChangeToEvent(int eventNo)
+        protected void ChangeToEventInQueue(int eventNo)
         {
-            currentEvent = allEvents[eventNo];
+            currentEventNo = eventNo;
             handler.RemoveText();
-            handler.AddTextToScroll(currentEvent.text);
+            handler.AddTextToScroll(currentQueue[currentEventNo].text);
+        }
+
+        protected void ChangeToQueue(int queueNo)
+        {
+            currentQueue = allEvents[queueNo];
+            currentEventNo = 0;
+            handler.RemoveText();
+            handler.AddTextToScroll(currentQueue[0].text);
         }
 
         protected void SendWave(int enemyNo_)
@@ -418,20 +427,39 @@ namespace SuperBulletManiaReloadedTheSequel
             }
         }
 
-        protected Event[] LoadUpEvents()
+        protected Event[][] LoadUpEvents()
         {
-            Event[] events = new Event[2]
+            Event[][] events = new Event[][]
             {
-                new Event(
-                    "this is the first dialogue text wow",
-                    new string[] { "getEvent1" },
-                    new string[] { "getEvent1", "breakTurret1" },
-                    new string[] { "getEvent1", "sendWave8" }),
-                new Event(
-                    "and this is the second dialogue text!",
-                    new string[] { "getEvent0" },
-                    new string[] { "getEvent0", "breakTurret3" },
-                    new string[] { "getEvent0", "sendWave8" })
+                new Event[]
+                {
+                    new Event(
+                     "this is the first dialogue text wow",
+                      new string[] { "getQueueEvent1" },
+                      new string[] { "getQueueEvent1", "breakTurret1" },
+                      new string[] { "getQueueEvent1", "sendWave8" }),
+                    new Event(
+                      "and this is the second dialogue text!",
+                      new string[] { "getQueue1" },
+                      new string[] { "getQueueEvent0", "breakTurret3" },
+                      new string[] { "getQueueEvent0", "sendWave8" })
+                },
+
+                new Event[]
+                {
+                    new Event(
+                        "testing the new queue system",
+                        new string[] { "getQueue0" },
+                        new string[] { "getQueueEvent1" },
+                        new string[] { "getQueueEvent1"}
+                        ),
+                    new Event(
+                        "still testing the new queue system",
+                        new string[] { "getQueueEvent1" },
+                        new string[] { "getQueueEvent1", "breakTurret1" },
+                        new string[] { "getQueueEvent0" }
+                        )
+                }
             };
             return events;
         }
