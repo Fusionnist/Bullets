@@ -270,17 +270,6 @@ namespace SuperBulletManiaReloadedTheSequel
             waveAmt += amt_;
             waveNumber++;
         }
-        protected List<Button> SetupGameButtons()
-        {
-            TextureDrawer temp = new TextureDrawer(Content.Load<Texture2D>("button"));
-            List<Button> gameButtons = new List<Button>()
-            {
-                new Button("sayYes", new Rectangle(0, 212, 100 ,60), new TextureDrawer(Content.Load<Texture2D>("yes"))),
-                new Button("sayNo", new Rectangle(60, 212, 100, 60), new TextureDrawer(Content.Load<Texture2D>("no")))
-            };
-            return gameButtons;
-        }
-
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);

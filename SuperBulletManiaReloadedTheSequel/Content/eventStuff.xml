@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Events>
+  <EventQueue nb="0" cap="2">
+    <Event nb ="">
+      <Text>hi my name is ndsvndsofnndfnsdnf</Text>
+      <yes>getQueueEvent1</yes>
+      <no>getQueueEvent1 breakTurret1</no>
+      <ignore>getQueueEvent0</ignore>
+    </Event>
+    <Event>
+      
+    </Event>
+  </EventQueue>
+</Events>
