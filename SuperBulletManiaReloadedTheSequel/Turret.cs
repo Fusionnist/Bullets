@@ -19,7 +19,7 @@ namespace SuperBulletManiaReloadedTheSequel
         Vector2 target;
         float angle;
         bool isShooting;
-        public Turret(DrawerCollection texes_, Vector2 pos_, List<Property> properties_): base(texes_, pos_, properties_, "turret", "turret")
+        public Turret(DrawerCollection texes_, Vector2 pos_, List<Property> properties_, string name_, string type_ = "turret"): base(texes_, pos_, properties_, name_, type_)
         {
             baseDmg = 1;
         }
@@ -46,6 +46,7 @@ namespace SuperBulletManiaReloadedTheSequel
                     target = tar.pos;
 
                     angle = -(float)Math.Atan2(target.X - pos.X, target.Y - pos.Y) + (float)Math.PI;
+                    //angle -= angle%((float)Math.PI / 16);
                 }                
             }
             base.Update(elapsedTime_);

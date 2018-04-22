@@ -120,6 +120,7 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\cursor.png" />
     <Content Include="Content\Entities.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -128,6 +129,7 @@
     <Content Include="Content\font.png" />
     <Content Include="Content\nonpressed.png" />
     <Content Include="Content\nopressed.png" />
+    <Content Include="Content\mapoverlay.png" />
     <Content Include="Content\placeholder\aaaaaaaaaaaaaaa.png" />
     <Content Include="Content\placeholder\button.png" />
     <Content Include="Content\placeholder\dot.png" />
