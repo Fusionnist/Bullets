@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 using MonoGame.FZT;
 using MonoGame.FZT.Assets;
 using MonoGame.FZT.Data;
@@ -8,6 +9,7 @@ using MonoGame.FZT.Drawing;
 using MonoGame.FZT.Input;
 using MonoGame.FZT.UI;
 using MonoGame.FZT.XML;
+using MonoGame.FZT.Sound;
 using System.Xml.Linq;
 using System;
 using System.Collections.Generic;
@@ -112,6 +114,8 @@ namespace SuperBulletManiaReloadedTheSequel
             TextureDrawer[] letters = GetLettersFromSource();
             drawer.fonts.Add(new DrawerCollection(letters, "aaa"));
             handler = new TextHandler(drawer, virtualDims);
+
+            SoundManager.AddEffect(Content.Load<SoundEffect>("classic_hurt"), "shoot");
 
             ChangeToQueue(0);
 
