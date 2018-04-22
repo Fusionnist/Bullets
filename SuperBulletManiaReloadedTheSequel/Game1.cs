@@ -30,23 +30,18 @@ namespace SuperBulletManiaReloadedTheSequel
         UISystem currentUI;
         UISystem[] UIs;
         TDEntityBuilder ebuilder;
-        Point virtualDims, windowDims;
+        Point virtualDims, windowDims, TDdims, TAdims;
         SceneCollection scenes;
         TextHandler handler;
         Rectangle TDFrame, TAFrame;
-        Point TDdims, TAdims;
         Event[] currentQueue;
-        int currentEventNo;
         Map gameMap;
         InputProfile ipp;
         List<Entity> availableTurrets;
-        int turretIndex;
         TextureDrawer status, cursor;
-        Timer waveTimer;
-        int waveNumber, money, health, waveAmt;
-        bool lost;
-        bool transition;
-        Timer transitionTimer;
+        Timer waveTimer, transitionTimer;
+        int waveNumber, money, health, waveAmt, currentEventNo, turretIndex, income;
+        bool lost, transition;
         
         public Game1()
         {
@@ -96,6 +91,7 @@ namespace SuperBulletManiaReloadedTheSequel
             waveTimer = new Timer(10);
 
             money = 100;
+            income = 0;
         }
         
         protected override void LoadContent()
@@ -267,6 +263,9 @@ namespace SuperBulletManiaReloadedTheSequel
                 {
                     SendWave(waveNumber*1);
                     waveTimer.Reset();
+                    money += income;
+                    if (money < 0)
+                        money = 0;
                 }
                 if(waveAmt > 0)
                 {
@@ -490,6 +489,8 @@ namespace SuperBulletManiaReloadedTheSequel
                     BreakTurret(int.Parse(relevantVariable[i].Substring(11)));
                 else if (relevantVariable[i].StartsWith("getQueue"))
                     ChangeToQueue(int.Parse(relevantVariable[i].Substring(8)));
+                else if (relevantVariable[i].StartsWith("changeIncome"))
+                    income += int.Parse(relevantVariable[i].Substring(12));
             }
         }
         
