@@ -33,7 +33,6 @@ namespace SuperBulletManiaReloadedTheSequel
         TextHandler handler;
         Rectangle TDFrame, TAFrame;
         Point TDdims, TAdims;
-        Event[][] allEvents;
         Event[] currentQueue;
         int currentEventNo;
         Map gameMap;
@@ -113,9 +112,6 @@ namespace SuperBulletManiaReloadedTheSequel
             TextureDrawer[] letters = GetLettersFromSource();
             drawer.fonts.Add(new DrawerCollection(letters, "aaa"));
             handler = new TextHandler(drawer, virtualDims);
-
-
-            allEvents = LoadUpEvents();
 
             ChangeToQueue(0);
 
@@ -502,7 +498,7 @@ namespace SuperBulletManiaReloadedTheSequel
 
         protected void ChangeToQueue(int queueNo)
         {
-            currentQueue = allEvents[queueNo];
+            currentQueue = GetEventQueue(queueNo);
             currentEventNo = 0;
             handler.RemoveText();
             handler.AddTextToScroll(currentQueue[0].text);
@@ -538,7 +534,7 @@ namespace SuperBulletManiaReloadedTheSequel
         protected Event[] GetEventQueue(int nb)
         {
             XDocument xdoc = XDocument.Load("Content\\eventStuff.xml");
-            XElement el = xdoc.Root.Element("EventQueue" + nb.ToString());
+            XElement el = xdoc.Element("EventQueue" + nb.ToString());
             int cap = (int)el.Attribute("cap");
             Event[] eQueue = new Event[cap];
             IEnumerable<XElement> els = el.Elements("Event");
