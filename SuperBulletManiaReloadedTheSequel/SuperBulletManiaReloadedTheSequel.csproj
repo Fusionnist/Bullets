@@ -122,6 +122,7 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\classic_hurt.mp3" />
     <Content Include="Content\cursor.png" />
     <Content Include="Content\Entities.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -132,6 +133,7 @@
     </Content>
     <Content Include="Content\Image4.png" />
     <Content Include="Content\font.png" />
+    <Content Include="Content\ld41tracktest2.wav" />
     <Content Include="Content\nonpressed.png" />
     <Content Include="Content\nopressed.png" />
     <Content Include="Content\mapoverlay.png" />
