@@ -19,7 +19,7 @@ namespace SuperBulletManiaReloadedTheSequel
         Random r;
         bool looted;
 
-        public Enemy(DrawerCollection t_, Vector2 p_, List<Property> prop_) : base(t_,p_,prop_,"enemi","enemy")
+        public Enemy(DrawerCollection t_, Vector2 p_, List<Property> prop_, string name_) : base(t_,p_,prop_,name_,"enemy")
         {
             point = pos;
             deathTimer = new Timer(1);

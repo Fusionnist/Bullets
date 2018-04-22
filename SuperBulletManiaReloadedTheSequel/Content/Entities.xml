@@ -4,13 +4,19 @@
     <Textures name="ass">
       <Texture name="t1idle" id="0" sheetName="turrets"/>
       <Texture name="t1shoot" id="1" sheetName="turrets"/>
-    </Textures>    
-    <Properties/>
+    </Textures>
+    <Properties>
+      <Property name="price" type="int" value="100"></Property>
+    </Properties>
   </Entity>
   <Entity type="turret" name="turret2">
     <Textures name="ass">
       <Texture name="t2shoot" id="3" sheetName ="turrets"/>
+      <Texture name="t2idle" id="4" sheetName ="turrets"/>
     </Textures>
+    <Properties>
+      <Property name="price" type="int" value="1000"></Property>
+    </Properties>
   </Entity>
   <Entity type="enemy" name="enemy1">
     <Textures name="ass">
