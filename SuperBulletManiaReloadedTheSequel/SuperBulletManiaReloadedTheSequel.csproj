@@ -129,6 +129,8 @@
     <Content Include="Content\envtest3.png" />
     <Content Include="Content\Image4.png" />
     <Content Include="Content\font.png" />
+    <Content Include="Content\nonpressed.png" />
+    <Content Include="Content\nopressed.png" />
     <Content Include="Content\mapoverlay.png" />
     <Content Include="Content\placeholder\aaaaaaaaaaaaaaa.png" />
     <Content Include="Content\placeholder\button.png" />
@@ -144,6 +146,8 @@
     <Content Include="Content\TurretSheet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\yesnpressed.png" />
+    <Content Include="Content\yespressed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

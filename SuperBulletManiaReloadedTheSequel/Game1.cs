@@ -272,11 +272,14 @@ namespace SuperBulletManiaReloadedTheSequel
                     SpawnEnemy(1);
                 }
 
-                if (currentUI.IssuedCommand("sayYes"))
-                    HandleEventConsequences(currentQueue[currentEventNo].outcomeIfYes);
-                else if (currentUI.IssuedCommand("sayNo"))
-                    HandleEventConsequences(currentQueue[currentEventNo].outcomeIfNo);
-                else if (handler.wasIgnored)
+                if (!mouseMan.Pressed())
+                {
+                    if (currentUI.IssuedCommand("sayYes"))
+                        HandleEventConsequences(currentQueue[currentEventNo].outcomeIfYes);
+                    else if (currentUI.IssuedCommand("sayNo"))
+                        HandleEventConsequences(currentQueue[currentEventNo].outcomeIfNo);
+                }
+                if (handler.wasIgnored)
                 { HandleEventConsequences(currentQueue[currentEventNo].outcomeIfIgnored); handler.wasIgnored = false; }
             }
 
@@ -379,6 +382,17 @@ namespace SuperBulletManiaReloadedTheSequel
 
 
             base.Draw(gameTime);
+        }
+
+        protected List<Button> SetupGameButtons()
+        {
+            TextureDrawer temp = new TextureDrawer(Content.Load<Texture2D>("button"));
+            List<Button> gameButtons = new List<Button>()
+            {
+                new Button("sayYes", new Rectangle(20, 230, 49 ,21), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")), new TextureDrawer(Content.Load<Texture2D>("yespressed"))),
+                new Button("sayNo", new Rectangle(91, 230, 49, 21), new TextureDrawer(Content.Load<Texture2D>("nonpressed")), new TextureDrawer(Content.Load<Texture2D>("nopressed")))
+            };
+            return gameButtons;
         }
         void DrawTD()
         {
