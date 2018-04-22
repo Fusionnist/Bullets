@@ -94,8 +94,8 @@ namespace SuperBulletManiaReloadedTheSequel
 
             money = 100;
             income = 0;
-        }
-        
+            countdown = false;
+        }        
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -145,12 +145,12 @@ namespace SuperBulletManiaReloadedTheSequel
             cursor = new TextureDrawer(Content.Load<Texture2D>("cursor"), new TextureFrame(new Rectangle(0, 0, 8, 8), new Point(4, 4)));
             transitiontex = new TextureDrawer(Content.Load<Texture2D>("LOADINGOWO"));
         }
-
         void SetupGame()
         {
             lost = false;
             health = 100;
             money = 100;
+            countdown = false;
             waveNumber = 1;
             waveAmt = 0;
             EntityCollection.RemoveAll();
@@ -158,7 +158,6 @@ namespace SuperBulletManiaReloadedTheSequel
 
             SoundManager.PlaySong("song");
         }
-
         void PlaceRocks()
         {
             Assembler.GetEnt(ElementCollection.GetEntRef("rock1"),new Vector2(14,122), Content, ebuilder);
@@ -540,6 +539,12 @@ namespace SuperBulletManiaReloadedTheSequel
                     ChangeToQueue(int.Parse(relevantVariable[i].Substring(8)));
                 else if (relevantVariable[i].StartsWith("changeIncome"))
                     income += int.Parse(relevantVariable[i].Substring(12));
+                else if (relevantVariable[i].StartsWith("changeMoney"))
+                {
+                    money += int.Parse(relevantVariable[i].Substring(11));
+                    if (money < 0)
+                        money = 0;
+                }
             }
         }
         
@@ -552,6 +557,7 @@ namespace SuperBulletManiaReloadedTheSequel
 
         protected void ChangeToQueue(int queueNo)
         {
+            countdown = true;
             currentQueue = GetEventQueue(queueNo);
             currentEventNo = 0;
             handler.RemoveText();
