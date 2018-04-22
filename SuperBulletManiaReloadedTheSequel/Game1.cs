@@ -503,7 +503,7 @@ namespace SuperBulletManiaReloadedTheSequel
 
         protected TextureDrawer[] GetLettersFromSource()
         {
-            string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?!:;,.-_@'><)( /abcdefghijklmnopqrstuvwxyz";
+            string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?!:;,.-_@'>< /)(abcdefghijklmnopqrstuvwxyz";
             Texture2D ogTex = Content.Load<Texture2D>("font");
             TextureDrawer[] letterTexes = new TextureDrawer[78];
             for (int i = 0; i < 52; i++)
