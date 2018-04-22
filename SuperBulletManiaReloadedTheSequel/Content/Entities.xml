@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Entities>
-  <Entity type="artillery" name="artillery">
+  <Entity type="machinegun 1" name="machinegun 1">
     <Textures name="ass">
       <Texture name="t1idle" id="0" sheetName="turrets"/>
       <Texture name="t1shoot" id="1" sheetName="turrets"/>
@@ -9,7 +9,7 @@
       <Property name="price" type="int" value="100"></Property>
     </Properties>
   </Entity>
-  <Entity type="flak" name="flak">
+  <Entity type="machinegun 2" name="machinegun 2">
     <Textures name="ass">
       <Texture name="t1shoot" id="4" sheetName ="turrets"/>
       <Texture name="t1idle" id="3" sheetName ="turrets"/>

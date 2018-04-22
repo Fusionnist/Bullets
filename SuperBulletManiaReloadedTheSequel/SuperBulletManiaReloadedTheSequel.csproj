@@ -42,8 +42,15 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ClassInheriters\Artillery.cs" />
-    <Compile Include="ClassInheriters\Flak.cs" />
+    <Compile Include="ClassInheriters\Artillery1.cs" />
+    <Compile Include="ClassInheriters\Artillery2.cs" />
+    <Compile Include="ClassInheriters\Artillery3.cs" />
+    <Compile Include="ClassInheriters\Machinegun1.cs" />
+    <Compile Include="ClassInheriters\Machinegun2.cs" />
+    <Compile Include="ClassInheriters\Machinegun3.cs" />
+    <Compile Include="ClassInheriters\Sniper1.cs" />
+    <Compile Include="ClassInheriters\Sniper2.cs" />
+    <Compile Include="ClassInheriters\Sniper3.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Event.cs" />

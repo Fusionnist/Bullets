@@ -19,13 +19,17 @@ namespace SuperBulletManiaReloadedTheSequel
 
         public override Entity CreateEntity(string type_, DrawerCollection dc_, Vector2 pos_, List<Property> props_, string name_)
         {
-            if (type_ == "artillery")
+            if (type_ == "machinegun 1")
             {
-                return new Artillery(dc_, pos_, props_, name_);
+                return new Machinegun1(dc_, pos_, props_, name_);
             }
-            if (type_ == "flak")
+            if (type_ == "machinegun 2")
             {
-                return new Flak(dc_, pos_, props_, name_);
+                return new Machinegun2(dc_, pos_, props_, name_);
+            }
+            if (type_ == "machinegun 3")
+            {
+                return new Machinegun3(dc_, pos_, props_, name_);
             }
             if (type_ == "enemy")
             {
