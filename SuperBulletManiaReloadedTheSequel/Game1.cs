@@ -520,7 +520,7 @@ namespace SuperBulletManiaReloadedTheSequel
                 Color[] data = new Color[rect.Width * rect.Height];
                 ogTex.GetData(0, rect, data, 0, data.Length);
                 letter.SetData(data);
-                letterTexes[i + 44] = new TextureDrawer(letter,null, alphabet[i+44].ToString());
+                letterTexes[i + 52] = new TextureDrawer(letter,null, alphabet[i + 52].ToString());
             }
             return letterTexes;
         }
@@ -546,7 +546,7 @@ namespace SuperBulletManiaReloadedTheSequel
         {
             currentEventNo = eventNo;
             handler.RemoveText();
-            handler.AddTextToScroll(currentQueue[currentEventNo].text);
+            handler.AddTextToScroll(currentQueue[currentEventNo].text, currentQueue[currentEventNo].scrollSpeed);
         }
 
         protected void ChangeToQueue(int queueNo)
@@ -554,7 +554,7 @@ namespace SuperBulletManiaReloadedTheSequel
             currentQueue = GetEventQueue(queueNo);
             currentEventNo = 0;
             handler.RemoveText();
-            handler.AddTextToScroll(currentQueue[0].text);
+            handler.AddTextToScroll(currentQueue[0].text, currentQueue[0].scrollSpeed);
         }
 
         protected void SpawnEnemy(int enemyNo_)
@@ -592,12 +592,14 @@ namespace SuperBulletManiaReloadedTheSequel
             Event[] eQueue = new Event[cap];
             IEnumerable<XElement> els = el.Elements("Event");
             string yes, no, ignore;
+            int spd;
             for (int i = 0; i < cap; i++)
             {
                 yes = (string)els.ElementAt(i).Element("yes");
                 no = (string)els.ElementAt(i).Element("no");
                 ignore = (string)els.ElementAt(i).Element("ignore");
-                eQueue[i] = new Event((string)els.ElementAt(i).Element("Text"), yes.Split(' '), no.Split(' '), ignore.Split(' '));
+                spd = (int)els.ElementAt(i).Attribute("scrollSpeed");
+                eQueue[i] = new Event((string)els.ElementAt(i).Element("Text"), yes.Split(' '), no.Split(' '), ignore.Split(' '), spd);
             }
             return eQueue;
         }
