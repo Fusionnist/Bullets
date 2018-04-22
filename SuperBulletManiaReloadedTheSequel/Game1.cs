@@ -453,10 +453,10 @@ namespace SuperBulletManiaReloadedTheSequel
 
         protected TextureDrawer[] GetLettersFromSource()
         {
-            string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?!:;,.-_abcdefghijklmnopqrstuvwxyz";
+            string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?!:;,.-_@'><)( /abcdefghijklmnopqrstuvwxyz";
             Texture2D ogTex = Content.Load<Texture2D>("font");
-            TextureDrawer[] letterTexes = new TextureDrawer[70];
-            for (int i = 0; i < 44; i++)
+            TextureDrawer[] letterTexes = new TextureDrawer[78];
+            for (int i = 0; i < 52; i++)
             {
                 Rectangle rect = new Rectangle(6 * i, 0, 6, 12);
                 Texture2D letter = new Texture2D(GraphicsDevice, rect.Width, rect.Height);

@@ -28,7 +28,7 @@ namespace SuperBulletManiaReloadedTheSequel
             drawer = drawer_;
             texts = new List<string>();
             poses = new List<float>();
-            scrollSpeed = -50;
+            scrollSpeed = 30;
             virtualDims = virtualDims_;
             wasIgnored = false;
             currentHeight = 0;
@@ -38,7 +38,7 @@ namespace SuperBulletManiaReloadedTheSequel
         {
             for (int i = 0; i < texts.Count; i++)
             {
-                poses[i] += es_ * scrollSpeed;
+                poses[i] -= es_ * scrollSpeed;
                 if (poses[i] < -currentHeight)
                 {
                     poses.RemoveAt(i);
@@ -59,7 +59,7 @@ namespace SuperBulletManiaReloadedTheSequel
         public void AddTextToScroll(string textToAdd_)
         {
             texts.Add(textToAdd_);
-            poses.Add(virtualDims.Y * 4 / 5);
+            poses.Add(virtualDims.Y);
         }
 
         public void RemoveText()

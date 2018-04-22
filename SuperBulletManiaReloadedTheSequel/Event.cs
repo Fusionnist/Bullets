@@ -18,6 +18,7 @@ namespace SuperBulletManiaReloadedTheSequel
         public string text;
         public string[] outcomeIfYes, outcomeIfNo, outcomeIfIgnored;
         bool wasIgnored;
+        public int scrollSpeed;
 
         public Event(string text_, string[] outcomeIfYes_, string[] outcomeIfNo_, string[] outcomeIfIgnored_)
         {
