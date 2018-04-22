@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Events>
-  <EventQueue0 cap="2">
+  <EventQueue nb="0" cap="2">
     <Event nb ="0">
       <Text>hi my name is ndsvndsofnndfnsdnf</Text>
       <yes>getQueueEvent1</yes>
@@ -13,5 +13,5 @@
       <no>getQueueEvent0 sendWave10</no>
       <ignore>getQueueEvent1</ignore>
     </Event>
-  </EventQueue0>
+  </EventQueue>
 </Events>

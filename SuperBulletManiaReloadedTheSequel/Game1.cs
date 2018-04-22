@@ -12,6 +12,8 @@ using System.Xml.Linq;
 using System;
 using System.Collections.Generic;
 using static SuperBulletManiaReloadedTheSequel.Enums;
+using System.Xml;
+using System.Linq;
 
 namespace SuperBulletManiaReloadedTheSequel
 {
@@ -533,41 +535,23 @@ namespace SuperBulletManiaReloadedTheSequel
             }
         }
 
-        protected Event[][] LoadUpEvents()
+        protected Event[] GetEventQueue(int nb)
         {
-            Event[][] events = new Event[][]
+            XDocument xdoc = XDocument.Load("Content\\eventStuff.xml");
+            XElement el = xdoc.Root.Element("EventQueue" + nb.ToString());
+            int cap = (int)el.Attribute("cap");
+            Event[] eQueue = new Event[cap];
+            IEnumerable<XElement> els = el.Elements("Event");
+            string yes, no, ignore;
+            for (int i = 0; i < cap; i++)
             {
-                new Event[]
-                {
-                    new Event(
-                     "this is the first dialogue text wow",
-                      new string[] { "getQueueEvent1" },
-                      new string[] { "getQueueEvent1", "breakTurret1" },
-                      new string[] { "getQueueEvent1", "sendWave8" }),
-                    new Event(
-                      "and this is the second dialogue text!",
-                      new string[] { "getQueue1" },
-                      new string[] { "getQueueEvent0", "breakTurret3" },
-                      new string[] { "getQueueEvent0", "sendWave8" })
-                },
-
-                new Event[]
-                {
-                    new Event(
-                        "testing the new queue system",
-                        new string[] { "getQueue0" },
-                        new string[] { "getQueueEvent1" },
-                        new string[] { "getQueueEvent1"}
-                        ),
-                    new Event(
-                        "still testing the new queue system",
-                        new string[] { "getQueueEvent1" },
-                        new string[] { "getQueueEvent1", "breakTurret1" },
-                        new string[] { "getQueueEvent0" }
-                        )
-                }
-            };
-            return events;
+                yes = (string)els.ElementAt(i).Element("yes");
+                no = (string)els.ElementAt(i).Element("no");
+                ignore = (string)els.ElementAt(i).Element("ignore");
+                eQueue[i] = new Event((string)els.ElementAt(i).Element("Text"), yes.Split(' '), no.Split(' '), ignore.Split(' '));
+            }
+            return eQueue;
         }
+
     }
 }

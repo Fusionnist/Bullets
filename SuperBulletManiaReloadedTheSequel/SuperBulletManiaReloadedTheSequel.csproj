@@ -127,6 +127,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\envtest3.png" />
+    <Content Include="Content\eventStuff.xml" />
     <Content Include="Content\Image4.png" />
     <Content Include="Content\font.png" />
     <Content Include="Content\nonpressed.png" />
