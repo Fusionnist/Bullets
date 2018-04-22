@@ -19,15 +19,32 @@ namespace SuperBulletManiaReloadedTheSequel
         Vector2 target;
         float angle;
         bool isShooting;
+        protected Timer shotTimer, shotDrawTimer;
+
         public Turret(DrawerCollection texes_, Vector2 pos_, List<Property> properties_, string name_, string type_ = "turret"): base(texes_, pos_, properties_, name_, "turret")
         {
             baseDmg = 1;
+            shotTimer = new Timer(0.2f);
+            shotDrawTimer = new Timer(0.2f);
         }
 
         public override void Update(float elapsedTime_)
         {
-            //damage first enemy
             isShooting = false;
+            shotTimer.Update(elapsedTime_);
+            shotDrawTimer.Update(elapsedTime_);
+            if (shotTimer.Complete())
+            {
+                shotTimer.Reset();
+                Shoot();
+            }
+            
+            base.Update(elapsedTime_);
+        }
+
+        void Shoot()
+        {
+            //damage first enemy
             if (EntityCollection.GetGroup("enemies").Count > 0)
             {
                 Entity tar = null;
@@ -39,7 +56,7 @@ namespace SuperBulletManiaReloadedTheSequel
                         break;
                     }
                 }
-                if(tar != null)
+                if (tar != null)
                 {
                     isShooting = true;
                     tar.TakeDamage(baseDmg);
@@ -47,15 +64,16 @@ namespace SuperBulletManiaReloadedTheSequel
 
                     angle = -(float)Math.Atan2(target.X - pos.X, target.Y - pos.Y) + (float)Math.PI;
                     //angle -= angle%((float)Math.PI / 16);
-                }                
+
+                    shotDrawTimer.Reset();
+                }
             }
-            base.Update(elapsedTime_);
         }
 
         public override void Draw(SpriteBatch sb_, bool flipH_ = false, float angle_ = 0f)
         {
             if (isShooting) { currentTex = textures.GetTex("t1shoot"); }
-            else { currentTex = textures.GetTex("t1idle"); }
+            else if(shotDrawTimer.Complete()) { currentTex = textures.GetTex("t1idle"); }
             base.Draw(sb_, flipH_, angle);
         }
     }

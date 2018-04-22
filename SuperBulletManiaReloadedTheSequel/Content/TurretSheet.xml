@@ -20,21 +20,13 @@
         <Center x="8" y="24"/>
       </Frame>
     </Texture>
-    <Texture name="t2idle" anim="false" id="3">
+    <Texture name="t1idle" anim="false" id="3">
       <Frame displayTime="0.1">
-        <SourceRect x="96" y="8" w="16" h="24"/>
-        <Center x="8" y="24" />
-      </Frame>
-      <Frame displayTime="0.1">
-        <SourceRect x="112" y="8" w="16" h="24"/>
-        <Center x="8" y="24" />
-      </Frame>
-      <Frame displayTime="0.1">
-        <SourceRect x="128" y="8" w="16" h="24"/>
-        <Center x="8" y="24" />
+        <SourceRect x="0" y="32" w="16" h="16"/>
+        <Center x="8" y="8" />
       </Frame>
     </Texture>
-    <Texture name="t2shoot" anim="true" id="4">
+    <Texture name="t1shoot" anim="true" id="4">
       <Frame displayTime="0.1">
         <SourceRect x="112" y="64" w="16" h="32"/>
         <Center x="8" y="24"/>

@@ -11,8 +11,8 @@
   </Entity>
   <Entity type="flak" name="flak">
     <Textures name="ass">
-      <Texture name="t2shoot" id="3" sheetName ="turrets"/>
-      <Texture name="t2idle" id="4" sheetName ="turrets"/>
+      <Texture name="t1shoot" id="4" sheetName ="turrets"/>
+      <Texture name="t1idle" id="3" sheetName ="turrets"/>
     </Textures>
     <Properties>
       <Property name="price" type="int" value="1000"></Property>

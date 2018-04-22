@@ -54,7 +54,7 @@ namespace SuperBulletManiaReloadedTheSequel
 
         public bool ReachedFinish(Vector2 v_)
         {
-            return (points[points.Length-1]-v_).Length() < 10;
+            return (points[points.Length-1]-v_).Length() < 3;
         }
 
         public void Draw(SpriteBatch sb_)

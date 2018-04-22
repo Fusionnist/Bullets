@@ -17,7 +17,7 @@ namespace SuperBulletManiaReloadedTheSequel
     {
         public Flak(DrawerCollection texes_, Vector2 pos_, List<Property> properties_, string name_, string type_ = "turret") : base(texes_, pos_, properties_, name_, "turret")
         {
-            baseDmg = 20;
+            baseDmg = 100;
         }
     }
 }
