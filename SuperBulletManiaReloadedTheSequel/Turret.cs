@@ -15,7 +15,7 @@ namespace SuperBulletManiaReloadedTheSequel
 {
     class Turret : Entity
     {
-        protected int baseDmg;
+        protected int baseDmg, range;
         Vector2 target;
         float angle;
         bool isShooting;
@@ -26,6 +26,7 @@ namespace SuperBulletManiaReloadedTheSequel
             baseDmg = 1;
             shotTimer = new Timer(1f);
             shotDrawTimer = new Timer(0.2f);
+            range = 50;
         }
 
         public override void Update(float elapsedTime_)
@@ -52,8 +53,11 @@ namespace SuperBulletManiaReloadedTheSequel
                 {
                     if (!e.isDestroyed)
                     {
-                        tar = e;
-                        break;
+                        if((e.pos - pos).Length() <= range)
+                        {
+                            tar = e;
+                            break;
+                        }                        
                     }
                 }
                 if (tar != null)

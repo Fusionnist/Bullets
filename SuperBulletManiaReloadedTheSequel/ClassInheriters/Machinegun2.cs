@@ -13,11 +13,11 @@ using static SuperBulletManiaReloadedTheSequel.Enums;
 
 namespace SuperBulletManiaReloadedTheSequel
 {
-    class Artillery : Turret
+    class Machinegun2 : Turret
     {
-        public Artillery(DrawerCollection texes_, Vector2 pos_, List<Property> properties_, string name_, string type_ = "turret") : base(texes_, pos_, properties_, name_, "turret")
+        public Machinegun2(DrawerCollection texes_, Vector2 pos_, List<Property> properties_, string name_, string type_ = "turret") : base(texes_, pos_, properties_, name_, "turret")
         {
-            baseDmg = 50;
+            baseDmg = 100;
         }
     }
 }

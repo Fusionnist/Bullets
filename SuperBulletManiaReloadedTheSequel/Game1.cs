@@ -139,8 +139,7 @@ namespace SuperBulletManiaReloadedTheSequel
                 new FRectangle(0,104,100,138)});
 
             availableTurrets = new List<Entity>();
-            availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("artillery"), new Vector2(24,16), Content, ebuilder, false));
-            availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("flak"), new Vector2(24, 16), Content, ebuilder, false));
+            availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("machinegun 1"), new Vector2(24,16), Content, ebuilder, false));
             status = new TextureDrawer(Content.Load<Texture2D>("statusbar"));
 
             cursor = new TextureDrawer(Content.Load<Texture2D>("cursor"), new TextureFrame(new Rectangle(0, 0, 8, 8), new Point(4, 4)));
