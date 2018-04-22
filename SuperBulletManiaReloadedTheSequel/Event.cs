@@ -20,12 +20,13 @@ namespace SuperBulletManiaReloadedTheSequel
         bool wasIgnored;
         public int scrollSpeed;
 
-        public Event(string text_, string[] outcomeIfYes_, string[] outcomeIfNo_, string[] outcomeIfIgnored_)
+        public Event(string text_, string[] outcomeIfYes_, string[] outcomeIfNo_, string[] outcomeIfIgnored_, int scrollSpeed_)
         {
             text = text_;
             outcomeIfYes = outcomeIfYes_;
             outcomeIfNo = outcomeIfNo_;
             outcomeIfIgnored = outcomeIfIgnored_;
+            scrollSpeed = scrollSpeed_;
         }
     }
 }

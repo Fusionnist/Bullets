@@ -56,10 +56,11 @@ namespace SuperBulletManiaReloadedTheSequel
                 currentHeight = drawer.DrawText("aaa", texts[i], new Rectangle(0, (int)poses[i], virtualDims.X * 2 / 5, 666), sb_).Height;
         }
 
-        public void AddTextToScroll(string textToAdd_)
+        public void AddTextToScroll(string textToAdd_, int scrollSpd_)
         {
             texts.Add(textToAdd_);
             poses.Add(virtualDims.Y);
+            scrollSpeed = scrollSpd_;
         }
 
         public void RemoveText()
