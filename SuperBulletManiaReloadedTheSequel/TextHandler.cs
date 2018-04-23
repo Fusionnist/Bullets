@@ -53,7 +53,7 @@ namespace SuperBulletManiaReloadedTheSequel
         public void Draw(SpriteBatch sb_)
         {
             for (int i = 0; i < texts.Count; i++)
-                currentHeight = drawer.DrawText("aaa", texts[i], new Rectangle(0, (int)poses[i], virtualDims.X * 2 / 5, 666), sb_).Height;
+                currentHeight = drawer.DrawText("aaa", texts[i], new Rectangle(5, (int)Math.Round(poses[i]), virtualDims.X * 2 / 5 - 5, 666), sb_).Height;
         }
 
         public void AddTextToScroll(string textToAdd_, int scrollSpd_)
