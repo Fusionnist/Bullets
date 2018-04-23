@@ -39,7 +39,7 @@ namespace SuperBulletManiaReloadedTheSequel
         Map gameMap;
         InputProfile ipp;
         List<Entity> availableTurrets;
-        TextureDrawer status, cursor, transitiontex, menutex,dedtex;
+        TextureDrawer status, cursor, transitiontex, menutex,dedtex,textframe;
         Timer waveTimer, transitionTimer;
         int waveNumber, money, health, waveAmt, currentEventNo, turretIndex, income;
         bool lost, transition, countdown, hovering;
@@ -158,6 +158,7 @@ namespace SuperBulletManiaReloadedTheSequel
             transitiontex = new TextureDrawer(Content.Load<Texture2D>("loading"));
             menutex = new TextureDrawer(Content.Load<Texture2D>("start"));
             dedtex = new TextureDrawer(Content.Load<Texture2D>("gameover"));
+            textframe = new TextureDrawer(Content.Load<Texture2D>("ui2"));
         }
         void SetupGame()
         {
@@ -561,6 +562,7 @@ namespace SuperBulletManiaReloadedTheSequel
 
             //draw
             GraphicsDevice.Clear(Color.Beige);
+            textframe.Draw(spriteBatch, Vector2.Zero);
             currentUI.Draw(spriteBatch);
             handler.Draw(spriteBatch);
 
