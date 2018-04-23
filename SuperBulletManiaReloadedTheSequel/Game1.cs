@@ -564,6 +564,7 @@ namespace SuperBulletManiaReloadedTheSequel
             GraphicsDevice.Clear(Color.Beige);
             textframe.Draw(spriteBatch, Vector2.Zero);
             currentUI.Draw(spriteBatch);
+            currentQueue[currentEventNo].tex.Draw(spriteBatch, new Vector2(10, 10));
             handler.Draw(spriteBatch);
 
             spriteBatch.End();
@@ -724,7 +725,8 @@ namespace SuperBulletManiaReloadedTheSequel
                 no = (string)els.ElementAt(i).Element("no");
                 ignore = (string)els.ElementAt(i).Element("ignore");
                 spd = (int)els.ElementAt(i).Attribute("scrollSpeed");
-                eQueue[i] = new Event((string)els.ElementAt(i).Element("Text"), yes.Split(' '), no.Split(' '), ignore.Split(' '), spd);
+                TextureDrawer texture = new TextureDrawer(Content.Load<Texture2D>((string)els.ElementAt(i).Attribute("tex")));
+                eQueue[i] = new Event((string)els.ElementAt(i).Element("Text"), yes.Split(' '), no.Split(' '), ignore.Split(' '), spd, texture);
             }
             return eQueue;
         }

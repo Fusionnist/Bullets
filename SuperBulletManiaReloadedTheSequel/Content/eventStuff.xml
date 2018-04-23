@@ -1,61 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Events>
   <EventQueue0 cap="10">
-    <Event nb ="0" scrollSpeed="15">
+    <Event nb ="0" scrollSpeed="15" tex="button">
       <Text>Hi! You're playing our newest game, Super Bullet Mania Reloaded. Before we start, I'd like do do a quick tutorial on how this game works. To continue, please click on the button labelled 'Yes'.</Text>
       <yes>getQueueEvent4</yes>
       <no>getQueueEvent1</no>
       <ignore>getQueueEvent0</ignore>
     </Event>
-    <Event nb="1" scrollSpeed="15">
+    <Event nb="1" scrollSpeed="15" tex="button">
       <Text>I'm sorry, but you may have misunderstood. The button that you were meant to click was the big green one, not the red one. Please, do click on the button now.</Text>
       <yes>getQueueEvent5</yes>
       <no>getQueueEvent2</no>
       <ignore>getQueueEvent1</ignore>
     </Event>
-    <Event nb="2" scrollSpeed="15">
+    <Event nb="2" scrollSpeed="15" tex="button">
       <Text>According to my analysis, you may be suffering from colourblindness and/or dyslexia. That's okay! Just follow my instructions. Please move your mouse until it is hovering over the button on the left, (that, incidentally, has 'Yes' written on it in large capital letters and is green) and press the left mouse button.</Text>
       <yes>getQueueEvent5</yes>
       <no>getQueueEvent3</no>
       <ignore>getQueueEvent2</ignore>
     </Event>
-    <Event nb="3" scrollSpeed="15">
+    <Event nb="3" scrollSpeed="15" tex="button">
       <Text>Oh, never mind. I'll just assume that you passed this part of the tutorial.</Text>
       <yes>getQueueEvent4</yes>
       <no>getQueueEvent4</no>
       <ignore>getQueueEvent3</ignore>
     </Event>
-    <Event nb="4" scrollSpeed="15">
+    <Event nb="4" scrollSpeed="15" tex="button">
       <Text>This game is a cross between a tower defense game and a text adventure. On the left, this will play as a classic tower defense game : enemies will spawn and attempt to get to the other end of the map, and if 100 get through, you lose. However, on the right, this text box will contain the description for certain events, and you can answer by either 'Yes' or 'No', which will affect the gameplay of the tower defense. Understood?</Text>
       <yes>getQueueEvent5</yes>
       <no>getQueueEvent4</no>
       <ignore>getQueueEvent4</ignore>
     </Event>
-    <Event nb="5" scrollSpeed="2000">
+    <Event nb="5" scrollSpeed="2000" tex="button">
       <Text>random text</Text>
       <yes>getQueueEvent6</yes>
       <no>getQueueEvent6</no>
       <ignore>getQueueEvent7</ignore>
     </Event>
-    <Event nb="6" scrollSpeed="15">
+    <Event nb="6" scrollSpeed="15" tex="button">
       <Text>Well done for responding to the text so quickly! As you can see, the difficulty in the text-adventure part of this game comes from the fact that you have a limited time to make your choices: if the related text scrolls up to the top of the screen before you can answer, the game will consider that you ignored the person speaking to you, leading to a multitude of (usually negative) consequences. </Text>
       <yes>getQueueEvent8</yes>
       <no>getQueueEvent8</no>
       <ignore>getQueueEvent7</ignore>
     </Event>
-    <Event nb="7" scrollSpeed="15">
+    <Event nb="7" scrollSpeed="15" tex="button">
       <Text>As you can see, however, the difficulty in the text-adventure part of this game comes from the fact that you have a limited time to make your choices: if the related text scrolls up to the top of the screen before you can answer, the game will consider that you ignored the person speaking to you, leading to a multitude of (usually negative) consequences.</Text>
       <yes>getQueueEvent8</yes>
       <no>getQueueEvent8</no>
       <ignore>getQueueEvent7</ignore>
     </Event>
-    <Event nb="8" scrollSpeed="15">
+    <Event nb="8" scrollSpeed="15" tex="button">
       <Text>Ok! Finally, here are the controls: you place turrets by left-clicking a zone where there's space to set one (if of course you have enough money), and switch between turrets with the left and right arrow keys. I would suggest that you place a turret using the 100 units of nondescript money that you currently own, since you'll only gain more by either killing enemies or responding correctly to certain events.</Text>
       <yes>getQueueEvent9</yes>
       <no>getQueueEvent9</no>
       <ignore>getQueueEvent8</ignore>
     </Event>
-    <Event nb="9" scrollSpeed="15">
+    <Event nb="9" scrollSpeed="15" tex="button">
       <Text>I think you should be set to go now! Good luck!</Text>
       <yes>getQueue1</yes>
       <no>getQueue1</no>
@@ -63,19 +63,19 @@
     </Event>
   </EventQueue0>
   <EventQueue1 cap="3">
-    <Event nb ="0" scrollSpeed="32">
+    <Event nb ="0" scrollSpeed="32" tex="button">
       <Text>and so here is the second queue</Text>
       <yes>getQueueEvent1</yes>
       <no>getQueueEvent1 breakTurret1</no>
       <ignore>getQueueEvent0</ignore>
     </Event>
-    <Event nb="1" scrollSpeed="50">
+    <Event nb="1" scrollSpeed="50" tex="button">
       <Text>the tension is unbearable</Text>
       <yes>getQueueEvent2</yes>
       <no>getQueueEvent0</no>
       <ignore>getQueueEvent1</ignore>
     </Event>
-    <Event nb="1" scrollSpeed="45">
+    <Event nb="1" scrollSpeed="45" tex="button">
       <Text>hmmmmmmmmmmmmm</Text>
       <yes>getQueue0</yes>
       <no>getQueueEvent1 sendWave10</no>
