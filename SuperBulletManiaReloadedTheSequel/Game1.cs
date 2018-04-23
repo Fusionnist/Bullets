@@ -153,6 +153,7 @@ namespace SuperBulletManiaReloadedTheSequel
             availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("machinegun 1"), new Vector2(24,16), Content, ebuilder, false));
             availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("sniper 1"), new Vector2(24, 16), Content, ebuilder, false));
             availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("artillery 1"), new Vector2(24, 16), Content, ebuilder, false));
+            availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("ring"), new Vector2(24, 16), Content, ebuilder, false));
 
             //availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("machinegun 2"), new Vector2(24, 16), Content, ebuilder, false));
             //availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("sniper 2"), new Vector2(24, 16), Content, ebuilder, false));
@@ -408,8 +409,8 @@ namespace SuperBulletManiaReloadedTheSequel
             {
                 if (waveAmt > 1000)
                 {
-                    waveAmt -= 5;
-                    SpawnEnemy(2, "ballenemy");
+                    waveAmt -= 1000;
+                    SpawnEnemy(2, "boss");
 
                 }
                 else if (waveAmt > 600)

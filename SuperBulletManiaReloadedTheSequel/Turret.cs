@@ -17,9 +17,10 @@ namespace SuperBulletManiaReloadedTheSequel
     {
         protected int baseDmg, range, upgradePrice;
         protected Vector2 target;
-        float angle;
+        protected float angle;
         protected bool isShooting, canHitFlying;
         protected Timer shotTimer, shotDrawTimer;
+        Random r;
 
         public Turret(DrawerCollection texes_, Vector2 pos_, List<Property> properties_, string name_, string type_ = "turret"): base(texes_, pos_, properties_, name_, "turret")
         {
@@ -28,6 +29,7 @@ namespace SuperBulletManiaReloadedTheSequel
             shotDrawTimer = new Timer(0.2f);
             range = 100;
             upgradePrice = 50;
+            r = new Random();
         }
 
         public override int GetValue(string context_)
@@ -75,18 +77,19 @@ namespace SuperBulletManiaReloadedTheSequel
                     wasTarget = true;
 
                     angle = -(float)Math.Atan2(target.X - pos.X, target.Y - pos.Y) + (float)Math.PI;
-                    if (angle % ((float)Math.PI / 8) < ((float)Math.PI / 8)/2)
+                    //if (angle % ((float)Math.PI / 8) < ((float)Math.PI / 8)/2)
                         angle -= angle%((float)Math.PI / 8);
-                    else
-                    {
-                        angle += angle % ((float)Math.PI / 8);
-                    }
+                    //else
+                    //{
+                    //    angle += angle % ((float)Math.PI / 8);
+                    //}
                 }
             }
             if (wasTarget)
             {
                 shotDrawTimer.Reset();
 
+                if(r.Next(0,100)>80)
                 SoundManager.PlayEffect("shoot");
             }
         }
