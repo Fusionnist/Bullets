@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Events>
   <EventQueue0 cap="10">
-    <Event nb ="0" scrollSpeed="15" tex="button">
+    <Event nb ="0" scrollSpeed="15">
       <Text>Hi! You're playing our newest game, Super Bullet Mania Reloaded. Before we start, I'd like do do a quick tutorial on how this game works. To continue, please click on the button labelled 'Yes'.</Text>
       <yes>getQueueEvent4</yes>
       <no>getQueueEvent1</no>

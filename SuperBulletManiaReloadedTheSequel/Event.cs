@@ -21,7 +21,7 @@ namespace SuperBulletManiaReloadedTheSequel
         public int scrollSpeed;
         public TextureDrawer tex;
 
-        public Event(string text_, string[] outcomeIfYes_, string[] outcomeIfNo_, string[] outcomeIfIgnored_, int scrollSpeed_, TextureDrawer tex_)
+        public Event(string text_, string[] outcomeIfYes_, string[] outcomeIfNo_, string[] outcomeIfIgnored_, int scrollSpeed_, TextureDrawer tex_ = null)
         {
             text = text_;
             outcomeIfYes = outcomeIfYes_;
