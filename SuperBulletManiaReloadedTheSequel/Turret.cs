@@ -16,7 +16,7 @@ namespace SuperBulletManiaReloadedTheSequel
     class Turret : Entity
     {
         protected int baseDmg, range, upgradePrice;
-        Vector2 target;
+        protected Vector2 target;
         float angle;
         protected bool isShooting, canHitFlying;
         protected Timer shotTimer, shotDrawTimer;
@@ -52,6 +52,8 @@ namespace SuperBulletManiaReloadedTheSequel
 
         void Shoot()
         {
+            if(textures.GetTex("t1shoot").Ended())
+                textures.GetTex("t1shoot").Reset();
             DamageTargets(ObtainTargets());
         }
 
@@ -85,8 +87,15 @@ namespace SuperBulletManiaReloadedTheSequel
 
         public override void Draw(SpriteBatch sb_, bool flipH_ = false, float angle_ = 0f)
         {
-            if (isShooting) { currentTex = textures.GetTex("t1shoot"); }
-            else if(currentTex.Ended()) { currentTex = textures.GetTex("t1idle"); }
+            if (isShooting)
+            { currentTex = textures.GetTex("t1shoot"); textures.GetTex("shot").Reset();  }
+            else if(currentTex.Ended() && currentTex.name != "t1idle")
+            { currentTex = textures.GetTex("t1idle"); }
+            else if(!textures.GetTex("shot").Ended())
+            {
+                textures.GetTex("shot").Draw(sb_, target);
+            }
+
             base.Draw(sb_, flipH_, angle);
         }
     }

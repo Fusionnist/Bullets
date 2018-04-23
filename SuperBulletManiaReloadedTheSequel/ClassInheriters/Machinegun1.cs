@@ -22,6 +22,7 @@ namespace SuperBulletManiaReloadedTheSequel
             shotDrawTimer = new Timer(0.2f);
             range = 80;
             upgradePrice = 10;
+            canHitFlying = true;
         }
 
         protected override List<Entity> ObtainTargets()

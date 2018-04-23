@@ -4,6 +4,7 @@
     <Textures name="ass">
       <Texture name="t1idle" id="0" sheetName="turrets"/>
       <Texture name="t1shoot" id="1" sheetName="turrets"/>
+      <Texture name="shot" id="mgshot" sheetName="turrets"/>
     </Textures>
     <Properties>
       <Property name="price" type="int" value="5"></Property>
@@ -14,6 +15,7 @@
     <Textures name="ass">
       <Texture name="t1shoot" id="4" sheetName ="turrets"/>
       <Texture name="t1idle" id="3" sheetName ="turrets"/>
+      <Texture name="shot" id="mgshot" sheetName="turrets"/>
     </Textures>
     <Properties>
       <Property name="price" type="int" value="1000"></Property>
@@ -23,6 +25,7 @@
   <Entity type="machinegun 3" name="machinegun 3">
     <Textures name="ass">
       <Texture name="t1shoot" id="m3s" sheetName ="turrets"/>
+      <Texture name="shot" id="mgshot" sheetName="turrets"/>
       <Texture name="t1idle" id="m3i" sheetName ="turrets"/>
     </Textures>
     <Properties>
@@ -34,6 +37,7 @@
     <Textures name="ass">
       <Texture name="t1idle" id="s1i" sheetName="turrets"/>
       <Texture name="t1shoot" id="s1s" sheetName="turrets"/>
+      <Texture name="shot" id="mgshot" sheetName="turrets"/>
     </Textures>
     <Properties>
       <Property name="price" type="int" value="20"></Property>
@@ -44,6 +48,7 @@
     <Textures name="ass">
       <Texture name="t1shoot" id="s2s" sheetName ="turrets"/>
       <Texture name="t1idle" id="s2i" sheetName ="turrets"/>
+      <Texture name="shot" id="mgshot" sheetName="turrets"/>
     </Textures>
     <Properties>
       <Property name="price" type="int" value="1000"></Property>
@@ -54,6 +59,7 @@
     <Textures name="ass">
       <Texture name="t1shoot" id="s3s" sheetName ="turrets"/>
       <Texture name="t1idle" id="s3i" sheetName ="turrets"/>
+      <Texture name="shot" id="mgshot" sheetName="turrets"/>
     </Textures>
     <Properties>
       <Property name="price" type="int" value="1000"></Property>
@@ -64,6 +70,7 @@
     <Textures name="ass">
       <Texture name="t1idle" id="a1i" sheetName="turrets"/>
       <Texture name="t1shoot" id="a1s" sheetName="turrets"/>
+      <Texture name="shot" id="boom" sheetName="turrets"/>
     </Textures>
     <Properties>
       <Property name="price" type="int" value="10"></Property>
@@ -74,6 +81,7 @@
     <Textures name="ass">
       <Texture name="t1shoot" id="a2s" sheetName ="turrets"/>
       <Texture name="t1idle" id="a2i" sheetName ="turrets"/>
+      <Texture name="shot" id="boom" sheetName="turrets"/>
     </Textures>
     <Properties>
       <Property name="price" type="int" value="1000"></Property>
@@ -84,6 +92,7 @@
     <Textures name="ass">
       <Texture name="t1shoot" id="a3s" sheetName ="turrets"/>
       <Texture name="t1idle" id="a3i" sheetName ="turrets"/>
+      <Texture name="shot" id="boom" sheetName="turrets"/>
     </Textures>
     <Properties>
       <Property name="price" type="int" value="1000"></Property>

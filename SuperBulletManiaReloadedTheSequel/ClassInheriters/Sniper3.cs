@@ -17,12 +17,11 @@ namespace SuperBulletManiaReloadedTheSequel
     {
         public Sniper3(DrawerCollection texes_, Vector2 pos_, List<Property> properties_, string name_, string type_ = "turret") : base(texes_, pos_, properties_, name_, "turret")
         {
-            baseDmg = 5;
             shotTimer = new Timer(5f);
             shotDrawTimer = new Timer(0.2f);
             range = 200;
             upgradePrice = 300;
-            canHitFlying = true;
+            
         }
     }
 }

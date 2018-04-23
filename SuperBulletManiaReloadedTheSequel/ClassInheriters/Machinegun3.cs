@@ -22,6 +22,8 @@ namespace SuperBulletManiaReloadedTheSequel
             shotDrawTimer = new Timer(0.2f);
             range = 120;
             upgradePrice = 250;
+            canHitFlying = true;
+            canHitFlying = true;
         }
     }
 }
