@@ -20,7 +20,7 @@ namespace SuperBulletManiaReloadedTheSequel
             baseDmg = 3;
             shotTimer = new Timer(2f);
             shotDrawTimer = new Timer(0.2f);
-            range = 240;
+            range = 110;
             upgradePrice = 300;
             
             splodeRange = 30;

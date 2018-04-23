@@ -17,7 +17,7 @@ namespace SuperBulletManiaReloadedTheSequel
     {
         public Sniper2(DrawerCollection texes_, Vector2 pos_, List<Property> properties_, string name_, string type_ = "turret") : base(texes_, pos_, properties_, name_, "turret")
         {
-            shotTimer = new Timer(5f);
+            shotTimer = new Timer(4f);
             shotDrawTimer = new Timer(0.2f);
             range = 200;
             upgradePrice = 40;

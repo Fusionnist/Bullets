@@ -102,12 +102,14 @@
   <Entity type="enemy" name="enemy1">
     <Textures name="ass">
       <Texture name="enemywalk" id="2" sheetName="turrets"/>
+      <Texture name="ded" id="critter" sheetName="turrets"/>
     </Textures>
     <Properties/>
   </Entity>
   <Entity type="flyenemy" name="flyenemy">
     <Textures name="ass">
       <Texture name="enemywalk" id="flying" sheetName="turrets"/>
+      <Texture name="ded" id="flying" sheetName="turrets"/>
     </Textures>
     <Properties>
       <Property name="flying" value="true" type="bool"></Property>
@@ -116,6 +118,7 @@
   <Entity type="fatenemy" name="fatenemy">
     <Textures name="ass">
       <Texture name="enemywalk" id="fat" sheetName="turrets"/>
+      <Texture name="ded" id="fat" sheetName="turrets"/>
     </Textures>
     <Properties>
      
@@ -124,14 +127,15 @@
   <Entity type="ballenemy" name="ballenemy">
     <Textures name="ass">
       <Texture name="enemywalk" id="ball" sheetName="turrets"/>
+      <Texture name="ded" id="ball" sheetName="turrets"/>
     </Textures>
     <Properties>
-      <Property name="flying" value="true" type="bool"></Property>
     </Properties>
   </Entity>
   <Entity type="fastenemy" name="fastenemy">
     <Textures name="ass">
       <Texture name="enemywalk" id="fast" sheetName="turrets"/>
+      <Texture name="ded" id="fast" sheetName="turrets"/>
     </Textures>
     <Properties>
 

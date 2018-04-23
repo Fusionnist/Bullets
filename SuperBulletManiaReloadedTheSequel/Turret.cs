@@ -72,9 +72,15 @@ namespace SuperBulletManiaReloadedTheSequel
                     isShooting = true;
                     tar.TakeDamage(baseDmg);
                     target = tar.pos;
+                    wasTarget = true;
 
                     angle = -(float)Math.Atan2(target.X - pos.X, target.Y - pos.Y) + (float)Math.PI;
-                    angle -= angle%((float)Math.PI / 8); 
+                    if (angle % ((float)Math.PI / 8) < ((float)Math.PI / 8)/2)
+                        angle -= angle%((float)Math.PI / 8);
+                    else
+                    {
+                        angle += angle % ((float)Math.PI / 8);
+                    }
                 }
             }
             if (wasTarget)
@@ -96,6 +102,8 @@ namespace SuperBulletManiaReloadedTheSequel
                 textures.GetTex("shot").Draw(sb_, target);
             }
 
+            currentTex.Draw(sb_, pos + new Vector2(0, 2), rotation_:angle);
+            currentTex.Draw(sb_, pos + new Vector2(0, 1), rotation_: angle);
             base.Draw(sb_, flipH_, angle);
         }
     }

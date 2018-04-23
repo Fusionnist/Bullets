@@ -17,7 +17,7 @@ namespace SuperBulletManiaReloadedTheSequel
     {
         public Machinegun3(DrawerCollection texes_, Vector2 pos_, List<Property> properties_, string name_, string type_ = "turret") : base(texes_, pos_, properties_, name_, "turret")
         {
-            baseDmg = 1;
+            baseDmg = 2;
             shotTimer = new Timer(0.2f);
             shotDrawTimer = new Timer(0.2f);
             range = 120;

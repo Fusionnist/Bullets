@@ -106,11 +106,11 @@
       </Frame>
     </Texture>
     <Texture name="enemywalk" anim="true" id="fat">
-      <Frame displayTime="0.1">
+      <Frame displayTime="0.2">
         <SourceRect x="192" y="16" w="16" h="16"/>
         <Center x="8" y="16"/>
       </Frame>
-      <Frame displayTime="0.1">
+      <Frame displayTime="0.2">
         <SourceRect x="208" y="16" w="16" h="16"/>
         <Center x="8" y="16"/>
       </Frame>
@@ -136,6 +136,61 @@
       </Frame>
       <Frame displayTime="0.1">
         <SourceRect x="256" y="0" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+    </Texture>
+    //ded
+    <Texture name="ded" anim="true" id="critter" loop="false">
+      <Frame displayTime="0.1">
+        <SourceRect x="112" y="112" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="112" y="128" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="112" y="144" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+    </Texture>
+    <Texture name="ded" anim="true" id="flying" loop="false">
+      <Frame displayTime="0.1">
+        <SourceRect x="96" y="96" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="96" y="112" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+    </Texture>
+    <Texture name="ded" anim="true" id="fat" loop="false">
+      <Frame displayTime="0.1">
+        <SourceRect x="80" y="112" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="80" y="128" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="80" y="144" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+    </Texture>
+    <Texture name="ded" anim="true" id="ball" loop="false">
+      <Frame displayTime="0.1">
+        <SourceRect x="48" y="128" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="48" y="144" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>     
+    </Texture>
+    <Texture name="ded" anim="true" id="fast" loop="false">
+      <Frame displayTime="0.1">
+        <SourceRect x="64" y="112" w="16" h="16"/>
         <Center x="8" y="16"/>
       </Frame>
     </Texture>

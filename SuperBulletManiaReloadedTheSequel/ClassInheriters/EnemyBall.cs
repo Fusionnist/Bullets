@@ -23,10 +23,10 @@ namespace SuperBulletManiaReloadedTheSequel
         {
             point = pos;
             deathTimer = new Timer(1);
-            hp = 30;
+            hp = 80;
             r = new Random();
             speed = 0.5f;
-            worth = 5;
+            worth = 1;
         }
 
         public override void Update(float elapsedTime_)

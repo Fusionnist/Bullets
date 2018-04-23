@@ -135,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\classic_hurt.mp3" />
+    <Content Include="Content\classic_hurt.wav" />
     <Content Include="Content\cursor.png" />
     <Content Include="Content\diplomat.png" />
     <Content Include="Content\Entities.xml">

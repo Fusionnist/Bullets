@@ -124,12 +124,12 @@ namespace SuperBulletManiaReloadedTheSequel
             gameMap = new Map(
                 new Vector2[] {
                     new Vector2(150, 0),
-                    new Vector2(153, 138),
-                    new Vector2(222, 139),
-                    new Vector2(222, 184),
-                    new Vector2(113, 185),
-                    new Vector2(100, 100),
-                    new Vector2(-30, 100)},
+                    new Vector2(153, 142),
+                    new Vector2(222, 142),
+                    new Vector2(222, 190),
+                    new Vector2(108, 190),
+                    new Vector2(108, 104),
+                    new Vector2(-30, 104)},
                 new TextureDrawer(Content.Load<Texture2D>("envtest3")),
                 new FRectangle[] {
                 new FRectangle(0,0,141,81),
@@ -388,7 +388,7 @@ namespace SuperBulletManiaReloadedTheSequel
             waveTimer.Update(es);
             if (waveTimer.Complete())
             {
-                SendWave((int)Math.Pow(waveNumber,1.5));
+                SendWave((int)Math.Pow(waveNumber,2));
                 waveTimer.Reset();
                 money += income;
                 if (money < 0)
@@ -396,32 +396,49 @@ namespace SuperBulletManiaReloadedTheSequel
             }
             if (waveAmt > 0)
             {
-                if (waveAmt > 200)
+                if (waveAmt > 600)
                 {
-                    waveAmt -= 20;
-                    SpawnEnemy(10, "ballenemy");
+                    waveAmt -= 5;
+                    SpawnEnemy(1, "ballenemy");
 
                 }
-                else if (waveAmt > 50)
+                else if (waveAmt > 400)
                 {
-                    waveAmt -= 40;
-                    SpawnEnemy(10, "fastenemy");
+                    waveAmt -= 20;
+                    SpawnEnemy(3, "ballenemy");
+
+                }
+                else if (waveAmt > 200)
+                {
+                    waveAmt -= 50;
+                    SpawnEnemy(4, "ballenemy");
+
                 }
                 else if (waveAmt > 150)
                 {
                     waveAmt -= 20;
-                    SpawnEnemy(10, "fatenemy");
+                    SpawnEnemy(5, "fastenemy");
+                }
+                else if (waveAmt > 100)
+                {
+                    waveAmt -= 10;
+                    SpawnEnemy(5, "fatenemy");
 
+                }
+                else if (waveAmt > 70)
+                {
+                    waveAmt -= 5;
+                    SpawnEnemy(7, "enemy1");
                 }
                 else if (waveAmt > 50)
                 {
-                    waveAmt -= 15;
-                    SpawnEnemy(10, "flyenemy");
+                    waveAmt -= 8;
+                    SpawnEnemy(5, "flyenemy");
                 }
                 else if (waveAmt > 30)
                 {
-                    waveAmt -= 10;
-                    SpawnEnemy(10, "enemy1");
+                    waveAmt -= 5;
+                    SpawnEnemy(5, "enemy1");
                 }
                 else if (waveAmt > 15)
                 {
@@ -532,6 +549,11 @@ namespace SuperBulletManiaReloadedTheSequel
                 {
                     transitiontex.Draw(spriteBatch, Vector2.Zero);
                 }
+                else
+                {
+                    handler.drawer.DrawText("aaa", "highscore: wave " + waveNumber, new Rectangle(144, 140, 400, 64), spriteBatch);
+
+                }
                 spriteBatch.End();
             }
             spriteBatch.Begin(samplerState: SamplerState.PointWrap);
@@ -581,12 +603,15 @@ namespace SuperBulletManiaReloadedTheSequel
                 hovertaru.Draw(spriteBatch);
                 handler.drawer.DrawText("aaa", "click to upgrade this turret", new Rectangle(50, 3, 500, 200), spriteBatch);
                 handler.drawer.DrawText("aaa", "price:"+hoverTar.GetValue("upgradePrice"), new Rectangle(50, 19, 500, 200), spriteBatch);
+                string moneystring = money.ToString();
+                while (moneystring.Length > 5) { moneystring = moneystring.Remove(moneystring.Length - 3); moneystring += "k"; }
+                handler.drawer.DrawText("aaa", "money:" + moneystring, new Rectangle(128, 19, 500, 200), spriteBatch);
             }
             else
             {
                 availableTurrets[turretIndex].Draw(spriteBatch);
                 string moneystring = money.ToString();
-                while (moneystring.Length > 5) { moneystring = moneystring.Remove(moneystring.Length - 3); moneystring += "k"; }
+                while (moneystring.Length > 4) { moneystring = moneystring.Remove(moneystring.Length - 3); moneystring += "k"; }
                 handler.drawer.DrawText("aaa", "money:" + moneystring, new Rectangle(128, 3, 500, 200), spriteBatch);
                 handler.drawer.DrawText("aaa", "next:" + Math.Round(waveTimer.timer, 1) + "", new Rectangle(114, 19, 500, 200), spriteBatch);
                 handler.drawer.DrawText("aaa", "wave:" + waveNumber + "", new Rectangle(190, 3, 500, 200), spriteBatch);

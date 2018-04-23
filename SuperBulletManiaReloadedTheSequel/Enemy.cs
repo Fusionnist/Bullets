@@ -24,7 +24,7 @@ namespace SuperBulletManiaReloadedTheSequel
         public Enemy(DrawerCollection t_, Vector2 p_, List<Property> prop_, string name_) : base(t_,p_,prop_,name_,"enemy")
         {
             point = pos;
-            deathTimer = new Timer(1);
+            deathTimer = new Timer(10);
             hp = 100;
             worth = 1;
             r = new Random();
@@ -45,7 +45,7 @@ namespace SuperBulletManiaReloadedTheSequel
             //REGISTER PATH POINT
             if(context_ == "path")
             {
-                if((point-pos).Length() < 10)
+                if((point-pos).Length() < 3)
                 point = vec_;
             }
             base.FeedVector(vec_, context_);
@@ -74,7 +74,7 @@ namespace SuperBulletManiaReloadedTheSequel
             //WIGGLE
             foreach (Entity e in EntityCollection.GetGroup("enemies"))
             {
-                if ((e.pos - pos).Length() < 5)
+                if ((e.pos - pos).Length() < 3)
                 {
                     Vector2 diff = e.pos - pos;
                     float a = (float)Math.Atan2(diff.Y, diff.X);
@@ -97,6 +97,13 @@ namespace SuperBulletManiaReloadedTheSequel
                 }
             }
             base.Update(elapsedTime_);
+        }
+
+        public override void Draw(SpriteBatch sb_, bool flipH_ = false, float angle_ = 0)
+        {
+            if (isDestroyed)
+            { currentTex = textures.GetTex("ded"); }
+            base.Draw(sb_, flipH_, angle_);
         }
     }
 }

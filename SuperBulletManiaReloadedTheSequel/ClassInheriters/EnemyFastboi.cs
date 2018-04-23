@@ -26,7 +26,7 @@ namespace SuperBulletManiaReloadedTheSequel
             hp = 10;
             r = new Random();
             speed = 1f;
-            worth = 3;
+            worth = 1;
         }
 
         public override void Update(float elapsedTime_)
