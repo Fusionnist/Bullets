@@ -19,12 +19,14 @@ namespace SuperBulletManiaReloadedTheSequel
         Random r;
         bool looted;
         protected float speed;
+        protected int worth;
 
         public Enemy(DrawerCollection t_, Vector2 p_, List<Property> prop_, string name_) : base(t_,p_,prop_,name_,"enemy")
         {
             point = pos;
             deathTimer = new Timer(1);
             hp = 100;
+            worth = 1;
             r = new Random();
         }
 

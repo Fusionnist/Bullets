@@ -70,6 +70,14 @@ namespace SuperBulletManiaReloadedTheSequel
             {
                 return new EnemyFat(dc_, pos_, props_, name_);
             }
+            if (type_ == "ballenemy")
+            {
+                return new EnemyBall(dc_, pos_, props_, name_);
+            }
+            if (type_ == "fastenemy")
+            {
+                return new EnemyFastboi(dc_, pos_, props_, name_);
+            }
             return base.CreateEntity(type_, dc_, pos_, props_, name_);
         }
     }

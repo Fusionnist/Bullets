@@ -121,6 +121,22 @@
      
     </Properties>
   </Entity>
+  <Entity type="ballenemy" name="ballenemy">
+    <Textures name="ass">
+      <Texture name="enemywalk" id="ball" sheetName="turrets"/>
+    </Textures>
+    <Properties>
+      <Property name="flying" value="true" type="bool"></Property>
+    </Properties>
+  </Entity>
+  <Entity type="fastenemy" name="fastenemy">
+    <Textures name="ass">
+      <Texture name="enemywalk" id="fast" sheetName="turrets"/>
+    </Textures>
+    <Properties>
+
+    </Properties>
+  </Entity>
   
   <Entity type="rock" name="rock1">
     <Textures name="ass">

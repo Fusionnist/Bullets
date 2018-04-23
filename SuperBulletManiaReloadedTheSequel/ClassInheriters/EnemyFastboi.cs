@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace SuperBulletManiaReloadedTheSequel
 {
-    public class EnemyFat : Enemy
+    public class EnemyFastboi : Enemy
     {
         //next pt in map
         Vector2 point;
@@ -19,14 +19,14 @@ namespace SuperBulletManiaReloadedTheSequel
         Random r;
         bool looted;
 
-        public EnemyFat(DrawerCollection t_, Vector2 p_, List<Property> prop_, string name_) : base(t_, p_, prop_, name_)
+        public EnemyFastboi(DrawerCollection t_, Vector2 p_, List<Property> prop_, string name_) : base(t_, p_, prop_, name_)
         {
             point = pos;
             deathTimer = new Timer(1);
             hp = 10;
             r = new Random();
-            speed = 0.2f;
-            worth = 2;
+            speed = 1f;
+            worth = 3;
         }
 
         public override void Update(float elapsedTime_)

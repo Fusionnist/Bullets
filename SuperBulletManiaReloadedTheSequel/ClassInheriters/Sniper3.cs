@@ -21,7 +21,7 @@ namespace SuperBulletManiaReloadedTheSequel
             shotDrawTimer = new Timer(0.2f);
             range = 200;
             upgradePrice = 300;
-            
+            baseDmg = 20;
         }
     }
 }

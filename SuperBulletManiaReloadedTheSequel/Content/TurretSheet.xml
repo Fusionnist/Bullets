@@ -115,6 +115,30 @@
         <Center x="8" y="16"/>
       </Frame>
     </Texture>
+    <Texture name="enemywalk" anim="true" id="ball">
+      <Frame displayTime="0.1">
+        <SourceRect x="240" y="16" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="256" y="16" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="272" y="16" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+    </Texture>
+    <Texture name="enemywalk" anim="true" id="fast">
+      <Frame displayTime="0.1">
+        <SourceRect x="240" y="0" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="256" y="0" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+    </Texture>
     //env
     <Texture name="rock1" anim="false" id="5">
       <Frame>
@@ -251,7 +275,6 @@
         <Center x="8" y="8"/>
       </Frame>   
     </Texture>
-
     <Texture name="shot" anim="true" id="boom" loop="false">
       <Frame displayTime="0.1">
         <SourceRect x="32" y="16" w="16" h="16"/>

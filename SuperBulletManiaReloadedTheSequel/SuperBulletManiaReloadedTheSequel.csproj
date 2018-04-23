@@ -45,7 +45,9 @@
     <Compile Include="ClassInheriters\Artillery1.cs" />
     <Compile Include="ClassInheriters\Artillery2.cs" />
     <Compile Include="ClassInheriters\Artillery3.cs" />
+    <Compile Include="ClassInheriters\EnemyBall.cs" />
     <Compile Include="ClassInheriters\EnemyCritter.cs" />
+    <Compile Include="ClassInheriters\EnemyFastboi.cs" />
     <Compile Include="ClassInheriters\EnemyFat.cs" />
     <Compile Include="ClassInheriters\EnemyFlying.cs" />
     <Compile Include="ClassInheriters\Machinegun1.cs" />
