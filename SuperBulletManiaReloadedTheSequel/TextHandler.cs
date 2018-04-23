@@ -47,7 +47,6 @@ namespace SuperBulletManiaReloadedTheSequel
                         poses.RemoveAt(i);
                         texts.RemoveAt(i);
                         wasIgnored = true;
-                        isActive = false;
                     }
                 }
             }

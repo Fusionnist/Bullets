@@ -466,7 +466,6 @@ namespace SuperBulletManiaReloadedTheSequel
                 {
                     waveAmt -= 10;
                     SpawnEnemy(1, "fatenemy");
-
                 }
                 else if (waveAmt >= 1)
                 {
@@ -475,15 +474,16 @@ namespace SuperBulletManiaReloadedTheSequel
                 }
             }
 
-            if (!mouseMan.Pressed())
+            if (!mouseMan.Pressed() && handler.isActive)
             {
                 if (currentUI.IssuedCommand("sayYes"))
                     HandleEventConsequences(currentQueue[currentEventNo].outcomeIfYes);
                 else if (currentUI.IssuedCommand("sayNo"))
                     HandleEventConsequences(currentQueue[currentEventNo].outcomeIfNo);
             }
-            if (handler.wasIgnored)
-            { HandleEventConsequences(currentQueue[currentEventNo].outcomeIfIgnored); }
+            if (handler.wasIgnored && handler.isActive)
+            {
+                HandleEventConsequences(currentQueue[currentEventNo].outcomeIfIgnored); }
             if (!handler.isActive && waitingEventQueueNbs.Count > 0)
             {
                 if (waitingEventQueueNbs[0] <= 0)
@@ -613,10 +613,10 @@ namespace SuperBulletManiaReloadedTheSequel
             //draw
             GraphicsDevice.Clear(Color.Beige);
             textframe.Draw(spriteBatch, Vector2.Zero);
+            handler.Draw(spriteBatch);
             currentUI.Draw(spriteBatch);
             if (currentQueue[currentEventNo].tex != null)
                 currentQueue[currentEventNo].tex.Draw(spriteBatch, new Vector2(10, 10));
-            handler.Draw(spriteBatch);
 
             spriteBatch.End();
         }
