@@ -39,7 +39,7 @@ namespace SuperBulletManiaReloadedTheSequel
         Map gameMap;
         InputProfile ipp;
         List<Entity> availableTurrets;
-        TextureDrawer status, cursor, transitiontex, menutex,dedtex,textframe;
+        TextureDrawer status, cursor, transitiontex, menutex,dedtex,textframe,loader;
         Timer waveTimer, transitionTimer;
         int waveNumber, money, health, waveAmt, currentEventNo, turretIndex, income, eventNb;
         bool lost, transition, countdown, hovering;
@@ -53,7 +53,7 @@ namespace SuperBulletManiaReloadedTheSequel
             Content.RootDirectory = "Content";
 
             ebuilder = new TDEntityBuilder();
-            windowDims = new Point(1200, 821);
+            windowDims = new Point(800, 544);
             graphics.PreferredBackBufferHeight = windowDims.Y;
             graphics.PreferredBackBufferWidth = windowDims.X;
         }
@@ -100,12 +100,13 @@ namespace SuperBulletManiaReloadedTheSequel
                 el = xdoc.Root.Element("EventQueue" + eventNb.ToString());
                 eventNb++;
             } while (el != null);
+            eventNb--;
 
             waitingEventQueueNbs = new List<int>();
 
             base.Initialize();
 
-            waveTimer = new Timer(10);
+            waveTimer = new Timer(15);
         }        
         protected override void LoadContent()
         {
@@ -169,6 +170,12 @@ namespace SuperBulletManiaReloadedTheSequel
             menutex = new TextureDrawer(Content.Load<Texture2D>("start"));
             dedtex = new TextureDrawer(Content.Load<Texture2D>("gameover"));
             textframe = new TextureDrawer(Content.Load<Texture2D>("ui2"));
+            loader = new TextureDrawer(Content.Load<Texture2D>("loadanim"), new TextureFrame[]{
+                new TextureFrame(new Rectangle(0,0,162,48),Point.Zero),
+                new TextureFrame(new Rectangle(0,48,162,48),Point.Zero),
+                new TextureFrame(new Rectangle(0,96,162,48),Point.Zero),
+                new TextureFrame(new Rectangle(0,144,162,48),Point.Zero)
+                });
         }
         void SetupGame()
         {
@@ -176,13 +183,13 @@ namespace SuperBulletManiaReloadedTheSequel
             health = 25;
             money = 20;
             income = 0;
-            countdown = false;
             waveNumber = 1;
             waveAmt = 0;
             EntityCollection.RemoveAll();
             PlaceRocks();
             waveTimer.Reset();
-
+            ChangeToQueue(0);
+            countdown = false;
             SoundManager.PlaySong("song");
         }
         void PlaceRocks()
@@ -263,7 +270,7 @@ namespace SuperBulletManiaReloadedTheSequel
             ipp.Update(kbs, gps);
             float es = (float)gameTime.ElapsedGameTime.TotalSeconds; 
             mouseMan.Update();
-
+            loader.Update(es);
             if (!transition)
             {
                 if (phase == GamePhase.Menu)
@@ -407,10 +414,22 @@ namespace SuperBulletManiaReloadedTheSequel
             }
             if (waveAmt > 0)
             {
-                if (waveAmt > 1000)
+                if (waveAmt > 3000)
+                {
+                    waveAmt -= 200;
+                    SpawnEnemy(3, "boss");
+
+                }
+                else if (waveAmt > 2000)
+                {
+                    waveAmt -= 200;
+                    SpawnEnemy(1, "boss");
+
+                }
+                else if (waveAmt > 1000)
                 {
                     waveAmt -= 1000;
-                    SpawnEnemy(2, "boss");
+                    SpawnEnemy(1, "boss");
 
                 }
                 else if (waveAmt > 600)
@@ -561,6 +580,7 @@ namespace SuperBulletManiaReloadedTheSequel
                 if (transition)
                 {
                     transitiontex.Draw(spriteBatch, Vector2.Zero);
+                    loader.Draw(spriteBatch, new Vector2(119, 196));
                 }
                 spriteBatch.End();
             }
@@ -576,6 +596,7 @@ namespace SuperBulletManiaReloadedTheSequel
                 if (transition)
                 {
                     transitiontex.Draw(spriteBatch, Vector2.Zero);
+                    loader.Draw(spriteBatch, new Vector2(119,196));
                 }
                 else
                 {
@@ -645,7 +666,7 @@ namespace SuperBulletManiaReloadedTheSequel
                 handler.drawer.DrawText("aaa", "money:" + moneystring, new Rectangle(128, 3, 500, 200), spriteBatch);
                 handler.drawer.DrawText("aaa", "next:" + Math.Round(waveTimer.timer, 1) + "", new Rectangle(114, 19, 500, 200), spriteBatch);
                 handler.drawer.DrawText("aaa", "wave:" + waveNumber + "", new Rectangle(190, 3, 500, 200), spriteBatch);
-                handler.drawer.DrawText("aaa", "health:" + health + "", new Rectangle(164, 19, 500, 200), spriteBatch);
+                handler.drawer.DrawText("aaa", "health:" + health + "", new Rectangle(172, 19, 500, 200), spriteBatch);
                 handler.drawer.DrawText("aaa", "price:" + availableTurrets[turretIndex].IntProperty("price").ToString(), new Rectangle(50, 19, 500, 200), spriteBatch);
                 handler.drawer.DrawText("aaa", availableTurrets[turretIndex].Name, new Rectangle(50, 3, 500, 200), spriteBatch);
             }          
@@ -808,7 +829,8 @@ namespace SuperBulletManiaReloadedTheSequel
             XElement el;
             do
             {
-                el = xdoc.Root.Element("EventQueue" + r.Next(0, eventNb).ToString());
+                int x = r.Next(0, eventNb);
+                el = xdoc.Root.Element("EventQueue" + x.ToString());
             } while ((string)el.Attribute("rng") == "false");
             int cap = (int)el.Attribute("cap");
             Event[] eQueue = new Event[cap];

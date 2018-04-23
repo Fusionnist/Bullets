@@ -35,7 +35,7 @@ namespace SuperBulletManiaReloadedTheSequel
             if (context_ == "loot" && isDestroyed)
             {
                 if (looted) { return 0; }
-                else { looted = true; return 1; }
+                else { looted = true; return worth; }
             }
             return base.GetValue(context_);
         }

@@ -140,6 +140,7 @@
     <Content Include="Content\classic_hurt.wav" />
     <Content Include="Content\cursor.png" />
     <Content Include="Content\diplomat.png" />
+    <Content Include="Content\engineer.png" />
     <Content Include="Content\Entities.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -151,6 +152,9 @@
     <Content Include="Content\Image4.png" />
     <Content Include="Content\font.png" />
     <Content Include="Content\ld41tracktest2.wav" />
+    <Content Include="Content\musicslow.mp3" />
+    <Content Include="Content\music.mp3" />
+    <Content Include="Content\loadanim.png" />
     <Content Include="Content\loading.gif" />
     <Content Include="Content\LOADINGOWO.png" />
     <Content Include="Content\mafia.png" />

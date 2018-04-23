@@ -26,6 +26,7 @@ namespace SuperBulletManiaReloadedTheSequel
             hp = 800;
             r = new Random();
             speed = 0.2f;
+            worth = 20;
         }
     }
 }

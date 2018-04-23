@@ -1,85 +1,234 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Events>
-  <EventQueue0 cap="10" rng="false">
-    <Event nb ="0" scrollSpeed="15">
-      <Text>Hi! You're playing our newest game, Super Bullet Mania Reloaded. Before we start, I'd like do do a quick tutorial on how this game works. To continue, please click on the button labelled 'Yes'.</Text>
-      <yes>getQueueEvent4</yes>
-      <no>getQueueEvent1</no>
+  //TUTORIAL
+  <EventQueue0 cap="8" rng="false" >
+    <Event nb ="0" scrollSpeed="15" tex="military">
+      <Text>Greetings General! You don't seem to be completely awake yet, should I remind you how to lead an army?</Text>
+      <yes>getQueueEvent1</yes>
+      <no>getQueueEvent0</no>
       <ignore>getQueueEvent0</ignore>
     </Event>
-    <Event nb="1" scrollSpeed="15" tex="button">
-      <Text>I'm sorry, but you may have misunderstood. The button that you were meant to click was the big green one, not the red one. Please, do click on the button now.</Text>
-      <yes>getQueueEvent5</yes>
-      <no>getQueueEvent2</no>
+    <Event nb ="1" scrollSpeed="15" tex="military">
+      <Text>Alright, here we go again... Left click on an available spot to place turrets: those will shoot down enemies and therefore prevent them from killing all the citizens.</Text>
+      <yes>getQueueEvent2</yes>
+      <no>getQueueEvent1</no>
       <ignore>getQueueEvent1</ignore>
     </Event>
-    <Event nb="2" scrollSpeed="15" tex="button">
-      <Text>According to my analysis, you may be suffering from colourblindness and/or dyslexia. That's okay! Just follow my instructions. Please move your mouse until it is hovering over the button on the left, (that, incidentally, has 'Yes' written on it in large capital letters and is green) and press the left mouse button.</Text>
-      <yes>getQueueEvent5</yes>
-      <no>getQueueEvent3</no>
+    <Event nb ="2" scrollSpeed="15" tex="military">
+      <Text>Left click on a turret to upgrade it. I'd like to remind you that those things cost money, so don't go spending our whole budget on a single turret type, we're still doing repairs from last time...</Text>
+      <yes>getQueueEvent3</yes>
+      <no>getQueueEvent2</no>
       <ignore>getQueueEvent2</ignore>
     </Event>
-    <Event nb="3" scrollSpeed="15" tex="button">
-      <Text>Oh, never mind. I'll just assume that you passed this part of the tutorial.</Text>
+    <Event nb ="3" scrollSpeed="15" tex="military">
+      <Text>Use the Left and Right keys to switch between the available turrets. Each one of them serves a particular role, so make sure you place them well!</Text>
       <yes>getQueueEvent4</yes>
-      <no>getQueueEvent4</no>
+      <no>getQueueEvent3</no>
       <ignore>getQueueEvent3</ignore>
     </Event>
-    <Event nb="4" scrollSpeed="15" tex="button">
-      <Text>This game is a cross between a tower defense game and a text adventure. On the left, this will play as a classic tower defense game : enemies will spawn and attempt to get to the other end of the map, and if 100 get through, you lose. However, on the right, this text box will contain the description for certain events, and you can answer by either 'Yes' or 'No', which will affect the gameplay of the tower defense. Understood?</Text>
+    <Event nb ="4" scrollSpeed="15" tex="military">
+      <Text>The machinegun turret is a fast, low-damage, medium-range turret that can hit flying enemies. The sniper turret is a slow, high-range, high-damage turret that can also take down flying enemies. The artillery however cannot hit flying enemies, but it can harm multiple enemies at once. Its range isn't fantastic though. Finally, the ring, our strongest prototype, strongly damages enemies all around itself, but not flying ones.</Text>
       <yes>getQueueEvent5</yes>
       <no>getQueueEvent4</no>
       <ignore>getQueueEvent4</ignore>
     </Event>
-    <Event nb="5" scrollSpeed="2000" tex="button">
-      <Text>random text</Text>
+    <Event nb ="5" scrollSpeed="15" tex="military">
+      <Text>The monsters have a pretty much set idea on arriving every 15 seconds. Make sure you don't get overwhelmed!</Text>
       <yes>getQueueEvent6</yes>
+      <no>getQueueEvent5</no>
+      <ignore>getQueueEvent5</ignore>
+    </Event>
+    <Event nb ="6" scrollSpeed="15" tex="military">
+      <Text>Because every secretary you've had got fed up with your breakup flashbacks, you'll also have to take care of any incoming transmission! Those include: the mafia deals I told you to get out of, talking to the engineering team, the lab, myself, diplomats, and your hectic daily life.</Text>
+      <yes>getQueueEvent7</yes>
       <no>getQueueEvent6</no>
+      <ignore>getQueueEvent6</ignore>
+    </Event>
+    <Event nb ="7" scrollSpeed="15" tex="military">
+      <Text>We've made sure to keep it simple for you: either answer yes or no, or ignore a message. And please, assume the consequences and don't go telling the chief that I have anything to do with your mafia friends. Don't get too distracted though! You have a city to protect!</Text>
+      <yes>getRandomQueue</yes>
+      <no>getQueueEvent7</no>
       <ignore>getQueueEvent7</ignore>
-    </Event>
-    <Event nb="6" scrollSpeed="15" tex="button">
-      <Text>Well done for responding to the text so quickly! As you can see, the difficulty in the text-adventure part of this game comes from the fact that you have a limited time to make your choices: if the related text scrolls up to the top of the screen before you can answer, the game will consider that you ignored the person speaking to you, leading to a multitude of (usually negative) consequences. </Text>
-      <yes>getQueueEvent8</yes>
-      <no>getQueueEvent8</no>
-      <ignore>getQueueEvent7</ignore>
-    </Event>
-    <Event nb="7" scrollSpeed="15" tex="button">
-      <Text>As you can see, however, the difficulty in the text-adventure part of this game comes from the fact that you have a limited time to make your choices: if the related text scrolls up to the top of the screen before you can answer, the game will consider that you ignored the person speaking to you, leading to a multitude of (usually negative) consequences.</Text>
-      <yes>getQueueEvent8</yes>
-      <no>getQueueEvent8</no>
-      <ignore>getQueueEvent7</ignore>
-    </Event>
-    <Event nb="8" scrollSpeed="15" tex="button">
-      <Text>Ok! Finally, here are the controls: you place turrets by left-clicking a zone where there's space to set one (if of course you have enough money), and switch between turrets with the left and right arrow keys. I would suggest that you place a turret using the 100 units of nondescript money that you currently own, since you'll only gain more by either killing enemies or responding correctly to certain events.</Text>
-      <yes>getQueueEvent9</yes>
-      <no>getQueueEvent9</no>
-      <ignore>getQueueEvent8</ignore>
-    </Event>
-    <Event nb="9" scrollSpeed="15" tex="button">
-      <Text>I think you should be set to go now! Good luck!</Text>
-      <yes>putQueueInWaitingList31</yes>
-      <no>getQueue1</no>
-      <ignore></ignore>
     </Event>
   </EventQueue0>
-  <EventQueue1 cap="3" rng="true">
-    <Event nb ="0" scrollSpeed="32" tex="button">
-      <Text>and so here is the second queue</Text>
-      <yes>getQueueEvent1</yes>
-      <no>getQueueEvent1 breakTurret1</no>
-      <ignore>getQueueEvent0</ignore>
+  //MAFIA
+  <EventQueue1 cap="4" rng="true" >
+    <Event nb ="0" scrollSpeed="25" tex="mafia">
+      <Text>Hey bud, mind if I buy one of those turrets off? I'll give ya 100 bucks for it.</Text>
+      <yes>getQueueEvent1 changeMoney100 breakTurret1</yes>
+      <no>getQueueEvent2</no>
+      <ignore>getQueueEvent3 breakTurret1</ignore>
     </Event>
-    <Event nb="1" scrollSpeed="50" tex="button">
-      <Text>the tension is unbearable</Text>
-      <yes>getQueueEvent2</yes>
-      <no>getQueueEvent0</no>
-      <ignore>getQueueEvent1</ignore>
+    <Event nb ="1" scrollSpeed="25" tex="mafia">
+      <Text>Nice doing business with ya. Seeya soon!</Text>
+      <yes>getRandomQueue</yes>
+      <no>getRandomQueue</no>
+      <ignore>getRandomQueue</ignore>
     </Event>
-    <Event nb="1" scrollSpeed="45" tex="button">
-      <Text>hmmmmmmmmmmmmm</Text>
-      <yes>getQueue0</yes>
-      <no>getQueueEvent1 sendWave10</no>
-      <ignore>getQueueEvent2</ignore>
+    <Event nb ="2" scrollSpeed="25" tex="mafia">
+      <Text>Nah? You sure? Not even for, let's say, 120?</Text>
+      <yes>getQueueEvent1 changeMoney120</yes>
+      <no>getQueueEvent3 breakTurret1</no>
+      <ignore>getQueueEvent3 breakTurret1</ignore>
+    </Event>
+    <Event nb ="3" scrollSpeed="25" tex="mafia">
+      <Text>Alright, guess I'll just steal it instead.</Text>
+      <yes>getRandomQueue</yes>
+      <no>getRandomQueue</no>
+      <ignore>getRandomQueue</ignore>
     </Event>
   </EventQueue1>
+  <EventQueue2 cap="3" rng="true" >
+    <Event nb ="0" scrollSpeed="40" tex="mafia">
+      <Text>Hey bud, in need of money? I can provide for ya... if you agree to a relatively little tax.</Text>
+      <yes>getQueueEvent1 changeMoney100 changeIncome-10</yes>
+      <no>getQueueEvent2</no>
+      <ignore>getQueueEvent2</ignore>
+    </Event>
+    <Event nb ="1" scrollSpeed="40" tex="mafia">
+      <Text>Alrighty then, nice doing business with ya.</Text>
+      <yes>getRandomQueue</yes>
+      <no>getRandomQueue</no>
+      <ignore>getRandomQueue</ignore>
+    </Event>
+    <Event nb ="2" scrollSpeed="40" tex="mafia">
+      <Text>Hmpf!</Text>
+      <yes>getRandomQueue</yes>
+      <no>getRandomQueue</no>
+      <ignore>getRandomQueue</ignore>
+    </Event>
+  </EventQueue2>
+  <EventQueue3 cap="3" rng="true" >
+    <Event nb ="0" scrollSpeed="40" tex="mafia">
+      <Text>Hey, long time no see. Wanna join us for a little game of poker, like in the old times?</Text>
+      <yes>getQueueEvent1 changeMoney100</yes>
+      <no>getQueueEvent2</no>
+      <ignore>getQueueEvent2</ignore>
+    </Event>
+    <Event nb ="1" scrollSpeed="40" tex="mafia">
+      <Text>Well, must be your lucky day!</Text>
+      <yes>getRandomQueue</yes>
+      <no>getRandomQueue</no>
+      <ignore>getRandomQueue</ignore>
+    </Event>
+    <Event nb ="2" scrollSpeed="40" tex="mafia">
+      <Text>Hmpf! ):c</Text>
+      <yes>getRandomQueue</yes>
+      <no>getRandomQueue</no>
+      <ignore>getRandomQueue</ignore>
+    </Event>
+  </EventQueue3>
+  <EventQueue4 cap="4" rng="true" >
+    <Event nb ="0" scrollSpeed="40" tex="mafia">
+      <Text>Ah, my old friend! I'd need your help for a small business investment, only 50 coins worth. You in?</Text>
+      <yes>getQueueEvent1 changeMoney-100</yes>
+      <no>getQueueEvent2</no>
+      <ignore>getQueueEvent2</ignore>
+    </Event>
+    <Event nb ="1" scrollSpeed="40" tex="mafia">
+      <Text>Thanks bud!</Text>
+      <yes>getQueueEvent3</yes>
+      <no>getQueueEvent3</no>
+      <ignore>getQueueEvent3</ignore>
+    </Event>
+    <Event nb ="2" scrollSpeed="40" tex="mafia">
+      <Text>Hmm, too bad for you.</Text>
+      <yes>getRandomQueue</yes>
+      <no>getRandomQueue</no>
+      <ignore>getRandomQueue</ignore>
+    </Event>
+  </EventQueue4>
+    <Event nb ="3" scrollSpeed="40">
+      <Text>(you never hear any news about this again)</Text>
+      <yes>getRandomQueue</yes>
+      <no>getRandomQueue</no>
+      <ignore>getRandomQueue</ignore>
+    </Event>
+   
+  <EventQueue5 cap="3" rng="true" >
+    <Event nb ="0" scrollSpeed="40" tex="mechanic">
+      <Text>General, a turret is malfunctioning! Should we repair it?</Text>
+      <yes>getQueueEvent1 changeMoney-100</yes>
+      <no>breakTurret1 getQueueEvent2</no>
+      <ignore>getQueueEvent2</ignore>
+    </Event>
+    <Event nb ="1" scrollSpeed="40" tex="mechanic">
+      <Text>Alright, done! It seems like the noise drew some monsters nearby...</Text>
+      <yes>getRandomQueue</yes>
+      <no>getRandomQueue</no>
+      <ignore>getRandomQueue</ignore>
+    </Event>
+    <Event nb ="2" scrollSpeed="40" tex="mechanic">
+      <Text>Whoops, it exploded! Haha, flames everywhere!</Text>
+      <yes>getRandomQueue</yes>
+      <no>getRandomQueue</no>
+      <ignore>getRandomQueue</ignore>
+    </Event>
+  </EventQueue5>
+  <EventQueue6 cap="3" rng="true" >
+    <Event nb ="0" scrollSpeed="40" tex="mechanic">
+      <Text>We could spend time building new turrets... OR I just had this idea for an automated coffee dispenser. You like coffee, right?</Text>
+      <yes>getQueueEvent1 changeIncome15</yes>
+      <no>breakTurret1 getQueueEvent2</no>
+      <ignore>getRandomQueue</ignore>
+    </Event>
+    <Event nb ="1" scrollSpeed="40" tex="mechanic">
+      <Text>Success! All those jammers are using it, we're making profit!</Text>
+      <yes>getRandomQueue</yes>
+      <no>getRandomQueue</no>
+      <ignore>getRandomQueue</ignore>
+    </Event>
+    <Event nb ="2" scrollSpeed="40" tex="mechanic">
+      <Text>Oh right, you're one of those tea people... not sure if it's linked, but a turret exploded! Haha!</Text>
+      <yes>getRandomQueue</yes>
+      <no>getRandomQueue</no>
+      <ignore>getRandomQueue</ignore>
+    </Event>
+  </EventQueue6>
+  <EventQueue7 cap="4" rng="true" >
+    <Event nb ="0" scrollSpeed="40" tex="diplomat">
+      <Text>General, we are receiving refugees from the neighbouring country! Shall we take them in?</Text>
+      <yes>getQueueEvent1 changeIncome-35</yes>
+      <no>getQueueEvent2</no>
+      <ignore>getRandomQueue</ignore>
+    </Event>
+    <Event nb ="1" scrollSpeed="40" tex="diplomat">
+      <Text>Your kindness has saved lives, but we will have to pay an extra bit of allowance in order to maintain them...</Text>
+      <yes>getQueue8</yes>
+      <no>getQueueEvent3 changeIncome20</no>
+      <ignore>getQueue8</ignore>
+    </Event>
+    <Event nb ="2" scrollSpeed="40" tex="diplomat">
+      <Text>I understand.</Text>
+      <yes>getRandomQueue</yes>
+      <no>getRandomQueue</no>
+      <ignore>getRandomQueue</ignore>
+    </Event>
+    <Event nb ="3" scrollSpeed="40" tex="diplomat">
+      <Text>There's not much I can do. We'll lower their allowance for now.</Text>
+      <yes>getRandomQueue</yes>
+      <no>getRandomQueue</no>
+      <ignore>getRandomQueue</ignore>
+    </Event>
+  </EventQueue7>
+  <EventQueue8 cap="3" rng="false" >
+    <Event nb ="0" scrollSpeed="50" tex="diplomat">
+      <Text>General, sheltering those refugees has earned us a reward! 300 coins!</Text>
+      <yes>getQueueEvent1 changeMoney300</yes>
+      <no>getQueueEvent2</no>
+      <ignore>getRandomQueue changeMoney300</ignore>
+    </Event>
+    <Event nb ="1" scrollSpeed="60" tex="diplomat">
+      <Text>Hooray!</Text>
+      <yes>getRandomQueue</yes>
+      <no>getRandomQueue</no>
+      <ignore>getRandomQueue</ignore>
+    </Event>
+    <Event nb ="2" scrollSpeed="50" tex="diplomat">
+      <Text>Well, whatever I guess.</Text>
+      <yes>getRandomQueue</yes>
+      <no>getRandomQueue</no>
+      <ignore>getRandomQueue</ignore>
+    </Event>
+  </EventQueue8>
 </Events>
