@@ -41,10 +41,11 @@ namespace SuperBulletManiaReloadedTheSequel
         List<Entity> availableTurrets;
         TextureDrawer status, cursor, transitiontex, menutex,dedtex,textframe;
         Timer waveTimer, transitionTimer;
-        int waveNumber, money, health, waveAmt, currentEventNo, turretIndex, income;
+        int waveNumber, money, health, waveAmt, currentEventNo, turretIndex, income, eventNb;
         bool lost, transition, countdown, hovering;
         Entity hoverTar, hovertaru;
         Random r = new Random();
+        List<int> waitingEventQueueNbs;
         
         public Game1()
         {
@@ -90,13 +91,21 @@ namespace SuperBulletManiaReloadedTheSequel
             scenes.scenes.Add(new Scene(new RenderTarget2D(GraphicsDevice, TDdims.X, TDdims.Y), "td"));
             scenes.scenes.Add(new Scene(new RenderTarget2D(GraphicsDevice, virtualDims.X, virtualDims.Y), "game"));
             scenes.scenes.Add(new Scene(new RenderTarget2D(GraphicsDevice, TDdims.X, virtualDims.Y - TDdims.Y), "status"));
+
+            eventNb = 0;
+            XDocument xdoc = XDocument.Load("Content\\eventStuff.xml");
+            XElement el;
+            do
+            {
+                el = xdoc.Root.Element("EventQueue" + eventNb.ToString());
+                eventNb++;
+            } while (el != null);
+
+            waitingEventQueueNbs = new List<int>();
+
             base.Initialize();
 
             waveTimer = new Timer(10);
-
-            money = 100;
-            income = 0;
-            countdown = false;
         }        
         protected override void LoadContent()
         {
@@ -165,6 +174,7 @@ namespace SuperBulletManiaReloadedTheSequel
             lost = false;
             health = 25;
             money = 20;
+            income = 0;
             countdown = false;
             waveNumber = 1;
             waveAmt = 0;
@@ -449,7 +459,16 @@ namespace SuperBulletManiaReloadedTheSequel
                     HandleEventConsequences(currentQueue[currentEventNo].outcomeIfNo);
             }
             if (handler.wasIgnored)
-            { HandleEventConsequences(currentQueue[currentEventNo].outcomeIfIgnored); handler.wasIgnored = false; }
+            { HandleEventConsequences(currentQueue[currentEventNo].outcomeIfIgnored); }
+            if (!handler.isActive && waitingEventQueueNbs.Count > 0)
+            {
+                if (waitingEventQueueNbs[0] <= 0)
+                {
+                    ChangeToQueue(waitingEventQueueNbs[1]);
+                    waitingEventQueueNbs.RemoveAt(0);
+                    waitingEventQueueNbs.RemoveAt(0);
+                }
+            }
         }
         void UpdateTransition(float es)
         {
@@ -479,6 +498,8 @@ namespace SuperBulletManiaReloadedTheSequel
         {
             waveAmt += amt_;
             waveNumber++;
+            for (int i = 0; i < waitingEventQueueNbs.Count / 2; i++)
+                waitingEventQueueNbs[2 * i]--;
         }
        
 
@@ -647,16 +668,19 @@ namespace SuperBulletManiaReloadedTheSequel
 
         protected void HandleEventConsequences(string[] relevantVariable)
         {
+            handler.isActive = false;
             for (int i = 0; i < relevantVariable.Length; i++)
             {
                 if (relevantVariable[i].StartsWith("getQueueEvent"))
-                    ChangeToEventInQueue(int.Parse(relevantVariable[i].Substring(13)));
+                { ChangeToEventInQueue(int.Parse(relevantVariable[i].Substring(13))); handler.wasIgnored = false; }
                 else if (relevantVariable[i].StartsWith("sendWave"))
                     SendWave(int.Parse(relevantVariable[i].Substring(8)));
                 else if (relevantVariable[i].StartsWith("breakTurret"))
                     BreakTurret(int.Parse(relevantVariable[i].Substring(11)));
                 else if (relevantVariable[i].StartsWith("getQueue"))
-                    ChangeToQueue(int.Parse(relevantVariable[i].Substring(8)));
+                { ChangeToQueue(int.Parse(relevantVariable[i].Substring(8))); handler.wasIgnored = false; }
+                else if (relevantVariable[i] == "getRandomQueue")
+                { ChangeToRandomQueue(); handler.wasIgnored = false; }
                 else if (relevantVariable[i].StartsWith("changeIncome"))
                     income += int.Parse(relevantVariable[i].Substring(12));
                 else if (relevantVariable[i].StartsWith("changeMoney"))
@@ -665,6 +689,8 @@ namespace SuperBulletManiaReloadedTheSequel
                     if (money < 0)
                         money = 0;
                 }
+                else if (relevantVariable[i].StartsWith("putQueueInWaitingList"))
+                { waitingEventQueueNbs.Add((int)char.GetNumericValue(relevantVariable[i][21])); waitingEventQueueNbs.Add(int.Parse(relevantVariable[i].Substring(22))); countdown = true;}
             }
         }
         
@@ -679,6 +705,15 @@ namespace SuperBulletManiaReloadedTheSequel
         {
             countdown = true;
             currentQueue = GetEventQueue(queueNo);
+            currentEventNo = 0;
+            handler.RemoveText();
+            handler.AddTextToScroll(currentQueue[0].text, currentQueue[0].scrollSpeed);
+        }
+
+        protected void ChangeToRandomQueue()
+        {
+            countdown = true;
+            currentQueue = GetRandomEventQueue();
             currentEventNo = 0;
             handler.RemoveText();
             handler.AddTextToScroll(currentQueue[0].text, currentQueue[0].scrollSpeed);
@@ -735,5 +770,32 @@ namespace SuperBulletManiaReloadedTheSequel
             return eQueue;
         }
 
+        protected Event[] GetRandomEventQueue()
+        {
+            XDocument xdoc = XDocument.Load("Content\\eventStuff.xml");
+            XElement el;
+            do
+            {
+                el = xdoc.Root.Element("EventQueue" + r.Next(0, eventNb).ToString());
+            } while ((string)el.Attribute("rng") == "false");
+            int cap = (int)el.Attribute("cap");
+            Event[] eQueue = new Event[cap];
+            IEnumerable<XElement> els = el.Elements("Event");
+            string yes, no, ignore;
+            int spd;
+            for (int i = 0; i < cap; i++)
+            {
+                yes = (string)els.ElementAt(i).Element("yes");
+                no = (string)els.ElementAt(i).Element("no");
+                ignore = (string)els.ElementAt(i).Element("ignore");
+                spd = (int)els.ElementAt(i).Attribute("scrollSpeed");
+                string texName = (string)els.ElementAt(i).Attribute("tex");
+                if (texName != null)
+                    eQueue[i] = new Event((string)els.ElementAt(i).Element("Text"), yes.Split(' '), no.Split(' '), ignore.Split(' '), spd, new TextureDrawer(Content.Load<Texture2D>(texName)));
+                else
+                    eQueue[i] = new Event((string)els.ElementAt(i).Element("Text"), yes.Split(' '), no.Split(' '), ignore.Split(' '), spd);
+            }
+            return eQueue;
+        }
     }
 }

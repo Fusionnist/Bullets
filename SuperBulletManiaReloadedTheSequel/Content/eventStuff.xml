@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Events>
-  <EventQueue0 cap="10">
+  <EventQueue0 cap="10" rng="false">
     <Event nb ="0" scrollSpeed="15">
       <Text>Hi! You're playing our newest game, Super Bullet Mania Reloaded. Before we start, I'd like do do a quick tutorial on how this game works. To continue, please click on the button labelled 'Yes'.</Text>
       <yes>getQueueEvent4</yes>
@@ -57,12 +57,12 @@
     </Event>
     <Event nb="9" scrollSpeed="15" tex="button">
       <Text>I think you should be set to go now! Good luck!</Text>
-      <yes>getQueue1</yes>
+      <yes>putQueueInWaitingList31</yes>
       <no>getQueue1</no>
-      <ignore>getQueueEvent9</ignore>
+      <ignore></ignore>
     </Event>
   </EventQueue0>
-  <EventQueue1 cap="3">
+  <EventQueue1 cap="3" rng="true">
     <Event nb ="0" scrollSpeed="32" tex="button">
       <Text>and so here is the second queue</Text>
       <yes>getQueueEvent1</yes>
