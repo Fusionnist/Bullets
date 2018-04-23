@@ -20,7 +20,7 @@ namespace SuperBulletManiaReloadedTheSequel
         List<float> poses;
         float scrollSpeed;
         Point virtualDims;
-        public bool wasIgnored;
+        public bool wasIgnored, isActive;
         public int currentHeight;
 
         public TextHandler(FontDrawer drawer_, Point virtualDims_)
@@ -32,19 +32,23 @@ namespace SuperBulletManiaReloadedTheSequel
             virtualDims = virtualDims_;
             wasIgnored = false;
             currentHeight = 0;
+            isActive = true;
         }
 
         public void Update(float es_)
         {
-            for (int i = 0; i < texts.Count; i++)
+            if (isActive)
             {
-                poses[i] -= es_ * scrollSpeed;
-                if (poses[i] < -currentHeight)
+                for (int i = 0; i < texts.Count; i++)
                 {
-                    poses.RemoveAt(i);
-                    texts.RemoveAt(i);
-                    wasIgnored = true;
-
+                    poses[i] -= es_ * scrollSpeed;
+                    if (poses[i] < -currentHeight)
+                    {
+                        poses.RemoveAt(i);
+                        texts.RemoveAt(i);
+                        wasIgnored = true;
+                        isActive = false;
+                    }
                 }
             }
             drawer.Update(es_);
@@ -52,8 +56,11 @@ namespace SuperBulletManiaReloadedTheSequel
 
         public void Draw(SpriteBatch sb_)
         {
-            for (int i = 0; i < texts.Count; i++)
-                currentHeight = drawer.DrawText("aaa", texts[i], new Rectangle(0, (int)poses[i], virtualDims.X * 2 / 5, 666), sb_).Height;
+            if (isActive)
+            {
+                for (int i = 0; i < texts.Count; i++)
+                    currentHeight = drawer.DrawText("aaa", texts[i], new Rectangle(10, (int)Math.Round(poses[i]), virtualDims.X * 2 / 5 - 12, 666), sb_).Height;
+            }
         }
 
         public void AddTextToScroll(string textToAdd_, int scrollSpd_)
@@ -61,6 +68,7 @@ namespace SuperBulletManiaReloadedTheSequel
             texts.Add(textToAdd_);
             poses.Add(virtualDims.Y);
             scrollSpeed = scrollSpd_;
+            isActive = true;
         }
 
         public void RemoveText()
