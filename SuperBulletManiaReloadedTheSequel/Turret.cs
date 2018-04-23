@@ -15,10 +15,10 @@ namespace SuperBulletManiaReloadedTheSequel
 {
     class Turret : Entity
     {
-        protected int baseDmg, range;
+        protected int baseDmg, range, upgradePrice;
         Vector2 target;
         float angle;
-        bool isShooting;
+        protected bool isShooting, canHitFlying;
         protected Timer shotTimer, shotDrawTimer;
 
         public Turret(DrawerCollection texes_, Vector2 pos_, List<Property> properties_, string name_, string type_ = "turret"): base(texes_, pos_, properties_, name_, "turret")
@@ -27,6 +27,13 @@ namespace SuperBulletManiaReloadedTheSequel
             shotTimer = new Timer(0.5f);
             shotDrawTimer = new Timer(0.2f);
             range = 100;
+            upgradePrice = 50;
+        }
+
+        public override int GetValue(string context_)
+        {
+            if(context_ == "upgradePrice") { return upgradePrice; }
+            return base.GetValue(context_);
         }
 
         public override void Update(float elapsedTime_)
@@ -45,21 +52,19 @@ namespace SuperBulletManiaReloadedTheSequel
 
         void Shoot()
         {
-            //damage first enemy
-            if (EntityCollection.GetGroup("enemies").Count > 0)
+            DamageTargets(ObtainTargets());
+        }
+
+        protected virtual List<Entity> ObtainTargets()
+        {
+            return new List<Entity>();
+        }
+
+        protected virtual void DamageTargets(List<Entity> targets)
+        {
+            bool wasTarget = false;
+            foreach(Entity tar in targets)
             {
-                Entity tar = null;
-                foreach (Entity e in EntityCollection.GetGroup("enemies"))
-                {
-                    if (!e.isDestroyed)
-                    {
-                        if((e.pos - pos).Length() <= range)
-                        {
-                            tar = e;
-                            break;
-                        }                        
-                    }
-                }
                 if (tar != null)
                 {
                     isShooting = true;
@@ -67,19 +72,21 @@ namespace SuperBulletManiaReloadedTheSequel
                     target = tar.pos;
 
                     angle = -(float)Math.Atan2(target.X - pos.X, target.Y - pos.Y) + (float)Math.PI;
-                    //angle -= angle%((float)Math.PI / 16);
-
-                    shotDrawTimer.Reset();
-
-                    SoundManager.PlayEffect("shoot");
+                    angle -= angle%((float)Math.PI / 8); 
                 }
+            }
+            if (wasTarget)
+            {
+                shotDrawTimer.Reset();
+
+                SoundManager.PlayEffect("shoot");
             }
         }
 
         public override void Draw(SpriteBatch sb_, bool flipH_ = false, float angle_ = 0f)
         {
             if (isShooting) { currentTex = textures.GetTex("t1shoot"); }
-            else if(shotDrawTimer.Complete()) { currentTex = textures.GetTex("t1idle"); }
+            else if(currentTex.Ended()) { currentTex = textures.GetTex("t1idle"); }
             base.Draw(sb_, flipH_, angle);
         }
     }

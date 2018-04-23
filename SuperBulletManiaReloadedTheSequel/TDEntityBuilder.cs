@@ -60,7 +60,15 @@ namespace SuperBulletManiaReloadedTheSequel
 
             if (type_ == "enemy")
             {
-                return new Enemy(dc_, pos_, props_, name_);
+                return new EnemyCritter(dc_, pos_, props_, name_);
+            }
+            if (type_ == "flyenemy")
+            {
+                return new EnemyFlying(dc_, pos_, props_, name_);
+            }
+            if (type_ == "fatenemy")
+            {
+                return new EnemyFat(dc_, pos_, props_, name_);
             }
             return base.CreateEntity(type_, dc_, pos_, props_, name_);
         }

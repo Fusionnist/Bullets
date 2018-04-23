@@ -39,10 +39,12 @@ namespace SuperBulletManiaReloadedTheSequel
         Map gameMap;
         InputProfile ipp;
         List<Entity> availableTurrets;
-        TextureDrawer status, cursor, transitiontex;
+        TextureDrawer status, cursor, transitiontex, menutex,dedtex;
         Timer waveTimer, transitionTimer;
         int waveNumber, money, health, waveAmt, currentEventNo, turretIndex, income;
-        bool lost, transition, countdown;
+        bool lost, transition, countdown, hovering;
+        Entity hoverTar, hovertaru;
+        Random r = new Random();
         
         public Game1()
         {
@@ -99,7 +101,7 @@ namespace SuperBulletManiaReloadedTheSequel
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Button button = new Button("goToGame", new Rectangle(virtualDims.X / 2 - 100, virtualDims.Y / 2 - 50, 200, 100), new TextureDrawer(Content.Load<Texture2D>("button")));
+            Button button = new Button("goToGame", new Rectangle(119, 196, 162, 48), new TextureDrawer(Content.Load<Texture2D>("button")));
             UIs = new UISystem[] { new UISystem(new List<Button>(1) {button}, "Menu"), new UISystem(SetupGameButtons(), "Game") };
             currentUI = UIs[0];
             //LOAD ALL XML
@@ -142,21 +144,32 @@ namespace SuperBulletManiaReloadedTheSequel
             availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("machinegun 1"), new Vector2(24,16), Content, ebuilder, false));
             availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("sniper 1"), new Vector2(24, 16), Content, ebuilder, false));
             availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("artillery 1"), new Vector2(24, 16), Content, ebuilder, false));
+
+            //availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("machinegun 2"), new Vector2(24, 16), Content, ebuilder, false));
+            //availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("sniper 2"), new Vector2(24, 16), Content, ebuilder, false));
+            //availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("artillery 2"), new Vector2(24, 16), Content, ebuilder, false));
+
+            //availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("machinegun 3"), new Vector2(24, 16), Content, ebuilder, false));
+            //availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("sniper 3"), new Vector2(24, 16), Content, ebuilder, false));
+            //availableTurrets.Add(Assembler.GetEnt(ElementCollection.GetEntRef("artillery 3"), new Vector2(24, 16), Content, ebuilder, false));
             status = new TextureDrawer(Content.Load<Texture2D>("statusbar"));
 
             cursor = new TextureDrawer(Content.Load<Texture2D>("cursor"), new TextureFrame(new Rectangle(0, 0, 8, 8), new Point(4, 4)));
-            transitiontex = new TextureDrawer(Content.Load<Texture2D>("LOADINGOWO"));
+            transitiontex = new TextureDrawer(Content.Load<Texture2D>("loading"));
+            menutex = new TextureDrawer(Content.Load<Texture2D>("start"));
+            dedtex = new TextureDrawer(Content.Load<Texture2D>("gameover"));
         }
         void SetupGame()
         {
             lost = false;
-            health = 100;
-            money = 100;
+            health = 25;
+            money = 20;
             countdown = false;
             waveNumber = 1;
             waveAmt = 0;
             EntityCollection.RemoveAll();
             PlaceRocks();
+            waveTimer.Reset();
 
             SoundManager.PlaySong("song");
         }
@@ -328,6 +341,28 @@ namespace SuperBulletManiaReloadedTheSequel
             }
             currentUI.HandleMouseInput(mouseMan, scenes.GetScene("game").ToVirtualPos(mouseMan.RawPos()));
         }
+        void UpdateHover()
+        {
+            hovering = false;
+            foreach (Entity t in EntityCollection.GetGroup("turrets"))
+            {
+                if ((t.pos - scenes.GetScene("game").ToVirtualPos(scenes.GetScene("td").ToVirtualPos(mouseMan.RawPos()))).Length() < 15)
+                {
+                    if(t.StringProperty("upgradename") != "null")
+                    {
+                        hovering = true;
+                        hoverTar = t;
+                        hovertaru = GetUpgrade(hoverTar);
+                        hovertaru.pos = new Vector2(24, 16);
+                    }
+                }
+            }
+
+            if(hovering && mouseMan.JustPressed())
+            {
+                UpgradeTurret(hoverTar);
+            }
+        }     
         void UpdateGame(float es)
         {
 
@@ -338,20 +373,21 @@ namespace SuperBulletManiaReloadedTheSequel
             EntityCollection.RecycleAll();
 
             gameMap.Update(es);
+            UpdateHover();
             UpdateTD(es);
             UpdateTA(es);
             UpdateTS(es);
 
             foreach (Entity e in EntityCollection.GetGroup("enemies"))
             {
-                money += e.GetValue("loot") * 10;
+                money += e.GetValue("loot") * 1;
             }
 
             if(countdown)
             waveTimer.Update(es);
             if (waveTimer.Complete())
             {
-                SendWave(waveNumber * 1);
+                SendWave((int)Math.Pow(waveNumber,1.5));
                 waveTimer.Reset();
                 money += income;
                 if (money < 0)
@@ -359,8 +395,38 @@ namespace SuperBulletManiaReloadedTheSequel
             }
             if (waveAmt > 0)
             {
-                waveAmt--;
-                SpawnEnemy(1);
+                if (waveAmt > 100)
+                {
+                    waveAmt -= 20;
+                    SpawnEnemy(10, "fatenemy");
+
+                }
+                else if (waveAmt > 50)
+                {
+                    waveAmt -= 15;
+                    SpawnEnemy(10, "flyenemy");
+                }
+                else if (waveAmt > 30)
+                {
+                    waveAmt -= 10;
+                    SpawnEnemy(10, "enemy1");
+                }
+                else if (waveAmt > 15)
+                {
+                    waveAmt -= 5;
+                    SpawnEnemy(3, "flyenemy");
+                }
+                else if (waveAmt > 10)
+                {
+                    waveAmt -= 10;
+                    SpawnEnemy(1, "fatenemy");
+
+                }
+                else if (waveAmt >= 1)
+                {
+                    waveAmt -= 1;
+                    SpawnEnemy(1, "enemy1");
+                }
             }
 
             if (!mouseMan.Pressed())
@@ -383,6 +449,20 @@ namespace SuperBulletManiaReloadedTheSequel
             }
         }
 
+        void UpgradeTurret(Entity e)
+        {
+            if (money >= hoverTar.GetValue("upgradePrice"))
+            {
+                EntityCollection.AddEntity(GetUpgrade(e));
+                e.exists = false;
+                money -= hoverTar.GetValue("upgradePrice");
+            }
+        }
+        Entity GetUpgrade(Entity e)
+        {
+            Entity a = Assembler.GetEnt(ElementCollection.GetEntRef(e.StringProperty("upgradename")), e.pos, Content, ebuilder, false);
+            return a;
+        }
         void SendWave(int amt_)
         {
             waveAmt += amt_;
@@ -409,19 +489,32 @@ namespace SuperBulletManiaReloadedTheSequel
                 DrawTD();
                 DrawTA();
                 DrawTS();
-                DrawGameScenes();
-                
-
-                
+                DrawGameScenes();               
             }
-            else
+            else if (phase == GamePhase.Menu)
             {
                 scenes.SelectScene("game");
                 scenes.CurrentScene.CreateInput(new Rectangle(0, 0, virtualDims.X, virtualDims.Y), 1);
                 scenes.CurrentScene.CreateOutput(new Rectangle(0, 0, windowDims.X, windowDims.Y), true, false);
                 scenes.SetupScene(spriteBatch, GraphicsDevice);
 
+                menutex.Draw(spriteBatch, Vector2.Zero);
                 currentUI.Draw(spriteBatch);
+                cursor.Draw(spriteBatch, scenes.CurrentScene.ToVirtualPos(mouseMan.RawPos()));
+                if (transition)
+                {
+                    transitiontex.Draw(spriteBatch, Vector2.Zero);
+                }
+                spriteBatch.End();
+            }
+            else if(phase == GamePhase.urded)
+            {
+                scenes.SelectScene("game");
+                scenes.CurrentScene.CreateInput(new Rectangle(0, 0, virtualDims.X, virtualDims.Y), 1);
+                scenes.CurrentScene.CreateOutput(new Rectangle(0, 0, windowDims.X, windowDims.Y), true, false);
+                scenes.SetupScene(spriteBatch, GraphicsDevice);
+
+                dedtex.Draw(spriteBatch, Vector2.Zero);
                 cursor.Draw(spriteBatch, scenes.CurrentScene.ToVirtualPos(mouseMan.RawPos()));
                 if (transition)
                 {
@@ -466,19 +559,29 @@ namespace SuperBulletManiaReloadedTheSequel
         {
             scenes.SelectScene("status");
             scenes.CurrentScene.CreateInput(new Rectangle(0, 0, TDdims.X, virtualDims.Y - TDdims.Y), 1f);
-            scenes.CurrentScene.CreateOutput(new Rectangle(0,240,240,32), true, true);
+            scenes.CurrentScene.CreateOutput(new Rectangle(0, 240, 240, 32), true, true);
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             status.Draw(spriteBatch, new Vector2(0, 0));
-            availableTurrets[turretIndex].Draw(spriteBatch);
-            string moneystring = money.ToString();
-            while(moneystring.Length > 5) { moneystring =  moneystring.Remove(moneystring.Length - 3); moneystring += "k"; }
-            handler.drawer.DrawText("aaa", "money:"+moneystring, new Rectangle(114, 3, 500, 200), spriteBatch);
-            handler.drawer.DrawText("aaa", "next:"+ Math.Round(waveTimer.timer,1) + "", new Rectangle(114, 19, 500, 200), spriteBatch);
-            handler.drawer.DrawText("aaa", "wave:"+ waveNumber + "", new Rectangle(194, 3, 500, 200), spriteBatch);
-            handler.drawer.DrawText("aaa", "health:" + health + "", new Rectangle(164, 19, 500, 200), spriteBatch);
-            handler.drawer.DrawText("aaa", "price:"+availableTurrets[turretIndex].IntProperty("price").ToString(), new Rectangle(50, 19, 500, 200), spriteBatch);
-            handler.drawer.DrawText("aaa", availableTurrets[turretIndex].Name, new Rectangle(50, 3, 500, 200), spriteBatch);
+            if (hovering)
+            {
+                hovertaru.Draw(spriteBatch);
+                handler.drawer.DrawText("aaa", "click to upgrade this turret", new Rectangle(50, 3, 500, 200), spriteBatch);
+                handler.drawer.DrawText("aaa", "price:"+hoverTar.GetValue("upgradePrice"), new Rectangle(50, 19, 500, 200), spriteBatch);
+            }
+            else
+            {
+                availableTurrets[turretIndex].Draw(spriteBatch);
+                string moneystring = money.ToString();
+                while (moneystring.Length > 5) { moneystring = moneystring.Remove(moneystring.Length - 3); moneystring += "k"; }
+                handler.drawer.DrawText("aaa", "money:" + moneystring, new Rectangle(128, 3, 500, 200), spriteBatch);
+                handler.drawer.DrawText("aaa", "next:" + Math.Round(waveTimer.timer, 1) + "", new Rectangle(114, 19, 500, 200), spriteBatch);
+                handler.drawer.DrawText("aaa", "wave:" + waveNumber + "", new Rectangle(190, 3, 500, 200), spriteBatch);
+                handler.drawer.DrawText("aaa", "health:" + health + "", new Rectangle(164, 19, 500, 200), spriteBatch);
+                handler.drawer.DrawText("aaa", "price:" + availableTurrets[turretIndex].IntProperty("price").ToString(), new Rectangle(50, 19, 500, 200), spriteBatch);
+                handler.drawer.DrawText("aaa", availableTurrets[turretIndex].Name, new Rectangle(50, 3, 500, 200), spriteBatch);
+            }          
+            
             spriteBatch.End();
         }
         void DrawGameScenes()
@@ -566,11 +669,11 @@ namespace SuperBulletManiaReloadedTheSequel
             handler.AddTextToScroll(currentQueue[0].text, currentQueue[0].scrollSpeed);
         }
 
-        protected void SpawnEnemy(int enemyNo_)
+        protected void SpawnEnemy(int enemyNo_, string name_)
         {
             for (int i = 0; i < enemyNo_; i++)
             {
-                Assembler.GetEnt(ElementCollection.GetEntRef("enemy1"), new Vector2(150, -20), Content, ebuilder);
+                Assembler.GetEnt(ElementCollection.GetEntRef(name_), new Vector2(150, -20), Content, ebuilder);
             }
         }
 

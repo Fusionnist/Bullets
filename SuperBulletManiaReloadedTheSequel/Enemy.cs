@@ -18,6 +18,7 @@ namespace SuperBulletManiaReloadedTheSequel
         Timer deathTimer;
         Random r;
         bool looted;
+        protected float speed;
 
         public Enemy(DrawerCollection t_, Vector2 p_, List<Property> prop_, string name_) : base(t_,p_,prop_,name_,"enemy")
         {
@@ -63,7 +64,7 @@ namespace SuperBulletManiaReloadedTheSequel
             //FOLLOW PATH
             Vector2 v = (point - pos);
             v.Normalize();
-            mov += v/1;
+            mov += v*speed;
         }
 
         void Wiggle()
@@ -84,7 +85,7 @@ namespace SuperBulletManiaReloadedTheSequel
 
         public override void Update(float elapsedTime_)
         {
-            if(hp < 0)
+            if(hp <= 0)
             {
                 isDestroyed = true;
                 deathTimer.Update(elapsedTime_);
