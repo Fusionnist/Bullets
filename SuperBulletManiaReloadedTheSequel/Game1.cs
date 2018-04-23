@@ -406,7 +406,13 @@ namespace SuperBulletManiaReloadedTheSequel
             }
             if (waveAmt > 0)
             {
-                if (waveAmt > 600)
+                if (waveAmt > 1000)
+                {
+                    waveAmt -= 5;
+                    SpawnEnemy(2, "ballenemy");
+
+                }
+                else if (waveAmt > 600)
                 {
                     waveAmt -= 5;
                     SpawnEnemy(1, "ballenemy");
