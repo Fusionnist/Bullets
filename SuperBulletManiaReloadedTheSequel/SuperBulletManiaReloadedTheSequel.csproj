@@ -45,6 +45,11 @@
     <Compile Include="ClassInheriters\Artillery1.cs" />
     <Compile Include="ClassInheriters\Artillery2.cs" />
     <Compile Include="ClassInheriters\Artillery3.cs" />
+    <Compile Include="ClassInheriters\EnemyBall.cs" />
+    <Compile Include="ClassInheriters\EnemyCritter.cs" />
+    <Compile Include="ClassInheriters\EnemyFastboi.cs" />
+    <Compile Include="ClassInheriters\EnemyFat.cs" />
+    <Compile Include="ClassInheriters\EnemyFlying.cs" />
     <Compile Include="ClassInheriters\Machinegun1.cs" />
     <Compile Include="ClassInheriters\Machinegun2.cs" />
     <Compile Include="ClassInheriters\Machinegun3.cs" />
@@ -131,6 +136,7 @@
   <ItemGroup>
     <Content Include="Content\classic_hurt.mp3" />
     <Content Include="Content\cursor.png" />
+    <Content Include="Content\diplomat.png" />
     <Content Include="Content\Entities.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -138,10 +144,15 @@
     <Content Include="Content\eventStuff.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\gameover.png" />
     <Content Include="Content\Image4.png" />
     <Content Include="Content\font.png" />
     <Content Include="Content\ld41tracktest2.wav" />
+    <Content Include="Content\loading.gif" />
     <Content Include="Content\LOADINGOWO.png" />
+    <Content Include="Content\mafia.png" />
+    <Content Include="Content\mechanic.png" />
+    <Content Include="Content\military.png" />
     <Content Include="Content\nonpressed.png" />
     <Content Include="Content\nopressed.png" />
     <Content Include="Content\mapoverlay.png" />
@@ -154,12 +165,16 @@
     <Content Include="Content\placeholder\yes.png" />
     <Content Include="Content\rock1.png" />
     <Content Include="Content\rock2.png" />
+    <Content Include="Content\scientist.png" />
+    <Content Include="Content\start.png" />
     <Content Include="Content\statusbar.png" />
     <Content Include="Content\Tower.png" />
     <Content Include="Content\tree1.png" />
     <Content Include="Content\TurretSheet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\ui.png" />
+    <Content Include="Content\ui2.png" />
     <Content Include="Content\yesnpressed.png" />
     <Content Include="Content\yespressed.png" />
   </ItemGroup>

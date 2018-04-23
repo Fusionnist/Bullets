@@ -17,7 +17,38 @@ namespace SuperBulletManiaReloadedTheSequel
     {
         public Machinegun1(DrawerCollection texes_, Vector2 pos_, List<Property> properties_, string name_, string type_ = "turret") : base(texes_, pos_, properties_, name_, "turret")
         {
-            baseDmg = 50;
+            baseDmg = 1;
+            shotTimer = new Timer(0.8f);
+            shotDrawTimer = new Timer(0.2f);
+            range = 80;
+            upgradePrice = 10;
+            canHitFlying = true;
+        }
+
+        protected override List<Entity> ObtainTargets()
+        {
+            List<Entity> ents = new List<Entity>();
+            if (EntityCollection.GetGroup("enemies").Count > 0)
+            {
+                Entity tar = null;
+                foreach (Entity e in EntityCollection.GetGroup("enemies"))
+                {
+                    if (!e.isDestroyed)
+                    {
+                        if ((e.pos - pos).Length() <= range)
+                        {
+                            if (!e.BoolProperty("flying") || canHitFlying)
+                            {
+                                tar = e;
+                                break;
+                            }
+                        }
+                    }
+                }
+                ents.Add(tar);
+            }
+
+            return ents;
         }
     }
 }

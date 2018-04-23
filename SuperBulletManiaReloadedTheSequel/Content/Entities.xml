@@ -4,89 +4,140 @@
     <Textures name="ass">
       <Texture name="t1idle" id="0" sheetName="turrets"/>
       <Texture name="t1shoot" id="1" sheetName="turrets"/>
+      <Texture name="shot" id="mgshot" sheetName="turrets"/>
     </Textures>
     <Properties>
-      <Property name="price" type="int" value="100"></Property>
+      <Property name="price" type="int" value="5"></Property>
+      <Property name="upgradename" type="string" value="machinegun 2"></Property>
     </Properties>
   </Entity>
   <Entity type="machinegun 2" name="machinegun 2">
     <Textures name="ass">
       <Texture name="t1shoot" id="4" sheetName ="turrets"/>
       <Texture name="t1idle" id="3" sheetName ="turrets"/>
+      <Texture name="shot" id="mgshot" sheetName="turrets"/>
     </Textures>
     <Properties>
       <Property name="price" type="int" value="1000"></Property>
+      <Property name="upgradename" type="string" value="machinegun 3"></Property>
     </Properties>
   </Entity>
   <Entity type="machinegun 3" name="machinegun 3">
     <Textures name="ass">
-      <Texture name="t1shoot" id="8" sheetName ="turrets"/>
-      <Texture name="t1idle" id="9" sheetName ="turrets"/>
+      <Texture name="t1shoot" id="m3s" sheetName ="turrets"/>
+      <Texture name="shot" id="mgshot" sheetName="turrets"/>
+      <Texture name="t1idle" id="m3i" sheetName ="turrets"/>
     </Textures>
     <Properties>
       <Property name="price" type="int" value="1000"></Property>
     </Properties>
   </Entity>
+  
   <Entity type="sniper 1" name="sniper 1">
     <Textures name="ass">
       <Texture name="t1idle" id="s1i" sheetName="turrets"/>
       <Texture name="t1shoot" id="s1s" sheetName="turrets"/>
+      <Texture name="shot" id="mgshot" sheetName="turrets"/>
     </Textures>
     <Properties>
-      <Property name="price" type="int" value="100"></Property>
+      <Property name="price" type="int" value="20"></Property>
+      <Property name="upgradename" type="string" value="sniper 2"></Property>
     </Properties>
   </Entity>
   <Entity type="sniper 2" name="sniper 2">
     <Textures name="ass">
-      <Texture name="t1shoot" id="12" sheetName ="turrets"/>
-      <Texture name="t1idle" id="13" sheetName ="turrets"/>
+      <Texture name="t1shoot" id="s2s" sheetName ="turrets"/>
+      <Texture name="t1idle" id="s2i" sheetName ="turrets"/>
+      <Texture name="shot" id="mgshot" sheetName="turrets"/>
     </Textures>
     <Properties>
       <Property name="price" type="int" value="1000"></Property>
+      <Property name="upgradename" type="string" value="sniper 3"></Property>
     </Properties>
   </Entity>
   <Entity type="sniper 3" name="sniper 3">
     <Textures name="ass">
-      <Texture name="t1shoot" id="14" sheetName ="turrets"/>
-      <Texture name="t1idle" id="15" sheetName ="turrets"/>
+      <Texture name="t1shoot" id="s3s" sheetName ="turrets"/>
+      <Texture name="t1idle" id="s3i" sheetName ="turrets"/>
+      <Texture name="shot" id="mgshot" sheetName="turrets"/>
     </Textures>
     <Properties>
       <Property name="price" type="int" value="1000"></Property>
     </Properties>
   </Entity>
+  
   <Entity type="artillery 1" name="artillery 1">
     <Textures name="ass">
       <Texture name="t1idle" id="a1i" sheetName="turrets"/>
       <Texture name="t1shoot" id="a1s" sheetName="turrets"/>
+      <Texture name="shot" id="boom" sheetName="turrets"/>
     </Textures>
     <Properties>
-      <Property name="price" type="int" value="100"></Property>
+      <Property name="price" type="int" value="10"></Property>
+      <Property name="upgradename" type="string" value="artillery 2"></Property>
     </Properties>
   </Entity>
   <Entity type="artillery 2" name="artillery 2">
     <Textures name="ass">
-      <Texture name="t1shoot" id="18" sheetName ="turrets"/>
-      <Texture name="t1idle" id="19" sheetName ="turrets"/>
+      <Texture name="t1shoot" id="a2s" sheetName ="turrets"/>
+      <Texture name="t1idle" id="a2i" sheetName ="turrets"/>
+      <Texture name="shot" id="boom" sheetName="turrets"/>
     </Textures>
     <Properties>
       <Property name="price" type="int" value="1000"></Property>
+      <Property name="upgradename" type="string" value="artillery 3"></Property>
     </Properties>
   </Entity>
   <Entity type="artillery 3" name="artillery 3">
     <Textures name="ass">
-      <Texture name="t1shoot" id="20" sheetName ="turrets"/>
-      <Texture name="t1idle" id="21" sheetName ="turrets"/>
+      <Texture name="t1shoot" id="a3s" sheetName ="turrets"/>
+      <Texture name="t1idle" id="a3i" sheetName ="turrets"/>
+      <Texture name="shot" id="boom" sheetName="turrets"/>
     </Textures>
     <Properties>
       <Property name="price" type="int" value="1000"></Property>
     </Properties>
   </Entity>
+  
   <Entity type="enemy" name="enemy1">
     <Textures name="ass">
       <Texture name="enemywalk" id="2" sheetName="turrets"/>
     </Textures>
     <Properties/>
   </Entity>
+  <Entity type="flyenemy" name="flyenemy">
+    <Textures name="ass">
+      <Texture name="enemywalk" id="flying" sheetName="turrets"/>
+    </Textures>
+    <Properties>
+      <Property name="flying" value="true" type="bool"></Property>
+    </Properties>
+  </Entity>
+  <Entity type="fatenemy" name="fatenemy">
+    <Textures name="ass">
+      <Texture name="enemywalk" id="fat" sheetName="turrets"/>
+    </Textures>
+    <Properties>
+     
+    </Properties>
+  </Entity>
+  <Entity type="ballenemy" name="ballenemy">
+    <Textures name="ass">
+      <Texture name="enemywalk" id="ball" sheetName="turrets"/>
+    </Textures>
+    <Properties>
+      <Property name="flying" value="true" type="bool"></Property>
+    </Properties>
+  </Entity>
+  <Entity type="fastenemy" name="fastenemy">
+    <Textures name="ass">
+      <Texture name="enemywalk" id="fast" sheetName="turrets"/>
+    </Textures>
+    <Properties>
+
+    </Properties>
+  </Entity>
+  
   <Entity type="rock" name="rock1">
     <Textures name="ass">
       <Texture name="rock1" id="5" sheetName="turrets"/>

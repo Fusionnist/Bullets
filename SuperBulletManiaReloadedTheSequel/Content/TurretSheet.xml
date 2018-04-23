@@ -7,11 +7,7 @@
         <Center x="8" y="8"/>
       </Frame>
     </Texture>
-    <Texture name="t1shoot" anim="true" id="1">
-      <Frame displayTime="0.1">
-        <SourceRect x="96" y="64" w="16" h="32"/>
-        <Center x="8" y="24"/>
-      </Frame>
+    <Texture name="t1shoot" anim="true" id="1" loop="false">
       <Frame displayTime="0.1">
         <SourceRect x="64" y="64" w="16" h="32"/>
         <Center x="8" y="24"/>
@@ -20,6 +16,11 @@
         <SourceRect x="80" y="64" w="16" h="32"/>
         <Center x="8" y="24"/>
       </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="96" y="64" w="16" h="32"/>
+        <Center x="8" y="24"/>
+      </Frame>
+      
     </Texture>
     <Texture name="t1idle" anim="false" id="3">
       <Frame displayTime="0.1">
@@ -27,7 +28,7 @@
         <Center x="8" y="8" />
       </Frame>
     </Texture>
-    <Texture name="t1shoot" anim="true" id="4">
+    <Texture name="t1shoot" anim="true" id="4" loop="false">
       <Frame displayTime="0.1">
         <SourceRect x="112" y="64" w="16" h="32"/>
         <Center x="8" y="24"/>
@@ -43,14 +44,42 @@
       </Frame>
      
     </Texture>
+    <Texture name="t1idle" anim="false" id="m3i">
+      <Frame displayTime="0.1">
+        <SourceRect x="0" y="64" w="16" h="16"/>
+        <Center x="8" y="8" />
+      </Frame>
+    </Texture>
+    <Texture name="t1shoot" anim="true" id="m3s" loop="false">
+      <Frame displayTime="0.1">
+        <SourceRect x="96" y="0" w="16" h="32"/>
+        <Center x="8" y="24"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="112" y="0" w="16" h="32"/>
+        <Center x="8" y="24"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="128" y="0" w="16" h="32"/>
+        <Center x="8" y="24"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="144" y="0" w="16" h="32"/>
+        <Center x="8" y="24"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="160" y="0" w="16" h="32"/>
+        <Center x="8" y="24"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="176" y="0" w="16" h="32"/>
+        <Center x="8" y="24"/>
+      </Frame>
+    </Texture>
     //enemy
     <Texture name="enemywalk" anim="true" id="2">
       <Frame displayTime="0.1">
         <SourceRect x="48" y="32" w="16" h="16"/>
-        <Center x="8" y="16"/>
-      </Frame>
-      <Frame displayTime="0.1">
-        <SourceRect x="80" y="32" w="16" h="16"/>
         <Center x="8" y="16"/>
       </Frame>
       <Frame displayTime="0.1">
@@ -62,13 +91,61 @@
         <Center x="8" y="16"/>
       </Frame>
     </Texture>
+    <Texture name="enemywalk" anim="true" id="flying">
+      <Frame displayTime="0.1">
+        <SourceRect x="192" y="0" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="208" y="0" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="224" y="0" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+    </Texture>
+    <Texture name="enemywalk" anim="true" id="fat">
+      <Frame displayTime="0.1">
+        <SourceRect x="192" y="16" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="208" y="16" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+    </Texture>
+    <Texture name="enemywalk" anim="true" id="ball">
+      <Frame displayTime="0.1">
+        <SourceRect x="240" y="16" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="256" y="16" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="272" y="16" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+    </Texture>
+    <Texture name="enemywalk" anim="true" id="fast">
+      <Frame displayTime="0.1">
+        <SourceRect x="240" y="0" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="256" y="0" w="16" h="16"/>
+        <Center x="8" y="16"/>
+      </Frame>
+    </Texture>
+    //env
     <Texture name="rock1" anim="false" id="5">
       <Frame>
         <SourceRect x="16" y="112" w="16" h="16"/>
         <Center x="8" y="8"/>
       </Frame>
     </Texture>
-    //env
     <Texture name="rock2" anim="false" id="6">
       <Frame>
         <SourceRect x="32" y="112" w="16" h="16"/>
@@ -88,7 +165,7 @@
         <Center x="8" y="8" />
       </Frame>
     </Texture>    
-    <Texture name="t1shoot" anim="true" id="a1s">
+    <Texture name="t1shoot" anim="true" id="a1s" loop="false">
       <Frame displayTime="0.1">
         <SourceRect x="144" y="32" w="16" h="32"/>
         <Center x="8" y="24"/>
@@ -99,28 +176,113 @@
       </Frame>
       <Frame displayTime="0.1">
         <SourceRect x="176" y="32" w="16" h="32"/>
+        <Center x="8" y="24"/>
+      </Frame>
+    </Texture>
+    <Texture name="t1idle" anim="false" id="a2i">
+      <Frame displayTime="0.1">
+        <SourceRect x="192" y="48" w="16" h="16"/>
+        <Center x="8" y="8" />
+      </Frame>
+    </Texture>
+    <Texture name="t1shoot" anim="true" id="a2s" loop="false">
+      <Frame displayTime="0.1">
+        <SourceRect x="208" y="32" w="16" h="32"/>
+        <Center x="8" y="24"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="224" y="32" w="16" h="32"/>
+        <Center x="8" y="24"/>
+      </Frame>
+    </Texture>
+    <Texture name="t1idle" anim="false" id="a3i">
+      <Frame displayTime="0.1">
+        <SourceRect x="240" y="32" w="16" h="16"/>
+        <Center x="8" y="8" />
+      </Frame>
+    </Texture>
+    <Texture name="t1shoot" anim="true" id="a3s" loop="false">
+      <Frame displayTime="0.1">
+        <SourceRect x="256" y="32" w="16" h="32"/>
+        <Center x="8" y="24"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="272" y="32" w="16" h="32"/>
         <Center x="8" y="24"/>
       </Frame>
     </Texture>
     //SNIPER
     <Texture name="t1idle" anim="false" id="s1i">
       <Frame displayTime="0.1">
-        <SourceRect x="128" y="32" w="16" h="16"/>
-        <Center x="8" y="8" />
+        <SourceRect x="160" y="64" w="16" h="32"/>
+        <Center x="8" y="24" />
       </Frame>
     </Texture>
-    <Texture name="t1shoot" anim="true" id="s1s">
+    <Texture name="t1shoot" anim="true" id="s1s" loop="false">
       <Frame displayTime="0.1">
-        <SourceRect x="144" y="32" w="16" h="32"/>
+        <SourceRect x="176" y="64" w="16" h="32"/>
         <Center x="8" y="24"/>
       </Frame>
       <Frame displayTime="0.1">
-        <SourceRect x="160" y="32" w="16" h="32"/>
+        <SourceRect x="192" y="64" w="16" h="32"/>
+        <Center x="8" y="24"/>
+      </Frame>
+    </Texture>
+    <Texture name="t1idle" anim="false" id="s2i">
+      <Frame displayTime="0.1">
+        <SourceRect x="224" y="64" w="16" h="32"/>
+        <Center x="8" y="24" />
+      </Frame>
+    </Texture>
+    <Texture name="t1shoot" anim="true" id="s2s" loop="false">
+      <Frame displayTime="0.1">
+        <SourceRect x="240" y="64" w="16" h="32"/>
         <Center x="8" y="24"/>
       </Frame>
       <Frame displayTime="0.1">
-        <SourceRect x="176" y="32" w="16" h="32"/>
+        <SourceRect x="256" y="64" w="16" h="32"/>
         <Center x="8" y="24"/>
+      </Frame>
+    </Texture>
+    <Texture name="t1idle" anim="false" id="s3i" >
+      <Frame displayTime="0.1">
+        <SourceRect x="272" y="64" w="16" h="32"/>
+        <Center x="8" y="24" />
+      </Frame>
+    </Texture>
+    <Texture name="t1shoot" anim="true" id="s3s" loop="false">
+      <Frame displayTime="0.1">
+        <SourceRect x="288" y="32" w="16" h="48"/>
+        <Center x="8" y="40"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="304" y="48" w="16" h="48"/>
+        <Center x="8" y="40"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="320" y="48" w="16" h="32"/>
+        <Center x="8" y="24"/>
+      </Frame>
+    </Texture>
+    //SHOTS
+    <Texture name="shot" anim="true" id="mgshot" loop="false">
+      <Frame displayTime="0.1">
+        <SourceRect x="32" y="0" w="16" h="16"/>
+        <Center x="8" y="8"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="48" y="0" w="16" h="16"/>
+        <Center x="8" y="8"/>
+      </Frame>   
+    </Texture>
+    <Texture name="shot" anim="true" id="boom" loop="false">
+      <Frame displayTime="0.1">
+        <SourceRect x="32" y="16" w="16" h="16"/>
+        <Center x="8" y="8"/>
+      </Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="48" y="16" w="16" h="16"/>
+        <Center x="8" y="8"/>
       </Frame>
     </Texture>
     
